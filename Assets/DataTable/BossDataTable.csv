@@ -1,9 +1,9 @@
 Boss_ID,Boss_Name,Stage_ID,Boss_Atk,Boss_Hp,Boss_Image
-2001,BossName1,3001,3,60,[image_boss_001]
-2002,BossName2,3002,4,70,[image_boss_002]
-2003,BossName3,3003,5,80,[image_boss_003]
-2004,BossName4,3004,6,90,[image_boss_004]
-2005,BossName5,3005,8,120,[image_boss_005]
-2006,BossName6,3006,10,140,[image_boss_006]
-2007,BossName7,3007,12,160,[image_boss_007]
-2008,BossName8,3008,14,180,[image_boss_008]
+2001,BossName1,3001,3,60,image_boss_001
+2002,BossName2,3002,4,70,image_boss_002
+2003,BossName3,3003,5,80,image_boss_003
+2004,BossName4,3004,6,90,image_boss_004
+2005,BossName5,3005,8,120,image_boss_005
+2006,BossName6,3006,10,140,image_boss_006
+2007,BossName7,3007,12,160,image_boss_007
+2008,BossName8,3008,14,180,image_boss_008
