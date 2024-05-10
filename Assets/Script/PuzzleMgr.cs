@@ -22,7 +22,8 @@ public class PuzzleMgr : MonoBehaviour
     public GameObject gameManager;
     private GameMgr gameMgr;
 
-    public int maxNumber = 0;
+    public int maxValue = 0;
+    public int emtpyCount = 0;
 
     private void Start() //게임 시작 시 카메라 위치 설정, 그리드 초기화 
     {
@@ -98,6 +99,8 @@ public class PuzzleMgr : MonoBehaviour
 
     private void Update()
     {
+        maxValue = _grid.maxValue;
+        emtpyCount = _grid.emptyCount;
         if (!gameMgr.isGridFull && !gameMgr.isTimeOver)
         {
             timerBar.value = (timer / limitTime);

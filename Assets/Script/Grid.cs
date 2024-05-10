@@ -11,7 +11,7 @@ public class Grid
     private readonly System.Random _generator; //랜덤 숫자 생성
 
     private readonly Sprite[] _tileSprites;
-    private readonly GameObject _gridCanvas; //타일이 위치할 캔버스
+    private readonly GameObject _gridBG; //타일이 위치할 캔버스
     private readonly SpriteRenderer[,] _renderer; //각 타일의 그래픽 표현을 위한 SpriteRenderer 컴포넌트를 저장하는 2차원 배열
     private readonly int[,] _value; //현재 그리드의 타일 값을 저장하는 2차원 배열
     private int[,] _lastValue; //마지막에 업데이트된 타일 값 (타일 값이 변경되었는지 체크하려고 만든 변수)
@@ -26,7 +26,7 @@ public class Grid
     {
         _value[y, x] = Empty;
         var newTile = new GameObject("Tile[" + y + "," + x + "]");
-        newTile.transform.parent = _gridCanvas.transform; //gridCanvas의 자식 오브젝트로 넣기
+        newTile.transform.parent = _gridBG.transform; //gridCanvas의 자식 오브젝트로 넣기
         newTile.transform.position = new Vector3(x, y, 1f);
         _renderer[y, x] = newTile.AddComponent<SpriteRenderer>();
         _renderer[y, x].sprite = _tileSprites[0];
@@ -88,14 +88,14 @@ public class Grid
         Debug.Log("빈칸 수: " + emptyCount);
     }
 
-    public Grid(int size, Sprite[] tileSprites, GameObject gridCanvas)
+    public Grid(int size, Sprite[] tileSprites, GameObject gridBG)
     {
         _generator = new System.Random();
         _tileSprites = tileSprites;
         _size = size;
         _value = new int[size, size];
         _renderer = new SpriteRenderer[size, size];
-        _gridCanvas = gridCanvas;
+        _gridBG = gridBG;
         for (var y = 0; y < size; y++)
         {
             for (var x = 0; x < size; x++)

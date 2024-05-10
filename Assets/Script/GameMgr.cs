@@ -21,12 +21,12 @@ public class GameMgr : MonoBehaviour
     {
         if(isTimeOver)
         {
-            Debug.Log("Time Over");
+            
         }
 
         if(isGridFull)
         {
-            Debug.Log("Grid Full");
+            
         }
     }
 
