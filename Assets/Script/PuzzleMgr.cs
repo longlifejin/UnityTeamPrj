@@ -107,7 +107,11 @@ public class PuzzleMgr : MonoBehaviour
         {
             gameMgr.isTimeOver = true;
         }
-
+        
+        if(_grid.Full())
+        {
+            gameMgr.isGridFull = true;
+        }    
 
     }
 

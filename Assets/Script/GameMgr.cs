@@ -8,4 +8,27 @@ public class GameMgr : MonoBehaviour
     public bool isGridFull = false;
 
 
+    private void Start()
+    {
+        
+    }
+    private void Update()
+    {
+        PuzzleOver();
+    }
+
+    private void PuzzleOver()
+    {
+        if(isTimeOver)
+        {
+            Debug.Log("Time Over");
+        }
+
+        if(isGridFull)
+        {
+            Debug.Log("Grid Full");
+        }
+    }
+
+
 }

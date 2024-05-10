@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -48,7 +49,7 @@ public class Grid
         
     }
 
-    private bool Full()  //게임 보드가 가득 찼는지 아닌지 확인하는 bool 반환형 메소드
+    public bool Full()  //게임 보드가 가득 찼는지 아닌지 확인하는 bool 반환형 메소드
     {
         return _value.Cast<int>().All(x => x != Empty); //_value 배열을 순회하면서 빈 칸이 있는지 검사
     }
@@ -163,10 +164,12 @@ public class Grid
             result |= MoveBuffer(buffer); //병합 후 남은 빈 공간을 다시 밀어 넣어 정렬, 움직임이 있으면 true 리턴
             //위 3번의 동작 중 하나라도 true가 있으면 result는 true가 된다.
             SaveBuffer(buffer, i, direction);
-
-            int maxValue = GetMaxValue();
-            Debug.Log("Current maximum value on the grid: " + maxValue);
         }
+        int maxValue = GetMaxValue();
+        Debug.Log("최댓값: " + maxValue);
+
+        int emptyCount = GetEmptyTile();
+        Debug.Log("빈칸 수: " + emptyCount);
         return result; //동작을 하였으면 true리턴, 움직이지도 않고 병합도 없었으면 false 리턴
     }
 
@@ -192,24 +195,41 @@ public class Grid
         AddRandom();
     }
 
-    private bool GameOver()
+    //private bool GameOver()
+    //{
+    //    for (var x1 = 0; x1 < _size - 1; x1++)
+    //    {
+    //        for (var y1 = 0; y1 < _size - 1; y1++)
+    //        {
+    //            if (_value[y1, x1] == _value[y1, x1 + 1] ||
+    //                _value[y1, x1] == _value[y1 + 1, x1])
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //    }
+    //    return true;
+    //}
+
+    private int GetMaxValue()
     {
-        for (var x1 = 0; x1 < _size - 1; x1++)
+        int max = (int)Math.Pow(2, (_value.Cast<int>().Max() + 1));
+        return max;
+    }
+
+    private int GetEmptyTile()
+    {
+        int count = -1;
+        for (int y = 0; y < _size; y++)
         {
-            for (var y1 = 0; y1 < _size - 1; y1++)
+            for (int x = 0; x < _size; x++)
             {
-                if (_value[y1, x1] == _value[y1, x1 + 1] ||
-                    _value[y1, x1] == _value[y1 + 1, x1])
+                if (_value[y, x] == Empty)
                 {
-                    return false;
+                    count++;
                 }
             }
         }
-        return true;
-    }
-
-    public int GetMaxValue()
-    {
-        return _value.Cast<int>().Max();
+        return count;
     }
 }
