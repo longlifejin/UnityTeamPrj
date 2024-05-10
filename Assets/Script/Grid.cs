@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -12,11 +11,13 @@ public class Grid
     private readonly System.Random _generator; //랜덤 숫자 생성
 
     private readonly Sprite[] _tileSprites;
-    private readonly Image _gridCanvas; //타일이 위치할 캔버스
+    private readonly GameObject _gridCanvas; //타일이 위치할 캔버스
     private readonly SpriteRenderer[,] _renderer; //각 타일의 그래픽 표현을 위한 SpriteRenderer 컴포넌트를 저장하는 2차원 배열
     private readonly int[,] _value; //현재 그리드의 타일 값을 저장하는 2차원 배열
     private int[,] _lastValue; //마지막에 업데이트된 타일 값 (타일 값이 변경되었는지 체크하려고 만든 변수)
     private readonly int _size; //격자(보드)의 크기를 나타내는 변수
+
+    private CardDeck cardDeck;
 
     private void InitTile(int x, int y) //지정된 위치에 새 타일을 초기화하고 설정
     {
@@ -24,8 +25,6 @@ public class Grid
         var newTile = new GameObject("Tile[" + y + "," + x + "]");
         newTile.transform.parent = _gridCanvas.transform; //gridCanvas의 자식 오브젝트로 넣기
         newTile.transform.position = new Vector3(x, y, 1f);
-        //newTile.transform.localScale = new Vector3(1f, 1f, 1f);
-        Debug.Log($"[{y},{x}] : {newTile.transform.localScale}");
         _renderer[y, x] = newTile.AddComponent<SpriteRenderer>();
         _renderer[y, x].sprite = _tileSprites[0];
         _renderer[y, x].enabled = false;
@@ -46,7 +45,7 @@ public class Grid
         }
         _lastValue = (int[,])_value.Clone(); //마지막 값을 현재 값을 복사해서 할당하여 변경해줌
 
-        
+
     }
 
     public bool Full()  //게임 보드가 가득 찼는지 아닌지 확인하는 bool 반환형 메소드
@@ -58,18 +57,29 @@ public class Grid
     {
         if (Full()) //가득 찼으면 exception 던짐
         {
-            throw new UnityException("Cannot add random tile! Grid is full.");
+            return;
         }
+
         int x, y;
         do
         {
             x = _generator.Next() % _size; //0,1,2,3 중 하나 반환
             y = _generator.Next() % _size;
         } while (_value[y, x] != Empty); //빈칸이 아니면 다시 반복
-        _value[y, x] = _generator.Next() % 2; //빈 칸에 0 혹은 1 을 할당 
+
+        if (cardDeck.playerDeck != null && cardDeck.playerDeck.Count > 0)
+        {
+            var random = UnityEngine.Random.Range(0, cardDeck.playerDeck.Count);
+            _value[y, x] = cardDeck.playerDeck[random];
+            cardDeck.playerDeck.RemoveAt(random);
+        }
+        else
+        {
+            _value[y, x] = _generator.Next() % 2; //빈 칸에 0 혹은 1 을 할당 
+        }
     }
 
-    public Grid(int size, Sprite[] tileSprites, Image gridCanvas)
+    public Grid(int size, Sprite[] tileSprites, GameObject gridCanvas)
     {
         _generator = new System.Random();
         _tileSprites = tileSprites;
@@ -183,6 +193,7 @@ public class Grid
 
     public void Reset()
     {
+        cardDeck = new CardDeck();
         for (var y = 0; y < _size; y++)
         {
             for (var x = 0; x < _size; x++)

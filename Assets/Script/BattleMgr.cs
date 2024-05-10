@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class BattleMgr : MonoBehaviour
 {
+    private void Start()
+    {
+        
+    }
 
+    private void Update()
+    {
+        
+    }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class PuzzleMgr : MonoBehaviour
 {
     public Sprite[] TileSprites; //타일에 사용될 스프라이트 배열
-    public Camera MainCamera; //게임 메인 카메라
-    public Image GridCanvas; //타일이 배치되는 캔버스
+    public Camera PuzzleCamera; //퍼즐 카메라
+    public GameObject gridBG; //타일이 배치되는 캔버스
 
     private Vector2 _touchStartPosition = Vector2.zero;
     private Grid _grid;
@@ -15,7 +15,10 @@ public class PuzzleMgr : MonoBehaviour
     private const float MinSwipeDistance = 10.0f;
 
     private float limitTime = 30f;
-    private float timer = 0f;
+    private float timer;
+
+    public Slider timerBar;
+
     public GameObject gameManager;
     private GameMgr gameMgr;
 
@@ -24,9 +27,10 @@ public class PuzzleMgr : MonoBehaviour
     private void Start() //게임 시작 시 카메라 위치 설정, 그리드 초기화 
     {
         const float center = Size / 2f - 0.5f;
-        MainCamera.transform.position = new Vector3(center, center, -10.0f);
-        _grid = new Grid(Size, TileSprites, GridCanvas);
+        PuzzleCamera.transform.position = new Vector3(center, center, -10.0f);
+        _grid = new Grid(Size, TileSprites, gridBG);
         gameMgr = gameManager.GetComponent<GameMgr>();
+        timer = limitTime;
     }
 
     private void InputEvents() //키보드 입력을 받는 내용
@@ -94,16 +98,20 @@ public class PuzzleMgr : MonoBehaviour
 
     private void Update()
     {
-        timer = Time.time;
+        if(gameMgr == null)
+        {
+            Debug.Log("gameMgr is null");
+        }
         if (!gameMgr.isGridFull && !gameMgr.isTimeOver)
         {
-            timer += Time.deltaTime;
+            timerBar.value = (timer / limitTime);
+            timer -= Time.deltaTime;
             InputEvents();
             TouchEvents();
             _grid.Update();
         }
 
-        if (timer >= limitTime)
+        if (timer <= 0f)
         {
             gameMgr.isTimeOver = true;
         }
