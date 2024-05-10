@@ -22,7 +22,9 @@ public class Grid
         _value[y, x] = Empty;
         var newTile = new GameObject("Tile[" + y + "," + x + "]");
         newTile.transform.parent = _gridCanvas.transform; //gridCanvas의 자식 오브젝트로 넣기
-        newTile.transform.position = new Vector3(x, y, 1.0f);
+        newTile.transform.position = new Vector3(x, y, 1f);
+        //newTile.transform.localScale = new Vector3(1f, 1f, 1f);
+        Debug.Log($"[{y},{x}] : {newTile.transform.localScale}");
         _renderer[y, x] = newTile.AddComponent<SpriteRenderer>();
         _renderer[y, x].sprite = _tileSprites[0];
         _renderer[y, x].enabled = false;
@@ -42,6 +44,8 @@ public class Grid
             }
         }
         _lastValue = (int[,])_value.Clone(); //마지막 값을 현재 값을 복사해서 할당하여 변경해줌
+
+        
     }
 
     private bool Full()  //게임 보드가 가득 찼는지 아닌지 확인하는 bool 반환형 메소드
@@ -159,6 +163,9 @@ public class Grid
             result |= MoveBuffer(buffer); //병합 후 남은 빈 공간을 다시 밀어 넣어 정렬, 움직임이 있으면 true 리턴
             //위 3번의 동작 중 하나라도 true가 있으면 result는 true가 된다.
             SaveBuffer(buffer, i, direction);
+
+            int maxValue = GetMaxValue();
+            Debug.Log("Current maximum value on the grid: " + maxValue);
         }
         return result; //동작을 하였으면 true리턴, 움직이지도 않고 병합도 없었으면 false 리턴
     }
@@ -199,5 +206,10 @@ public class Grid
             }
         }
         return true;
+    }
+
+    public int GetMaxValue()
+    {
+        return _value.Cast<int>().Max();
     }
 }
