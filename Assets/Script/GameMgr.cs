@@ -10,7 +10,7 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
-        
+       
     }
     private void Update()
     {
