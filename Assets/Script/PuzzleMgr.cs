@@ -98,18 +98,15 @@ public class PuzzleMgr : MonoBehaviour
 
     private void Update()
     {
-        if(gameMgr == null)
-        {
-            Debug.Log("gameMgr is null");
-        }
         if (!gameMgr.isGridFull && !gameMgr.isTimeOver)
         {
             timerBar.value = (timer / limitTime);
             timer -= Time.deltaTime;
-            InputEvents();
-            TouchEvents();
-            _grid.Update();
+            
         }
+        InputEvents();
+        TouchEvents();
+        _grid.Update();
 
         if (timer <= 0f)
         {

@@ -17,6 +17,9 @@ public class Grid
     private int[,] _lastValue; //마지막에 업데이트된 타일 값 (타일 값이 변경되었는지 체크하려고 만든 변수)
     private readonly int _size; //격자(보드)의 크기를 나타내는 변수
 
+    public int maxValue;
+    public int emptyCount;
+
     private CardDeck cardDeck;
 
     private void InitTile(int x, int y) //지정된 위치에 새 타일을 초기화하고 설정
@@ -77,6 +80,12 @@ public class Grid
         {
             _value[y, x] = _generator.Next() % 2; //빈 칸에 0 혹은 1 을 할당 
         }
+
+        maxValue = GetMaxValue();
+        Debug.Log("최댓값: " + maxValue);
+
+        emptyCount = GetEmptyTile();
+        Debug.Log("빈칸 수: " + emptyCount);
     }
 
     public Grid(int size, Sprite[] tileSprites, GameObject gridCanvas)
@@ -175,11 +184,7 @@ public class Grid
             //위 3번의 동작 중 하나라도 true가 있으면 result는 true가 된다.
             SaveBuffer(buffer, i, direction);
         }
-        int maxValue = GetMaxValue();
-        Debug.Log("최댓값: " + maxValue);
-
-        int emptyCount = GetEmptyTile();
-        Debug.Log("빈칸 수: " + emptyCount);
+        
         return result; //동작을 하였으면 true리턴, 움직이지도 않고 병합도 없었으면 false 리턴
     }
 
@@ -230,7 +235,7 @@ public class Grid
 
     private int GetEmptyTile()
     {
-        int count = -1;
+        int count = 0;
         for (int y = 0; y < _size; y++)
         {
             for (int x = 0; x < _size; x++)
