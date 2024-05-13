@@ -15,7 +15,7 @@ public class Grid
     private readonly SpriteRenderer[,] _renderer; //각 타일의 그래픽 표현을 위한 SpriteRenderer 컴포넌트를 저장하는 2차원 배열
     private readonly int[,] _value; //현재 그리드의 타일 값을 저장하는 2차원 배열
     private int[,] _lastValue; //마지막에 업데이트된 타일 값 (타일 값이 변경되었는지 체크하려고 만든 변수)
-    private readonly int _size; //격자(보드)의 크기를 나타내는 변수
+    public readonly int _size; //격자(보드)의 크기를 나타내는 변수
 
     public int maxValue;
     public int emptyCount;
@@ -47,7 +47,6 @@ public class Grid
             }
         }
         _lastValue = (int[,])_value.Clone(); //마지막 값을 현재 값을 복사해서 할당하여 변경해줌
-
 
     }
 

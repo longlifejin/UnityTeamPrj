@@ -17,9 +17,4 @@ public class CardDeck
             7,
             7
         };
-
-
-
-
-
 }

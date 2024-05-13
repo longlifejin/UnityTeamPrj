@@ -12,11 +12,19 @@ public static class DataTableMgr
         table.Load(DataTableIds.String);
         tables.Add(DataTableIds.String, table);
 
-
-
         PlayerDataTable playerDataTable = new PlayerDataTable();
         playerDataTable.Load(DataTableIds.PlayerTable);
         tables.Add(DataTableIds.PlayerTable, playerDataTable);
+
+        BossDataTable bossDataTable = new BossDataTable();
+        bossDataTable.Load(DataTableIds.BossTable);
+        tables.Add(DataTableIds.BossTable, bossDataTable);
+
+        StageDataTable stageDataTable = new StageDataTable();
+        stageDataTable.Load(DataTableIds.StageTable);
+        tables.Add(DataTableIds.StageTable, stageDataTable);
+
+        
     }
 
     public static StringTable GetStringTable()

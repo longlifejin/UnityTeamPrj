@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -105,15 +106,19 @@ public class PuzzleMgr : MonoBehaviour
         {
             timerBar.value = (timer / limitTime);
             timer -= Time.deltaTime;
-            
+
+            InputEvents();
+            TouchEvents();
+            _grid.Update();
         }
-        InputEvents();
-        TouchEvents();
-        _grid.Update();
 
         if (timer <= 0f)
         {
+            gameMgr.filledGridCount = (int)Math.Pow(2, _grid._size) - _grid.emptyCount;
+            gameMgr.maxValue = _grid.maxValue;
             gameMgr.isTimeOver = true;
+
+            timer = limitTime;
         }
         
         if(_grid.Full())

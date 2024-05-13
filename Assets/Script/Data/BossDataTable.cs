@@ -6,22 +6,28 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerData
-{
-    public string Player_ID {  get; set; }
-    public int Player_Atk { get; set; }
-    public int Player_Hp { get; set; }
-    public string Player_Image { get; set; }
 
-    public override string ToString()
+public class BossData
+{
+    public string Boss_ID { get; set; }
+    public string Boss_Name { get; set; }
+    public int Boss_Atk { get; set; }
+    public int Boss_Hp { get; set; }
+    public string Boss_Image { get; set; }
+
+    public string GetName
     {
-        return $"{Player_ID} / {Player_Atk} / {Player_Hp} / {Player_Image}";
+        
+        get
+        {
+            return DataTableMgr.Get<StringTable>(DataTableIds.String).Get(Boss_Name);
+        }
     }
 }
 
-public class PlayerDataTable : DataTable
+public class BossDataTable : DataTable
 {
-    private Dictionary<string, PlayerData> table = new Dictionary<string, PlayerData>();
+    private Dictionary<string, BossData> table = new Dictionary<string, BossData>();
 
     public List<string> AllIds
     {
@@ -31,7 +37,7 @@ public class PlayerDataTable : DataTable
         }
     }
 
-    public PlayerData Get(string id)
+    public BossData Get(string id)
     {
         if (!table.ContainsKey(id))
             return null;
@@ -41,16 +47,16 @@ public class PlayerDataTable : DataTable
 
     public override void Load(string path)
     {
-        
+
         var textAsset = Resources.Load<TextAsset>(path);
 
         using (var reader = new StringReader(textAsset.text))
         using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
-            var records = csvReader.GetRecords<PlayerData>();
+            var records = csvReader.GetRecords<BossData>();
             foreach (var record in records)
             {
-                table.Add(record.Player_ID, record);
+                table.Add(record.Boss_ID, record);
             }
         }
     }
