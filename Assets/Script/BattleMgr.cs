@@ -50,7 +50,8 @@ public class BattleMgr : MonoBehaviour
             gameMgr.isPlayerFirst = false;
             
         }
-        else if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
+        
+        if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
         {
             BossFirst();
             gameMgr.isBossFirst = false;
@@ -81,8 +82,8 @@ public class BattleMgr : MonoBehaviour
     {
         Debug.Log("BossFirst Start");
 
-        boss.atk *= 32;
-        player.hp -= boss.atk * gameMgr.filledGridCount;
+        int penaltyAtk = 32 * boss.atk;
+        player.hp -= penaltyAtk * gameMgr.filledGridCount;
         boss.hp -= player.atk * gameMgr.maxValue;
 
         Debug.Log("Player HP : " + player.hp);

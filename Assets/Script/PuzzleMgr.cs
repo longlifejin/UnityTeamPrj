@@ -100,9 +100,10 @@ public class PuzzleMgr : MonoBehaviour
 
     private void Update()
     {
-        maxValue = _grid.maxValue;
-        emtpyCount = _grid.emptyCount;
-        if (!gameMgr.isGridFull && !gameMgr.isTimeOver)
+        gameMgr.filledGridCount = (int)Mathf.Pow(_grid._size, 2) - _grid.emptyCount;
+        gameMgr.maxValue = _grid.maxValue;
+
+        if (!gameMgr.isPuzzleOver)
         {
             timerBar.value = (timer / limitTime);
             timer -= Time.deltaTime;
@@ -114,18 +115,18 @@ public class PuzzleMgr : MonoBehaviour
 
         if (timer <= 0f)
         {
-            gameMgr.filledGridCount = (int)Math.Pow(2, _grid._size) - _grid.emptyCount;
-            gameMgr.maxValue = _grid.maxValue;
             gameMgr.isTimeOver = true;
-
+            gameMgr.isPuzzleOver = true;
             timer = limitTime;
         }
-        
-        if(_grid.Full())
+        else if(_grid.isGridFull)
         {
             gameMgr.isGridFull = true;
-        }    
-
+            gameMgr.isPuzzleOver = true;
+            gameMgr.filledGridCount = (int)Mathf.Pow(_grid._size, 2) - _grid.emptyCount;
+            _grid.isGridFull = false;
+            timer = limitTime;
+        }
     }
 
     [UsedImplicitly]

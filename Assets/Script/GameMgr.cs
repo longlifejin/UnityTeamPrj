@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameMgr : MonoBehaviour
 {
+    public bool isPuzzleOver = false;
+
     public bool isTimeOver = false;
     public bool isGridFull = false;
     public bool isPlayerFirst = false;
