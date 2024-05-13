@@ -16,9 +16,15 @@ public class GameMgr : MonoBehaviour
     public int filledGridCount;
     public int maxValue;
 
+    public GameObject puzzleManager;
+    private PuzzleMgr puzzleMgr;
+    public GameObject battleManager;
+    private BattleMgr battleMgr;
+
     private void Start()
     {
-       
+       puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
+       battleMgr = battleManager.GetComponent<BattleMgr>();
     }
     private void Update()
     {
@@ -40,16 +46,22 @@ public class GameMgr : MonoBehaviour
         }
     }
 
-    private void BattleOver()
+    public void BattleOver()
     {
         if(isPlayerDie)
         {
             //½ÇÆÐ Ã¢ ¶ç¿ì±â
+            //½ÇÆÐ °ñµå È¹µæ
+            Debug.Log("Player Die");
+            //
+            isPlayerDie = false;
         }
         
         if(isBattleStageClear)
         {
-
+            //¼º°ø °ñµå È¹µæ
+            Debug.Log("Stage Clear");
+            isBattleStageClear = false;
         }
     }
 }

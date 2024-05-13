@@ -130,7 +130,7 @@ public class PuzzleMgr : MonoBehaviour
     }
 
     [UsedImplicitly]
-    public void ResetLevel()
+    public void ResetPuzzle()
     {
         _grid.Reset();
         timer = 0f;

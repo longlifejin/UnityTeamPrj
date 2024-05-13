@@ -6,15 +6,15 @@ public class CardDeck
 {
     public List<int> playerDeck = new List<int>
         {
-            7,
-            8,
-            9,
-            10,
-            7,
-            7,
-            7,
-            7,
-            7,
-            7
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            2,
+            3
         };
 }

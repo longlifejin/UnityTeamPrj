@@ -15,10 +15,6 @@ public class BattleMgr : MonoBehaviour
     Player player = new Player();
     Boss boss = new Boss();
 
-    private bool isPlayerTurn = false;
-    private bool isBossTurn = false;
-    
-
     private void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
@@ -46,47 +42,81 @@ public class BattleMgr : MonoBehaviour
     {
         if (gameMgr.isPlayerFirst && !gameMgr.isBossFirst)
         {
-            PlayerFirst();
+            StartCoroutine(PlayerFirst());
             gameMgr.isPlayerFirst = false;
             
         }
         
         if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
         {
-            BossFirst();
+            StartCoroutine(BossFirst());
             gameMgr.isBossFirst = false;
         }
 
-        if(player.hp <= 0)
+        
+    }
+
+    private IEnumerator PlayerFirst()
+    {
+        Debug.Log("PlayerFirst Start");
+        if(!gameMgr.isBattleStageClear)
         {
-            gameMgr.isPlayerDie = true;
+            boss.hp -= player.atk * gameMgr.maxValue;
+            CheckHealth();
+            Debug.Log("Boss HP : " + boss.hp);
         }
-        else if(boss.hp <= 0)
+
+        yield return new WaitForSeconds(1f);
+        if(!gameMgr.isPlayerDie)
         {
-            gameMgr.isBattleStageClear = true;
+            player.hp -= boss.atk * gameMgr.filledGridCount;
+            CheckHealth();
+            Debug.Log("Player HP : " + player.hp);
+        }
+    }   
+
+    private IEnumerator BossFirst()
+    {
+        Debug.Log("BossFirst Start");
+        if(!gameMgr.isPlayerDie)
+        {
+            int penaltyAtk = 32 * boss.atk;
+            player.hp -= penaltyAtk * gameMgr.filledGridCount;
+            CheckHealth();
+            Debug.Log("Player HP : " + player.hp);
+        }
+        
+        yield return new WaitForSeconds(1f);
+
+        if(!gameMgr.isBattleStageClear)
+        {
+            boss.hp -= player.atk * gameMgr.maxValue;
+            CheckHealth();
+            Debug.Log("Boss HP : " + boss.hp);
         }
     }
 
-    private void PlayerFirst()
+    private void CheckHealth()
     {
-        Debug.Log("PlayerFirst Start");
+        if (player.hp <= 0)
+        {
+            gameMgr.isPlayerDie = true;
+            StopAllCoroutines();
+        }
+        else if (boss.hp <= 0)
+        {
+            gameMgr.isBattleStageClear = true;
+            StopAllCoroutines();
+        }
+        else if (player.hp > 0 && boss.hp > 0)
+        {
+            
+        }
+        else
+        {
+            return;
+        }
 
-        boss.hp -= player.atk * gameMgr.maxValue;
-        player.hp -= boss.atk * gameMgr.filledGridCount;
-
-        Debug.Log("Boss HP : " + boss.hp);
-        Debug.Log("Player HP : " + player.hp);
-    }   
-
-    private void BossFirst()
-    {
-        Debug.Log("BossFirst Start");
-
-        int penaltyAtk = 32 * boss.atk;
-        player.hp -= penaltyAtk * gameMgr.filledGridCount;
-        boss.hp -= player.atk * gameMgr.maxValue;
-
-        Debug.Log("Player HP : " + player.hp);
-        Debug.Log("Boss HP : " + boss.hp);
+        gameMgr.BattleOver();
     }
 }

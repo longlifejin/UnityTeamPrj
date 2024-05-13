@@ -674,7 +674,7 @@ RectTransform:
   m_GameObject: {fileID: 416112694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.146667, y: 5.146667, z: 5.146667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1190056390}
@@ -906,8 +906,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 43}
-  m_SizeDelta: {x: 70, y: 10}
+  m_AnchoredPosition: {x: 1.2, y: 51.8}
+  m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190056391
 MonoBehaviour:
@@ -1585,7 +1585,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976674315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 54}
+  m_LocalPosition: {x: 0, y: 0, z: -39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1595,7 +1595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1740.1, y: -1563.2}
+  m_AnchoredPosition: {x: -1712.7, y: -1541.9}
   m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1976674317
@@ -1709,6 +1709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ad4f2a36d6bd844ab1af479c34c914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPuzzleOver: 0
   isTimeOver: 0
   isGridFull: 0
   isPlayerFirst: 0
@@ -1717,6 +1718,8 @@ MonoBehaviour:
   isBattleStageClear: 0
   filledGridCount: 0
   maxValue: 0
+  puzzleManager: {fileID: 1544963456}
+  battleManager: {fileID: 367777430}
 --- !u!4 &2080948010
 Transform:
   m_ObjectHideFlags: 0
