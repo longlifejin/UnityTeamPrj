@@ -30,6 +30,7 @@ public class PuzzleMgr : MonoBehaviour
     {
         const float center = Size / 2f - 0.5f;
         PuzzleCamera.transform.position = new Vector3(center, center, -10.0f);
+        
         _grid = new Grid(Size, TileSprites, gridBG);
         gameMgr = gameManager.GetComponent<GameMgr>();
         timer = limitTime;
