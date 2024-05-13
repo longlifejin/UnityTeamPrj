@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameMgr : MonoBehaviour
 {
@@ -21,10 +23,15 @@ public class GameMgr : MonoBehaviour
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
+    public Image popUpPanel;
+    TextMeshProUGUI popUpMessage;
+
     private void Start()
     {
-       puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
-       battleMgr = battleManager.GetComponent<BattleMgr>();
+        puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
+        battleMgr = battleManager.GetComponent<BattleMgr>();
+        popUpPanel.gameObject.SetActive(false);
+        popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Update()
     {
@@ -33,13 +40,13 @@ public class GameMgr : MonoBehaviour
 
     private void PuzzleOver()
     {
-        if(isTimeOver)
+        if (isTimeOver)
         {
             isPlayerFirst = true;
             isTimeOver = false;
         }
 
-        if(isGridFull)
+        if (isGridFull)
         {
             isBossFirst = true;
             isGridFull = false;
@@ -48,20 +55,30 @@ public class GameMgr : MonoBehaviour
 
     public void BattleOver()
     {
-        if(isPlayerDie)
+        if (isPlayerDie)
         {
-            //½ÇÆÐ Ã¢ ¶ç¿ì±â
-            //½ÇÆÐ °ñµå È¹µæ
+            popUpPanel.gameObject.SetActive(true);
+            popUpMessage.text = $"Stage Failed!\n gained Gold : 0";
             Debug.Log("Player Die");
-            //
-            isPlayerDie = false;
         }
-        
-        if(isBattleStageClear)
+
+        if (isBattleStageClear)
         {
-            //¼º°ø °ñµå È¹µæ
+            popUpPanel.gameObject.SetActive(true);
+            popUpMessage.text = $"Stage Clear!\n gained Gold : 50";
             Debug.Log("Stage Clear");
-            isBattleStageClear = false;
         }
+    }
+
+    public void StartNextRound()
+    {
+        puzzleMgr.ResetPuzzle();
+    }
+
+    public void OnClickOK()
+    {
+        popUpPanel.gameObject.SetActive(false);
+        isPlayerDie = false;
+        isBattleStageClear = false;
     }
 }

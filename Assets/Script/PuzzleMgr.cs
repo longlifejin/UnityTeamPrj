@@ -133,6 +133,8 @@ public class PuzzleMgr : MonoBehaviour
     public void ResetPuzzle()
     {
         _grid.Reset();
-        timer = 0f;
+        timer = limitTime;
+        gameMgr.isPuzzleOver = false;
+
     }
 }

@@ -12,6 +12,9 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
+    private int playerHp;
+    private int bossHp;
+
     Player player = new Player();
     Boss boss = new Boss();
 
@@ -25,6 +28,7 @@ public class BattleMgr : MonoBehaviour
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
 
         player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        //playerHp = player.hp;
         player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
         player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
@@ -66,12 +70,14 @@ public class BattleMgr : MonoBehaviour
             Debug.Log("Boss HP : " + boss.hp);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         if(!gameMgr.isPlayerDie)
         {
             player.hp -= boss.atk * gameMgr.filledGridCount;
-            CheckHealth();
             Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+            GoNextRound();
         }
     }   
 
@@ -82,17 +88,19 @@ public class BattleMgr : MonoBehaviour
         {
             int penaltyAtk = 32 * boss.atk;
             player.hp -= penaltyAtk * gameMgr.filledGridCount;
-            CheckHealth();
             Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
         }
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         if(!gameMgr.isBattleStageClear)
         {
             boss.hp -= player.atk * gameMgr.maxValue;
             CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
+            GoNextRound();
         }
     }
 
@@ -108,15 +116,20 @@ public class BattleMgr : MonoBehaviour
             gameMgr.isBattleStageClear = true;
             StopAllCoroutines();
         }
-        else if (player.hp > 0 && boss.hp > 0)
-        {
-            
-        }
         else
         {
             return;
         }
 
         gameMgr.BattleOver();
+    }
+
+    private void GoNextRound()
+    {
+        if (player.hp > 0 && boss.hp > 0)
+        {
+            Debug.Log("GoNextRound");
+            gameMgr.StartNextRound();
+        }
     }
 }
