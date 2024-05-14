@@ -31,7 +31,7 @@ public class PuzzleMgr : MonoBehaviour
     public void OnEnable() //게임 시작 시 카메라 위치 설정, 그리드 초기화 
     {
         const float center = Size / 2f - 0.5f;
-        PuzzleCamera.transform.position = new Vector3(center, center, -10.0f);
+        PuzzleCamera.transform.position = new Vector3(center, center + 1f, -10.0f);
        
         gameMgr = gameManager.GetComponent<GameMgr>();
         timer = limitTime;

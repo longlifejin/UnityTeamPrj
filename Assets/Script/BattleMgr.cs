@@ -47,6 +47,9 @@ public class BattleMgr : MonoBehaviour
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
 
+        playerHpBar.fillAmount = player.hp / playerOriginHp;
+        bossHpBar.fillAmount = boss.hp / bossOriginHp;
+
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
 
