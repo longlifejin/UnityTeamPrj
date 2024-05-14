@@ -27,20 +27,20 @@ ItemName1,[2] 숫자 카드
 ItemName2,[4] 숫자 카드
 ItemName3,[8] 숫자 카드
 ItemName4,[16] 숫자 카드
-ItemName5,체력 강화 + 1
-ItemName6,체력 강화 + 2
-ItemName7,체력 강화 + 3
-ItemName8,체력 강화 + 4
-ItemName9,체력 강화 + 5
-ItemName10,공격력 강화 + 1
-ItemName11,공격력 강화 + 2
-ItemName12,공격력 강화 + 3
-ItemName13,공격력 강화 + 4
-ItemName14,공격력 강화 + 5
-ItemInfo1,잔여개수 : 99개
-ItemInfo2,잔여개수 : 99개
-ItemInfo3,잔여개수 : 99개
-ItemInfo4,잔여개수 : 2개
+ItemName5,[체력] 강화 + 1
+ItemName6,[체력] 강화 + 2
+ItemName7,[체력] 강화 + 3
+ItemName8,[체력] 강화 + 4
+ItemName9,[체력] 강화 + 5
+ItemName10,[공격력] 강화 + 1
+ItemName11,[공격력] 강화 + 2
+ItemName12,[공격력] 강화 + 3
+ItemName13,[공격력] 강화 + 4
+ItemName14,[공격력] 강화 + 5
+ItemInfo1,잔여개수 99개
+ItemInfo2,잔여개수 99개
+ItemInfo3,잔여개수 99개
+ItemInfo4,잔여개수 2개
 ItemInfo5,플레이어의 체력이 영구적으로 50 상승합니다.
 ItemInfo6,플레이어의 체력이 영구적으로 50 상승합니다.
 ItemInfo7,플레이어의 체력이 영구적으로 50 상승합니다.

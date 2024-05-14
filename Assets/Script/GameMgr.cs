@@ -72,7 +72,7 @@ public class GameMgr : MonoBehaviour
 
     public void StartNextRound()
     {
-        puzzleMgr.ResetPuzzle();
+        puzzleMgr.OnEnable();
     }
 
     public void OnClickOK()

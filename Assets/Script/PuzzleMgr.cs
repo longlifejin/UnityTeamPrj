@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class PuzzleMgr : MonoBehaviour
     public Sprite[] TileSprites; //타일에 사용될 스프라이트 배열
     public Camera PuzzleCamera; //퍼즐 카메라
     public GameObject gridBG; //타일이 배치되는 캔버스
+    public Button buttonPuzzleStart;
 
     private Vector2 _touchStartPosition = Vector2.zero;
     private Grid _grid;
@@ -18,7 +20,7 @@ public class PuzzleMgr : MonoBehaviour
     private float limitTime = 30f;
     private float timer;
 
-    public Slider timerBar;
+    public Image timeBar;
 
     public GameObject gameManager;
     private GameMgr gameMgr;
@@ -26,14 +28,20 @@ public class PuzzleMgr : MonoBehaviour
     public int maxValue = 0;
     public int emtpyCount = 0;
 
-    private void Start() //게임 시작 시 카메라 위치 설정, 그리드 초기화 
+    public void OnEnable() //게임 시작 시 카메라 위치 설정, 그리드 초기화 
     {
         const float center = Size / 2f - 0.5f;
         PuzzleCamera.transform.position = new Vector3(center, center, -10.0f);
-        
-        _grid = new Grid(Size, TileSprites, gridBG);
+       
         gameMgr = gameManager.GetComponent<GameMgr>();
         timer = limitTime;
+        Time.timeScale = 0f;
+        buttonPuzzleStart.gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        _grid = new Grid(Size, TileSprites, gridBG);
     }
 
     private void InputEvents() //키보드 입력을 받는 내용
@@ -106,7 +114,7 @@ public class PuzzleMgr : MonoBehaviour
 
         if (!gameMgr.isPuzzleOver)
         {
-            timerBar.value = (timer / limitTime);
+            timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
 
             InputEvents();
@@ -137,5 +145,12 @@ public class PuzzleMgr : MonoBehaviour
         timer = limitTime;
         gameMgr.isPuzzleOver = false;
 
+    }
+
+    public void OnClickPuzzleStart()
+    {
+        Time.timeScale = 1f;
+        ResetPuzzle();
+        buttonPuzzleStart.gameObject.SetActive(false);
     }
 }
