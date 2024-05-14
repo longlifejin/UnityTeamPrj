@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameMgr : MonoBehaviour
 {
+    public bool isPuzzleOver = false;
+
     public bool isTimeOver = false;
     public bool isGridFull = false;
     public bool isPlayerFirst = false;
@@ -14,9 +18,20 @@ public class GameMgr : MonoBehaviour
     public int filledGridCount;
     public int maxValue;
 
+    public GameObject puzzleManager;
+    private PuzzleMgr puzzleMgr;
+    public GameObject battleManager;
+    private BattleMgr battleMgr;
+
+    public Image popUpPanel;
+    TextMeshProUGUI popUpMessage;
+
     private void Start()
     {
-       
+        puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
+        battleMgr = battleManager.GetComponent<BattleMgr>();
+        popUpPanel.gameObject.SetActive(false);
+        popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Update()
     {
@@ -25,29 +40,45 @@ public class GameMgr : MonoBehaviour
 
     private void PuzzleOver()
     {
-        if(isTimeOver)
+        if (isTimeOver)
         {
             isPlayerFirst = true;
             isTimeOver = false;
         }
 
-        if(isGridFull)
+        if (isGridFull)
         {
             isBossFirst = true;
             isGridFull = false;
         }
     }
 
-    private void BattleOver()
+    public void BattleOver()
     {
-        if(isPlayerDie)
+        if (isPlayerDie)
         {
-            //실패 창 띄우기
+            popUpPanel.gameObject.SetActive(true);
+            popUpMessage.text = $"Stage Failed!\n gained Gold : 0";
+            Debug.Log("Player Die");
         }
-        
-        if(isBattleStageClear)
-        {
 
+        if (isBattleStageClear)
+        {
+            popUpPanel.gameObject.SetActive(true);
+            popUpMessage.text = $"Stage Clear!\n gained Gold : 50";
+            Debug.Log("Stage Clear");
         }
+    }
+
+    public void StartNextRound()
+    {
+        puzzleMgr.ResetPuzzle();
+    }
+
+    public void OnClickOK()
+    {
+        popUpPanel.gameObject.SetActive(false);
+        isPlayerDie = false;
+        isBattleStageClear = false;
     }
 }

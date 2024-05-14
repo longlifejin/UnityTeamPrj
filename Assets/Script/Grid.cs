@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ public class Grid
 
     public int maxValue;
     public int emptyCount;
+
+    public bool isGridFull = false;
 
     private CardDeck cardDeck;
 
@@ -57,7 +60,7 @@ public class Grid
 
     private void AddRandom() //·£´ýÇÑ À§Ä¡¿¡ »õ·Î¿î Å¸ÀÏÀ» Ãß°¡
     {
-        if (Full()) //°¡µæ Ã¡À¸¸é exception ´øÁü
+        if (Full()) //°¡µæ Ã¡À¸¸é
         {
             return;
         }
@@ -81,10 +84,11 @@ public class Grid
         }
 
         maxValue = GetMaxValue();
-        Debug.Log("ÃÖ´ñ°ª: " + maxValue);
-
         emptyCount = GetEmptyTile();
-        Debug.Log("ºóÄ­ ¼ö: " + emptyCount);
+        if (emptyCount == 0)
+        {
+            isGridFull = true;
+        }
     }
 
     public Grid(int size, Sprite[] tileSprites, GameObject gridBG)

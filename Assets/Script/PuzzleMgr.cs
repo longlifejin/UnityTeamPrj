@@ -30,6 +30,7 @@ public class PuzzleMgr : MonoBehaviour
     {
         const float center = Size / 2f - 0.5f;
         PuzzleCamera.transform.position = new Vector3(center, center, -10.0f);
+        
         _grid = new Grid(Size, TileSprites, gridBG);
         gameMgr = gameManager.GetComponent<GameMgr>();
         timer = limitTime;
@@ -100,9 +101,10 @@ public class PuzzleMgr : MonoBehaviour
 
     private void Update()
     {
-        maxValue = _grid.maxValue;
-        emtpyCount = _grid.emptyCount;
-        if (!gameMgr.isGridFull && !gameMgr.isTimeOver)
+        gameMgr.filledGridCount = (int)Mathf.Pow(_grid._size, 2) - _grid.emptyCount;
+        gameMgr.maxValue = _grid.maxValue;
+
+        if (!gameMgr.isPuzzleOver)
         {
             timerBar.value = (timer / limitTime);
             timer -= Time.deltaTime;
@@ -114,24 +116,26 @@ public class PuzzleMgr : MonoBehaviour
 
         if (timer <= 0f)
         {
-            gameMgr.filledGridCount = (int)Math.Pow(2, _grid._size) - _grid.emptyCount;
-            gameMgr.maxValue = _grid.maxValue;
             gameMgr.isTimeOver = true;
-
+            gameMgr.isPuzzleOver = true;
             timer = limitTime;
         }
-        
-        if(_grid.Full())
+        else if(_grid.isGridFull)
         {
             gameMgr.isGridFull = true;
-        }    
-
+            gameMgr.isPuzzleOver = true;
+            gameMgr.filledGridCount = (int)Mathf.Pow(_grid._size, 2) - _grid.emptyCount;
+            _grid.isGridFull = false;
+            timer = limitTime;
+        }
     }
 
     [UsedImplicitly]
-    public void ResetLevel()
+    public void ResetPuzzle()
     {
         _grid.Reset();
-        timer = 0f;
+        timer = limitTime;
+        gameMgr.isPuzzleOver = false;
+
     }
 }

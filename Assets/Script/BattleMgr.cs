@@ -12,12 +12,11 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
+    private int playerHp;
+    private int bossHp;
+
     Player player = new Player();
     Boss boss = new Boss();
-
-    private bool isPlayerTurn = false;
-    private bool isBossTurn = false;
-    
 
     private void Start()
     {
@@ -29,6 +28,7 @@ public class BattleMgr : MonoBehaviour
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
 
         player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        //playerHp = player.hp;
         player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
         player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
@@ -46,46 +46,90 @@ public class BattleMgr : MonoBehaviour
     {
         if (gameMgr.isPlayerFirst && !gameMgr.isBossFirst)
         {
-            PlayerFirst();
+            StartCoroutine(PlayerFirst());
             gameMgr.isPlayerFirst = false;
             
         }
-        else if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
+        
+        if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
         {
-            BossFirst();
+            StartCoroutine(BossFirst());
             gameMgr.isBossFirst = false;
         }
 
-        if(player.hp <= 0)
+        
+    }
+
+    private IEnumerator PlayerFirst()
+    {
+        Debug.Log("PlayerFirst Start");
+        if(!gameMgr.isBattleStageClear)
         {
-            gameMgr.isPlayerDie = true;
+            boss.hp -= player.atk * gameMgr.maxValue;
+            CheckHealth();
+            Debug.Log("Boss HP : " + boss.hp);
         }
-        else if(boss.hp <= 0)
+
+        yield return new WaitForSeconds(2f);
+        if(!gameMgr.isPlayerDie)
         {
-            gameMgr.isBattleStageClear = true;
+            player.hp -= boss.atk * gameMgr.filledGridCount;
+            Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+            GoNextRound();
+        }
+    }   
+
+    private IEnumerator BossFirst()
+    {
+        Debug.Log("BossFirst Start");
+        if(!gameMgr.isPlayerDie)
+        {
+            int penaltyAtk = 32 * boss.atk;
+            player.hp -= penaltyAtk * gameMgr.filledGridCount;
+            Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+        }
+        
+        yield return new WaitForSeconds(2f);
+
+        if(!gameMgr.isBattleStageClear)
+        {
+            boss.hp -= player.atk * gameMgr.maxValue;
+            CheckHealth();
+            Debug.Log("Boss HP : " + boss.hp);
+            GoNextRound();
         }
     }
 
-    private void PlayerFirst()
+    private void CheckHealth()
     {
-        Debug.Log("PlayerFirst Start");
+        if (player.hp <= 0)
+        {
+            gameMgr.isPlayerDie = true;
+            StopAllCoroutines();
+        }
+        else if (boss.hp <= 0)
+        {
+            gameMgr.isBattleStageClear = true;
+            StopAllCoroutines();
+        }
+        else
+        {
+            return;
+        }
 
-        boss.hp -= player.atk * gameMgr.maxValue;
-        player.hp -= boss.atk * gameMgr.filledGridCount;
+        gameMgr.BattleOver();
+    }
 
-        Debug.Log("Boss HP : " + boss.hp);
-        Debug.Log("Player HP : " + player.hp);
-    }   
-
-    private void BossFirst()
+    private void GoNextRound()
     {
-        Debug.Log("BossFirst Start");
-
-        boss.atk *= 32;
-        player.hp -= boss.atk * gameMgr.filledGridCount;
-        boss.hp -= player.atk * gameMgr.maxValue;
-
-        Debug.Log("Player HP : " + player.hp);
-        Debug.Log("Boss HP : " + boss.hp);
+        if (player.hp > 0 && boss.hp > 0)
+        {
+            Debug.Log("GoNextRound");
+            gameMgr.StartNextRound();
+        }
     }
 }
