@@ -1,0 +1,14 @@
+diff a/Assets/Resources/ItemDataTable.csv b/Assets/Resources/ItemDataTable.csv	(rejected hunks)
+@@ -1,8 +1,8 @@
+ Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
+-41001,1,ItemName1,0,25,99,ItemInfo1,image_Item_1001
+-41002,1,ItemName2,0,50,99,ItemInfo2,image_Item_1002
+-41003,1,ItemName3,0,150,99,ItemInfo3,image_Item_1003
+-41004,1,ItemName4,0,500,2,ItemInfo4,image_Item_1004
++41001,1,ItemName1,0,100,99,ItemInfo1,image_Item_1001
++41002,1,ItemName2,0,200,99,ItemInfo2,image_Item_1002
++41003,1,ItemName3,0,800,99,ItemInfo3,image_Item_1003
++41004,1,ItemName4,0,1600,2,ItemInfo4,image_Item_1004
+ 43001,2,ItemName5,50,100,1,ItemInfo5,image_Item_3001
+ 43002,2,ItemName6,50,300,1,ItemInfo6,image_Item_3002
+ 43003,2,ItemName7,50,500,1,ItemInfo7,image_Item_3003
