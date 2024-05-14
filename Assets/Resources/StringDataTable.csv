@@ -1,12 +1,12 @@
-ï»¿String_ID,Text
-BossName1,ë³€ì¢… ì„ ì¸ìž¥
-BossName2,ê°€ì‹œì™¸ëˆˆë‹¬íŒ½ì´
-BossName3,í¬ì•…í•œ ë¯¸ë¯¹
-BossName4,ìŠ¤ì¼ˆë ˆí†¤ ì „ì‚¬
-BossName5,ì‚¬ë‚˜ìš´ ì›¨ì–´ìš¸í”„
-BossName6,ê³ ë¸”ë¦° ëŒ€ìž¥
-BossName7,ì§€ì˜¥ì˜ ë°œë¡
-BossName8,ì €ì£¼ë°›ì€ ë§ˆë²•ì‚¬
+String_ID,Text
+BossName1,º¯Á¾ ¼±ÀÎÀå
+BossName2,°¡½Ã¿Ü´«´ÞÆØÀÌ
+BossName3,Æ÷¾ÇÇÑ ¹Ì¹Í
+BossName4,½ºÄÌ·¹Åæ Àü»ç
+BossName5,»ç³ª¿î ¿þ¾î¿ïÇÁ
+BossName6,°íºí¸° ´ëÀå
+BossName7,Áö¿ÁÀÇ ¹ß·Ï
+BossName8,ÀúÁÖ¹ÞÀº ¸¶¹ý»ç
 StageName1,Stage 1
 StageName2,Stage 2
 StageName3,Stage 3
@@ -15,39 +15,39 @@ StageName5,Stage 5
 StageName6,Stage 6
 StageName7,Stage 7
 StageName8,Stage 8
-StageInfo1,"ì´Œìž¥ìœ¼ë¡œë¶€í„° ë§ˆë¬¼ì´ ê¸‰ê²©ížˆ ëŠ˜ì–´ë‚œ ì›ì¸ì„ ì°¾ê³  ì´ë¥¼ ì œê±°í•´ë‹¬ë¼ëŠ” ë¶€íƒì„ ë°›ì•˜ë‹¤. ì¡°ì‚¬ë¥¼ ìœ„í•´ ìˆ²ì— ë°œì„ ë“¤ì¸ ìˆœê°„, ë³€ì¢… ì„ ì¸ìž¥ê³¼ ë§ˆì£¼ì³¤ë‹¤. "
-StageInfo2,ë³€ì¢… ì„ ì¸ìž¥ì˜ ì‹œì²´ë¥¼ ì¡°ì‚¬í•˜ë˜ ì¤‘ í’€ìˆ²ì—ì„œ ê°€ì‹œ ì™¸ëˆˆ ë‹¬íŒ½ì´ê°€ íŠ€ì–´ë‚˜ì™”ë‹¤. ìˆ²ì˜ ì´ˆìž…ê¹Œì§€ ë§ˆë¬¼ì´ ë‚´ë ¤ì˜¤ëŠ” ì¼ì€ ë“œë¬¸ë°â€¦ ë¬´ì–¸ê°€ ì´ìƒí•˜ë‹¤. 
-StageInfo3,ë‹¬íŒ½ì´ë¥¼ ë¬´ì‚¬ížˆ ì“°ëŸ¬íŠ¸ë¦¬ê³  ìˆ²ê¸¸ì„ ë”°ë¼ ê°€ë˜ ì¤‘ ê¸¸ í•œê°€ìš´ë° ë©ê·¸ëŸ¬ë‹ˆ ë†“ì¸ ìƒìžë¥¼ ë°œê²¬í–ˆë‹¤. ìƒìžë¥¼ í–¥í•´ ì†ì„ ë»—ëŠ” ìˆœê°„ ìƒìžê°€ ë²Œì–´ì§€ê³  ë‚ ì¹´ë¡œìš´ ì´ë¹¨ì´ ë“œëŸ¬ë‚¬ë‹¤. 
-StageInfo4,"ë¯¸ë¯¹ ê°™ì€ ë§ˆë¬¼ê¹Œì§€ ëª¨ìŠµì„ ë“œëŸ¬ë‚´ë‹¤ë‹ˆ. ê²½ê³„í•˜ë©° ì•žìœ¼ë¡œ ë‚˜ì•„ê°€ëŠ”ë°, ê·¼ì²˜ì—ì„œ ì‚¬ëžŒì˜ ë¹„ëª… ì†Œë¦¬ê°€ ë“¤ë ¸ë‹¤. ë‹¬ë ¤ê°€ë³´ë‹ˆ ìŠ¤ì¼ˆë ˆí†¤ ì „ì‚¬ê°€ ë§ˆì„ ì£¼ë¯¼ì„ ìœ„í˜‘í•˜ê³  ìžˆì—ˆë‹¤. "
-StageInfo5,ë§ˆê³„ì˜ ë§ˆë¬¼ë“¤ì´ ì†Œí™˜ë˜ëŠ” ê²ƒì´ í™•ì‹¤í•´ì¡Œë‹¤. í¬ì•…í•œ ë§ˆë¬¼ë“¤ì„ í—¤ì¹˜ê³  ì†Œí™˜ìžë¥¼ ì°¾ì•„ì•¼ í•œë‹¤.
-StageInfo6,"ìˆ²ì˜ ì‹¬ì¸µë¶€, ìˆ˜ì‹­ ë§ˆë¦¬ì˜ ë¬´ìž¥í•œ ê³ ë¸”ë¦°ì´ ë¬´ë¦¬ ì§€ì–´ìžˆë‹¤. ë‹¤ìˆ˜ì˜ ê³ ë¸”ë¦° ë¬´ë¦¬ì™€ ì‹¸ìš¸ ë•Œ ê°€ìž¥ ì¢‹ì€ ë°©ë²•ì€ ë°”ë¡œ ë¬´ë¦¬ì˜ ëŒ€ìž¥ì„ í•´ì¹˜ìš°ëŠ” ê²ƒì´ë‹¤."
-StageInfo7,"í¬íš¨ì™€ í•¨ê»˜ ë‚ ê°œ ë‹¬ë¦° ê±°ëŒ€í•œ ë§ˆë¬¼ì´ ë‚˜íƒ€ë‚¬ë‹¤. í•œ ìŒì˜ ë¿”ê³¼ ë‚ ê°œ, ë¶‰ê²Œ ë¹›ë‚˜ëŠ” ëˆˆ. ì§€ì˜¥ì— ì‚°ë‹¤ëŠ” ì „ì„¤ì˜ ë§ˆë¬¼, ë°œë¡ê³¼ ë™ì¼í•œ ëª¨ìŠµì´ë‹¤. ë‚´ê°€ ì´ê¸¸ ìˆ˜ ìžˆì„ê¹Œ? "
-StageInfo8,"ëª¨ë“  ì‚¬íƒœì˜ ì›í‰, ë§ˆë¬¼ì„ ì†Œí™˜í•œ ë§ˆë²•ì‚¬ë¥¼ ë°œê²¬í–ˆë‹¤. ë§ˆë²•ì‚¬ë¥¼ ì“°ëŸ¬íŠ¸ë¦¬ë©´ ëª¨ë“  ë§ˆë¬¼ë“¤ì˜ ì†Œí™˜ì´ í’€ë¦´ ê²ƒì´ë‹¤. "
-ItemName1,[2] ìˆ«ìž ì¹´ë“œ
-ItemName2,[4] ìˆ«ìž ì¹´ë“œ
-ItemName3,[8] ìˆ«ìž ì¹´ë“œ
-ItemName4,[16] ìˆ«ìž ì¹´ë“œ
-ItemName5,[ì²´ë ¥] ê°•í™” + 1
-ItemName6,[ì²´ë ¥] ê°•í™” + 2
-ItemName7,[ì²´ë ¥] ê°•í™” + 3
-ItemName8,[ì²´ë ¥] ê°•í™” + 4
-ItemName9,[ì²´ë ¥] ê°•í™” + 5
-ItemName10,[ê³µê²©ë ¥] ê°•í™” + 1
-ItemName11,[ê³µê²©ë ¥] ê°•í™” + 2
-ItemName12,[ê³µê²©ë ¥] ê°•í™” + 3
-ItemName13,[ê³µê²©ë ¥] ê°•í™” + 4
-ItemName14,[ê³µê²©ë ¥] ê°•í™” + 5
-ItemInfo1,[2] ìˆ«ìž ì¹´ë“œ
-ItemInfo2,[4] ìˆ«ìž ì¹´ë“œ
-ItemInfo3,[8] ìˆ«ìž ì¹´ë“œ
-ItemInfo4,[16] ìˆ«ìž ì¹´ë“œ
-ItemInfo5,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 50 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo6,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 50 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo7,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 50 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo8,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 100 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo9,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 100 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo10,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 3 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo11,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 5 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo12,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 5 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo13,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 7 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo14,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 10 ìƒìŠ¹í•©ë‹ˆë‹¤.
+StageInfo1,"ÃÌÀåÀ¸·ÎºÎÅÍ ¸¶¹°ÀÌ ±Þ°ÝÈ÷ ´Ã¾î³­ ¿øÀÎÀ» Ã£°í ÀÌ¸¦ Á¦°ÅÇØ´Þ¶ó´Â ºÎÅ¹À» ¹Þ¾Ò´Ù. Á¶»ç¸¦ À§ÇØ ½£¿¡ ¹ßÀ» µéÀÎ ¼ø°£, º¯Á¾ ¼±ÀÎÀå°ú ¸¶ÁÖÃÆ´Ù. "
+StageInfo2,º¯Á¾ ¼±ÀÎÀåÀÇ ½ÃÃ¼¸¦ Á¶»çÇÏ´ø Áß Ç®½£¿¡¼­ °¡½Ã ¿Ü´« ´ÞÆØÀÌ°¡ Æ¢¾î³ª¿Ô´Ù. ½£ÀÇ ÃÊÀÔ±îÁö ¸¶¹°ÀÌ ³»·Á¿À´Â ÀÏÀº µå¹®µ¥¡¦ ¹«¾ð°¡ ÀÌ»óÇÏ´Ù. 
+StageInfo3,´ÞÆØÀÌ¸¦ ¹«»çÈ÷ ¾²·¯Æ®¸®°í ½£±æÀ» µû¶ó °¡´ø Áß ±æ ÇÑ°¡¿îµ¥ µ¢±×·¯´Ï ³õÀÎ »óÀÚ¸¦ ¹ß°ßÇß´Ù. »óÀÚ¸¦ ÇâÇØ ¼ÕÀ» »¸´Â ¼ø°£ »óÀÚ°¡ ¹ú¾îÁö°í ³¯Ä«·Î¿î ÀÌ»¡ÀÌ µå·¯³µ´Ù. 
+StageInfo4,"¹Ì¹Í °°Àº ¸¶¹°±îÁö ¸ð½ÀÀ» µå·¯³»´Ù´Ï. °æ°èÇÏ¸ç ¾ÕÀ¸·Î ³ª¾Æ°¡´Âµ¥, ±ÙÃ³¿¡¼­ »ç¶÷ÀÇ ºñ¸í ¼Ò¸®°¡ µé·È´Ù. ´Þ·Á°¡º¸´Ï ½ºÄÌ·¹Åæ Àü»ç°¡ ¸¶À» ÁÖ¹ÎÀ» À§ÇùÇÏ°í ÀÖ¾ú´Ù. "
+StageInfo5,¸¶°èÀÇ ¸¶¹°µéÀÌ ¼ÒÈ¯µÇ´Â °ÍÀÌ È®½ÇÇØÁ³´Ù. Æ÷¾ÇÇÑ ¸¶¹°µéÀ» ÇìÄ¡°í ¼ÒÈ¯ÀÚ¸¦ Ã£¾Æ¾ß ÇÑ´Ù.
+StageInfo6,"½£ÀÇ ½ÉÃþºÎ, ¼ö½Ê ¸¶¸®ÀÇ ¹«ÀåÇÑ °íºí¸°ÀÌ ¹«¸® Áö¾îÀÖ´Ù. ´Ù¼öÀÇ °íºí¸° ¹«¸®¿Í ½Î¿ï ¶§ °¡Àå ÁÁÀº ¹æ¹ýÀº ¹Ù·Î ¹«¸®ÀÇ ´ëÀåÀ» ÇØÄ¡¿ì´Â °ÍÀÌ´Ù."
+StageInfo7,"Æ÷È¿¿Í ÇÔ²² ³¯°³ ´Þ¸° °Å´ëÇÑ ¸¶¹°ÀÌ ³ªÅ¸³µ´Ù. ÇÑ ½ÖÀÇ »Ô°ú ³¯°³, ºÓ°Ô ºû³ª´Â ´«. Áö¿Á¿¡ »ê´Ù´Â Àü¼³ÀÇ ¸¶¹°, ¹ß·Ï°ú µ¿ÀÏÇÑ ¸ð½ÀÀÌ´Ù. ³»°¡ ÀÌ±æ ¼ö ÀÖÀ»±î? "
+StageInfo8,"¸ðµç »çÅÂÀÇ ¿øÈä, ¸¶¹°À» ¼ÒÈ¯ÇÑ ¸¶¹ý»ç¸¦ ¹ß°ßÇß´Ù. ¸¶¹ý»ç¸¦ ¾²·¯Æ®¸®¸é ¸ðµç ¸¶¹°µéÀÇ ¼ÒÈ¯ÀÌ Ç®¸± °ÍÀÌ´Ù. "
+ItemName1,[2] ¼ýÀÚ Ä«µå
+ItemName2,[4] ¼ýÀÚ Ä«µå
+ItemName3,[8] ¼ýÀÚ Ä«µå
+ItemName4,[16] ¼ýÀÚ Ä«µå
+ItemName5,[Ã¼·Â] °­È­ + 1
+ItemName6,[Ã¼·Â] °­È­ + 2
+ItemName7,[Ã¼·Â] °­È­ + 3
+ItemName8,[Ã¼·Â] °­È­ + 4
+ItemName9,[Ã¼·Â] °­È­ + 5
+ItemName10,[°ø°Ý·Â] °­È­ + 1
+ItemName11,[°ø°Ý·Â] °­È­ + 2
+ItemName12,[°ø°Ý·Â] °­È­ + 3
+ItemName13,[°ø°Ý·Â] °­È­ + 4
+ItemName14,[°ø°Ý·Â] °­È­ + 5
+ItemInfo1,ÀÜ¿©°³¼ö 99°³
+ItemInfo2,ÀÜ¿©°³¼ö 99°³
+ItemInfo3,ÀÜ¿©°³¼ö 99°³
+ItemInfo4,ÀÜ¿©°³¼ö 2°³
+ItemInfo5,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 50 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo6,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 50 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo7,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 50 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo8,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 100 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo9,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 100 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo10,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 3 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo11,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 5 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo12,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 5 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo13,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 7 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo14,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 10 »ó½ÂÇÕ´Ï´Ù.
