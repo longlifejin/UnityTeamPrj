@@ -50,8 +50,9 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
 
-        playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
-        bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
+        playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
+        bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
+
     }
 
     private void Update()
@@ -89,9 +90,9 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
             player.hp -= boss.atk * gameMgr.filledGridCount;
             yield return new WaitForSeconds(2f);
+            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
             CheckHealth();
 
             playerHpBar.fillAmount = player.hp / playerOriginHp;
@@ -138,11 +139,13 @@ public class BattleMgr : MonoBehaviour
     {
         if (player.hp <= 0)
         {
+            playerAnimator.SetBool(AnimatorIds.playerDieAni, true);
             gameMgr.isPlayerDie = true;
             StopAllCoroutines();
         }
         else if (boss.hp <= 0)
         {
+            bossAnimator.SetBool(AnimatorIds.bossDiedAni, true);
             gameMgr.isBattleStageClear = true;
             StopAllCoroutines();
         }
