@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleMgr : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class BattleMgr : MonoBehaviour
     Player player = new Player();
     Boss boss = new Boss();
 
+    public Image playerHpBar;
+    public Image bossHpBar;
+
+    private int playerOriginHp;
+    private int bossOriginHp;
+
     private void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
@@ -26,12 +33,14 @@ public class BattleMgr : MonoBehaviour
 
         //TO-DO : 스테이지 별 체력, 공격력, 이미지 설정 추가
         player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        playerOriginHp = player.hp;
         player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
         player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         string bossID = stageTable.Get(DataTableIds.stageID).Boss_ID;
         boss.name = stringTable.Get(bossTable.Get(bossID).Boss_Name);
         boss.hp = bossTable.Get(bossID).Boss_Hp;
+        bossOriginHp = boss.hp;
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
 
@@ -60,6 +69,7 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isBattleStageClear)
         {
             boss.hp -= player.atk * gameMgr.maxValue;
+            bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
         }
@@ -69,6 +79,7 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             player.hp -= boss.atk * gameMgr.filledGridCount;
+            playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
 
             yield return new WaitForSeconds(2f);
@@ -85,6 +96,7 @@ public class BattleMgr : MonoBehaviour
         {
             int penaltyAtk = 32 * boss.atk;
             player.hp -= penaltyAtk * gameMgr.filledGridCount;
+            playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
 
             yield return new WaitForSeconds(2f);
@@ -97,6 +109,7 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isBattleStageClear)
         {
             boss.hp -= player.atk * gameMgr.maxValue;
+            bossHpBar.fillAmount = boss.hp / bossOriginHp;
             Debug.Log("Boss HP : " + boss.hp);
             CheckHealth();
             GoNextRound();
