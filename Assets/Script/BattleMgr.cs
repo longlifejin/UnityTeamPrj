@@ -19,8 +19,11 @@ public class BattleMgr : MonoBehaviour
     public Image playerHpBar;
     public Image bossHpBar;
 
-    private int playerOriginHp;
-    private int bossOriginHp;
+    private float playerOriginHp;
+    private float bossOriginHp;
+
+    public Animator playerAnimator;
+    public Animator bossAnimator;
 
     private void Start()
     {
@@ -46,6 +49,9 @@ public class BattleMgr : MonoBehaviour
 
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
+
+        playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
+        bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
     }
 
     private void Update()
@@ -68,23 +74,35 @@ public class BattleMgr : MonoBehaviour
         Debug.Log("PlayerFirst Start");
         if(!gameMgr.isBattleStageClear)
         {
+            playerAnimator.SetBool(AnimatorIds.playerAtkAni, true);
+            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, true);
             boss.hp -= player.atk * gameMgr.maxValue;
-            bossHpBar.fillAmount = boss.hp / bossOriginHp;
-            CheckHealth();
-            Debug.Log("Boss HP : " + boss.hp);
-        }
+            yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(2f);
+            bossHpBar.fillAmount = boss.hp / bossOriginHp;
+            Debug.Log("Boss HP : " + boss.hp);
+
+            playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
+            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, false);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+        }
 
         if(!gameMgr.isPlayerDie)
         {
+            bossAnimator.SetBool(AnimatorIds.bossAtkAni, true);
+            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, true);
             player.hp -= boss.atk * gameMgr.filledGridCount;
+            yield return new WaitForSeconds(2f);
+
             playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
 
+            bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
+            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, false);
             yield return new WaitForSeconds(2f);
-
             CheckHealth();
+
             GoNextRound();
         }
     }   
@@ -95,23 +113,31 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             int penaltyAtk = 32 * boss.atk;
+            bossAnimator.SetBool(AnimatorIds.bossAtkAni, true);
+            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, true);
             player.hp -= penaltyAtk * gameMgr.filledGridCount;
             playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
 
             yield return new WaitForSeconds(2f);
-
+            bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
+            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, false);
             CheckHealth();
         }
         
-        yield return new WaitForSeconds(2f);
-
         if(!gameMgr.isBattleStageClear)
         {
+            playerAnimator.SetBool(AnimatorIds.playerAtkAni, true);
+            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, true);
             boss.hp -= player.atk * gameMgr.maxValue;
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             Debug.Log("Boss HP : " + boss.hp);
+
+            yield return new WaitForSeconds(2f);
+            playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
+            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, false);
             CheckHealth();
+
             GoNextRound();
         }
     }

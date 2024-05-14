@@ -12,3 +12,11 @@ public static class DataTableIds
     public static readonly string stageID = "3001";
 
 }
+
+public static class AnimatorIds
+{
+    public static readonly string playerAtkAni = "Idle_Battle_DoubleSword";
+    public static readonly string playerDamaedAni = "PlayerDamaged";
+    public static readonly string bossAtkAni = "IdleNormal";
+    public static readonly string bossDamagedAni = "BossDamaged";
+}
