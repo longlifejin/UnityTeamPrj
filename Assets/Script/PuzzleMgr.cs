@@ -20,7 +20,7 @@ public class PuzzleMgr : MonoBehaviour
     private float limitTime = 30f;
     private float timer;
 
-    public Slider timerBar;
+    public Image timeBar;
 
     public GameObject gameManager;
     private GameMgr gameMgr;
@@ -114,7 +114,7 @@ public class PuzzleMgr : MonoBehaviour
 
         if (!gameMgr.isPuzzleOver)
         {
-            timerBar.value = (timer / limitTime);
+            timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
 
             InputEvents();

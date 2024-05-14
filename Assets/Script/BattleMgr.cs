@@ -12,9 +12,6 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
-    private int playerHp;
-    private int bossHp;
-
     Player player = new Player();
     Boss boss = new Boss();
 
@@ -27,8 +24,8 @@ public class BattleMgr : MonoBehaviour
         bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
 
+        //TO-DO : 스테이지 별 체력, 공격력, 이미지 설정 추가
         player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
-        //playerHp = player.hp;
         player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
         player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
@@ -48,7 +45,6 @@ public class BattleMgr : MonoBehaviour
         {
             StartCoroutine(PlayerFirst());
             gameMgr.isPlayerFirst = false;
-            
         }
         
         if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
@@ -56,8 +52,6 @@ public class BattleMgr : MonoBehaviour
             StartCoroutine(BossFirst());
             gameMgr.isBossFirst = false;
         }
-
-        
     }
 
     private IEnumerator PlayerFirst()
@@ -71,11 +65,14 @@ public class BattleMgr : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
+
         if(!gameMgr.isPlayerDie)
         {
             player.hp -= boss.atk * gameMgr.filledGridCount;
             Debug.Log("Player HP : " + player.hp);
+
             yield return new WaitForSeconds(2f);
+
             CheckHealth();
             GoNextRound();
         }
@@ -89,7 +86,9 @@ public class BattleMgr : MonoBehaviour
             int penaltyAtk = 32 * boss.atk;
             player.hp -= penaltyAtk * gameMgr.filledGridCount;
             Debug.Log("Player HP : " + player.hp);
+
             yield return new WaitForSeconds(2f);
+
             CheckHealth();
         }
         
@@ -98,8 +97,8 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isBattleStageClear)
         {
             boss.hp -= player.atk * gameMgr.maxValue;
-            CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
+            CheckHealth();
             GoNextRound();
         }
     }
@@ -128,7 +127,7 @@ public class BattleMgr : MonoBehaviour
     {
         if (player.hp > 0 && boss.hp > 0)
         {
-            Debug.Log("GoNextRound");
+            Debug.Log("Go Next Round");
             gameMgr.StartNextRound();
         }
     }
