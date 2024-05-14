@@ -78,6 +78,12 @@ public class GameMgr : MonoBehaviour
     public void OnClickOK()
     {
         popUpPanel.gameObject.SetActive(false);
+
+        if(isPlayerDie || isBattleStageClear)
+        {
+            battleMgr.Start();
+        }
+
         isPlayerDie = false;
         isBattleStageClear = false;
     }

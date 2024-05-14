@@ -643,6 +643,8 @@ MonoBehaviour:
   gameManager: {fileID: 2080948008}
   playerHpBar: {fileID: 1357177229}
   bossHpBar: {fileID: 419013329}
+  playerAnimator: {fileID: 6285956486942957307}
+  bossAnimator: {fileID: 4700302515777491}
 --- !u!4 &367777432
 Transform:
   m_ObjectHideFlags: 0
@@ -2850,6 +2852,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3089418927586582332, guid: 14201e77aca54a14b82101c6c3416568, type: 3}
   m_PrefabInstance: {fileID: 236083021573466664}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &4700302515777491 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8869255202539093311, guid: 14201e77aca54a14b82101c6c3416568, type: 3}
+  m_PrefabInstance: {fileID: 236083021573466664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &236083021573466664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2991,6 +2998,11 @@ PrefabInstance:
 --- !u!4 &6285956486942957306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1201914515122606113, guid: 11adece7b3570cd4ea1a9cc4a391579e, type: 3}
+  m_PrefabInstance: {fileID: 2862123855991077452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6285956486942957307 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1671419110776920239, guid: 11adece7b3570cd4ea1a9cc4a391579e, type: 3}
   m_PrefabInstance: {fileID: 2862123855991077452}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

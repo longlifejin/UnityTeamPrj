@@ -25,7 +25,7 @@ public class BattleMgr : MonoBehaviour
     public Animator playerAnimator;
     public Animator bossAnimator;
 
-    private void Start()
+    public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
 
@@ -74,32 +74,28 @@ public class BattleMgr : MonoBehaviour
         Debug.Log("PlayerFirst Start");
         if(!gameMgr.isBattleStageClear)
         {
-            playerAnimator.SetBool(AnimatorIds.playerAtkAni, true);
-            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, true);
+            playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
+            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= player.atk * gameMgr.maxValue;
             yield return new WaitForSeconds(2f);
+            CheckHealth();
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             Debug.Log("Boss HP : " + boss.hp);
-
-            playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
-            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, false);
             yield return new WaitForSeconds(2f);
             CheckHealth();
         }
 
         if(!gameMgr.isPlayerDie)
         {
-            bossAnimator.SetBool(AnimatorIds.bossAtkAni, true);
-            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, true);
+            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
             player.hp -= boss.atk * gameMgr.filledGridCount;
             yield return new WaitForSeconds(2f);
+            CheckHealth();
 
             playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
-
-            bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
-            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, false);
             yield return new WaitForSeconds(2f);
             CheckHealth();
 
@@ -113,29 +109,25 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             int penaltyAtk = 32 * boss.atk;
-            bossAnimator.SetBool(AnimatorIds.bossAtkAni, true);
-            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, true);
+            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
             player.hp -= penaltyAtk * gameMgr.filledGridCount;
             playerHpBar.fillAmount = player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
 
             yield return new WaitForSeconds(2f);
-            bossAnimator.SetBool(AnimatorIds.bossAtkAni, false);
-            playerAnimator.SetBool(AnimatorIds.playerDamaedAni, false);
             CheckHealth();
         }
         
         if(!gameMgr.isBattleStageClear)
         {
-            playerAnimator.SetBool(AnimatorIds.playerAtkAni, true);
-            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, true);
+            playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
+            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= player.atk * gameMgr.maxValue;
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             Debug.Log("Boss HP : " + boss.hp);
 
             yield return new WaitForSeconds(2f);
-            playerAnimator.SetBool(AnimatorIds.playerAtkAni, false);
-            bossAnimator.SetBool(AnimatorIds.bossDamagedAni, false);
             CheckHealth();
 
             GoNextRound();
