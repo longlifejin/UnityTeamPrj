@@ -48,6 +48,7 @@ public class GameMgr : MonoBehaviour
 
         if (isGridFull)
         {
+            Debug.Log("GridFull");
             isBossFirst = true;
             isGridFull = false;
         }

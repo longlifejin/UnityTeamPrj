@@ -71,7 +71,7 @@ public class TileBoard : MonoBehaviour
         {
             timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
-            //puzzleStartButton.enabled = false;
+            puzzleStartButton.enabled = false;
             TouchEvents();
             //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
             //{
