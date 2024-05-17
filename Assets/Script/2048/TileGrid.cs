@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TileGrid : MonoBehaviour
@@ -14,7 +15,8 @@ public class TileGrid : MonoBehaviour
         rows = GetComponentsInChildren<TileRow>();
         cells = GetComponentsInChildren<TileCell>();
 
-        for (int i = 0; i < cells.Length; i++) {
+        for (int i = 0; i < cells.Length; i++)
+        {
             cells[i].coordinates = new Vector2Int(i % Width, i / Width);
         }
     }
@@ -26,9 +28,12 @@ public class TileGrid : MonoBehaviour
 
     public TileCell GetCell(int x, int y)
     {
-        if (x >= 0 && x < Width && y >= 0 && y < Height) {
+        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        {
             return rows[y].cells[x];
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -51,12 +56,14 @@ public class TileGrid : MonoBehaviour
         {
             index++;
 
-            if (index >= cells.Length) {
+            if (index >= cells.Length)
+            {
                 index = 0;
             }
 
             // all cells are occupied
-            if (index == startingIndex) {
+            if (index == startingIndex)
+            {
                 return null;
             }
         }
@@ -66,7 +73,7 @@ public class TileGrid : MonoBehaviour
 
     public bool CheckGridFull()
     {
-        for(int i = 0; i < cells.Length; ++i)
+        for (int i = 0; i < cells.Length; ++i)
         {
             if (cells[i].Occupied == false)
                 return false;
@@ -78,7 +85,7 @@ public class TileGrid : MonoBehaviour
     {
         int filledGridCount = 1;
 
-        for(int i = 0; i < cells.Length; ++i)
+        for (int i = 0; i < cells.Length; ++i)
         {
             if (cells[i].Occupied == true)
             {
@@ -92,14 +99,48 @@ public class TileGrid : MonoBehaviour
     {
         int maxValue = 0;
 
+        for (int i = 0; i < cells.Length; ++i)
+        {
+            if (cells[i].Occupied)
+            {
+                if (cells[i].tile.state.number > maxValue)
+                    maxValue = cells[i].tile.state.number;
+            }
+        }
+        return maxValue;
+    }
+
+    public Vector2 GetMaxGridPos()
+    {
+        Vector2 maxGridPos = Vector2.zero;
+
+        int maxValue = 0;
+
+        for (int i = 0; i < cells.Length; ++i)
+        {
+            if (cells[i].Occupied)
+            {
+                if (cells[i].tile.state.number > maxValue)
+                {
+                    maxValue = cells[i].tile.state.number;
+                    maxGridPos = cells[i].gameObject.GetComponent<RectTransform>().position;
+                }
+            }
+        }
+        return maxGridPos;
+    }
+
+    public List<Vector2> GetfilledGridPos()
+    {
+        List<Vector2> filledGridPosList = new List<Vector2>();
+
         for(int i = 0; i < cells.Length; ++i)
         {
             if (cells[i].Occupied)
             {
-                if(cells[i].tile.state.number > maxValue)
-                    maxValue = cells[i].tile.state.number;  
+                filledGridPosList.Add(cells[i].transform.position);
             }
         }
-        return maxValue;
+        return filledGridPosList;
     }
 }

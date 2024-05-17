@@ -185,6 +185,7 @@ public class TileBoard : MonoBehaviour
             isGridFull = true;
         }
         gameMgr.maxValue = grid.GetMaxGridValue();
+        Debug.Log("MaxGridPos : " + grid.GetMaxGridPos());
 
         if (changed) 
         {

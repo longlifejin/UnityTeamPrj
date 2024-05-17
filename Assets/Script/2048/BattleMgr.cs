@@ -43,7 +43,6 @@ public class BattleMgr : MonoBehaviour
         string bossID = stageTable.Get(DataTableIds.stageID).Boss_ID;
         boss.name = stringTable.Get(bossTable.Get(bossID).Boss_Name);
         boss.hp = bossTable.Get(bossID).Boss_Hp;
-        Debug.Log(boss.hp);
         bossOriginHp = boss.hp;
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
@@ -56,7 +55,6 @@ public class BattleMgr : MonoBehaviour
 
         playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
         bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
-
     }
 
     private void Update()
