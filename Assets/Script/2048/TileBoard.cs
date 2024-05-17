@@ -28,7 +28,7 @@ public class TileBoard : MonoBehaviour
 
     private void Awake()
     {
-        grid = GetComponentInChildren<TileGrid>(); 
+        grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
 
         tiles = new List<Tile>(16);
@@ -36,6 +36,7 @@ public class TileBoard : MonoBehaviour
         timer = limitTime;
         Time.timeScale = 0f;
     }
+
     private void Start()
     {
         timer = limitTime;
@@ -96,6 +97,7 @@ public class TileBoard : MonoBehaviour
             gameMgr.isTimeOver = true;
             gameMgr.isPuzzleOver = true;
             timer = limitTime;
+           
         }
         else if(grid.CheckGridFull())
         {
@@ -166,11 +168,15 @@ public class TileBoard : MonoBehaviour
             {
                 TileCell cell = grid.GetCell(x, y);
 
-                if (cell.Occupied) {
+                if (cell.Occupied)
+                {
                     changed |= MoveTile(cell.tile, direction);
                 }
             }
         }
+
+        gameMgr.filledGridCount = grid.CountFilledGrid();
+        gameMgr.maxValue = grid.GetMaxGridValue();
 
         if (changed) 
         {
@@ -230,7 +236,8 @@ public class TileBoard : MonoBehaviour
     {
         for (int i = 0; i < tileStates.Length; i++)
         {
-            if (state == tileStates[i]) {
+            if (state == tileStates[i]) 
+            {
                 return i;
             }
         }
@@ -298,4 +305,6 @@ public class TileBoard : MonoBehaviour
         Time.timeScale = 1f;
         gameStart = true;
     }
+
+   
 }

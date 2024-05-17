@@ -29,7 +29,8 @@ public class Tile : MonoBehaviour
 
     public void Spawn(TileCell cell)
     {
-        if (this.cell != null) {
+        if (this.cell != null) 
+        {
             this.cell.tile = null;
         }
 

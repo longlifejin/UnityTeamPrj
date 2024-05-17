@@ -74,4 +74,32 @@ public class TileGrid : MonoBehaviour
         return true;
     }
 
+    public int CountFilledGrid()
+    {
+        int filledGridCount = 1;
+
+        for(int i = 0; i < cells.Length; ++i)
+        {
+            if (cells[i].Occupied == true)
+            {
+                ++filledGridCount;
+            }
+        }
+        return filledGridCount;
+    }
+
+    public int GetMaxGridValue()
+    {
+        int maxValue = 0;
+
+        for(int i = 0; i < cells.Length; ++i)
+        {
+            if (cells[i].Occupied)
+            {
+                if(cells[i].tile.state.number > maxValue)
+                    maxValue = cells[i].tile.state.number;  
+            }
+        }
+        return maxValue;
+    }
 }
