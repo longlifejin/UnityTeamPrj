@@ -71,7 +71,7 @@ public class TileBoard : MonoBehaviour
         {
             timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
-            puzzleStartButton.enabled = false;
+            //puzzleStartButton.enabled = false;
             TouchEvents();
             //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
             //{
@@ -294,7 +294,7 @@ public class TileBoard : MonoBehaviour
 
     public void OnClickPuzzleStartButton()
     {
-        //timer = limitTime;
+        touchStartPosition = Input.GetTouch(0).position;
         Time.timeScale = 1f;
         gameStart = true;
     }
