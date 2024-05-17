@@ -123,7 +123,7 @@ public class BattleMgr : MonoBehaviour
             CheckHealth();
         }
         
-        if(!gameMgr.isBattleStageClear)
+        if(!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
         {
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);

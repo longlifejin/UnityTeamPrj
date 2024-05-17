@@ -12,6 +12,7 @@ public class TileBoard : MonoBehaviour
     private List<Tile> tiles;
     private bool waiting;
     private bool gameStart;
+    public bool isGridFull;
 
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
@@ -33,6 +34,8 @@ public class TileBoard : MonoBehaviour
 
         tiles = new List<Tile>(16);
         gameStart = false;
+        isGridFull = false;
+
         timer = limitTime;
         Time.timeScale = 0f;
     }
@@ -99,12 +102,13 @@ public class TileBoard : MonoBehaviour
             timer = limitTime;
            
         }
-        else if(grid.CheckGridFull())
+        else if(isGridFull)
         {
             gameMgr.isGridFull = true;
             gameMgr.isPuzzleOver = true;
             gameMgr.filledGridCount = grid.cells.Length;
             timer = limitTime;
+            isGridFull = false;
         }
     }
 
@@ -176,6 +180,10 @@ public class TileBoard : MonoBehaviour
         }
 
         gameMgr.filledGridCount = grid.CountFilledGrid();
+        if(gameMgr.filledGridCount == 16)
+        {
+            isGridFull = true;
+        }
         gameMgr.maxValue = grid.GetMaxGridValue();
 
         if (changed) 
