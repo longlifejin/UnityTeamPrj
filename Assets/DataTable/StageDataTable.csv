@@ -1,0 +1,9 @@
+Stage_ID,Boss_ID,Stage_Name,Stage_Reward,Stage_Info,Stage_Image
+3001,2001,StageName1,50,StageInfo1,image_stage_001
+3002,2002,StageName2,100,StageInfo2,image_stage_002
+3003,2003,StageName3,150,StageInfo3,image_stage_003
+3004,2004,StageName4,200,StageInfo4,image_stage_004
+3005,2005,StageName5,250,StageInfo5,image_stage_005
+3006,2006,StageName6,300,StageInfo6,image_stage_006
+3007,2007,StageName7,350,StageInfo7,image_stage_007
+3008,2008,StageName8,400,StageInfo8,image_stage_008

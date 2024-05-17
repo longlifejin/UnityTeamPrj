@@ -19,7 +19,7 @@ public class GameMgr : MonoBehaviour
     public int maxValue;
 
     public GameObject puzzleManager;
-    private PuzzleMgr puzzleMgr;
+    private PuzzleManager puzzleMgr;
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
@@ -28,7 +28,7 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
-        puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
+        puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
         popUpPanel.gameObject.SetActive(false);
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
@@ -72,7 +72,7 @@ public class GameMgr : MonoBehaviour
 
     public void StartNextRound()
     {
-        puzzleMgr.OnEnable();
+        puzzleMgr.NewGame();
     }
 
     public void OnClickOK()
