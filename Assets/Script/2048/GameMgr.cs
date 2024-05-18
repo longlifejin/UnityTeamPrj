@@ -26,12 +26,16 @@ public class GameMgr : MonoBehaviour
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
 
+    public ParticleSystem testParticle;
+    public Vector2 particlePos;
+
     private void Start()
     {
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
         popUpPanel.gameObject.SetActive(false);
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
+        testParticle.Stop();
     }
     private void Update()
     {
@@ -44,6 +48,8 @@ public class GameMgr : MonoBehaviour
         {
             isPlayerFirst = true;
             isTimeOver = false;
+            testParticle.transform.position = particlePos;
+            testParticle.Play();
         }
 
         if (isGridFull)

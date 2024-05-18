@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,10 @@ public class PuzzleManager : MonoBehaviour
     public static PuzzleManager Instance { get; private set; }
 
     [SerializeField] private TileBoard board;
-    [SerializeField] private CanvasGroup gameOver; 
-    
+    [SerializeField] private CanvasGroup gameOver;
+
+    public Camera puzzleCamera;
+
 
     //[SerializeField] private TextMeshProUGUI scoreText;
     //[SerializeField] private TextMeshProUGUI hiscoreText;
@@ -30,6 +33,9 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
+        const float center = 4 / 2f - 0.5f;
+        puzzleCamera.transform.position = new Vector3(center, center + 1f, -15.0f);
+
         NewGame();
     }
 

@@ -100,7 +100,7 @@ public class TileBoard : MonoBehaviour
             gameMgr.isTimeOver = true;
             gameMgr.isPuzzleOver = true;
             timer = limitTime;
-           
+            gameMgr.particlePos = grid.GetMaxGridPos();
         }
         else if(isGridFull)
         {
