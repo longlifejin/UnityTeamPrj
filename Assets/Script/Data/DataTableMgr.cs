@@ -24,7 +24,9 @@ public static class DataTableMgr
         stageDataTable.Load(DataTableIds.StageTable);
         tables.Add(DataTableIds.StageTable, stageDataTable);
 
-        
+        ItemDataTable itemDataTable = new ItemDataTable();
+        itemDataTable.Load(DataTableIds.ItemTable);
+        tables.Add(DataTableIds.ItemTable, itemDataTable);
     }
 
     public static StringTable GetStringTable()
