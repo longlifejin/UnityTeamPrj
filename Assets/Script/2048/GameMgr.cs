@@ -23,6 +23,8 @@ public class GameMgr : MonoBehaviour
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
+    public Store store;
+
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
 

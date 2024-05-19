@@ -31,13 +31,11 @@ public class Store : MonoBehaviour
             if (textComponent1 != null)
             {
                 textComponent1.text = itemData.GetName;
-                Debug.Log(itemData.GetName);
             }
 
             if (textComponent2 != null)
             {
                 textComponent2.text = itemData.GetInfo;
-                Debug.Log(itemData.GetInfo);
             }
         }
 
