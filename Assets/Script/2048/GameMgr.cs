@@ -28,8 +28,10 @@ public class GameMgr : MonoBehaviour
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
 
-    public ParticleSystem testParticle;
-    public Vector2 particlePos;
+    public ParticleSystem playerParticle;
+    public ParticleSystem bossParticle;
+
+    public Vector2 playerParticlePos;
 
     private void Start()
     {
@@ -37,7 +39,7 @@ public class GameMgr : MonoBehaviour
         battleMgr = battleManager.GetComponent<BattleMgr>();
         popUpPanel.gameObject.SetActive(false);
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
-        testParticle.Stop();
+        playerParticle.Stop();
     }
     private void Update()
     {
@@ -50,8 +52,8 @@ public class GameMgr : MonoBehaviour
         {
             isPlayerFirst = true;
             isTimeOver = false;
-            testParticle.transform.position = particlePos;
-            testParticle.Play();
+            playerParticle.transform.position = playerParticlePos;
+            StartCoroutine(PlayParticleSystem(playerParticle));
         }
 
         if (isGridFull)
@@ -59,6 +61,7 @@ public class GameMgr : MonoBehaviour
             Debug.Log("GridFull");
             isBossFirst = true;
             isGridFull = false;
+            //PlayParticleSystem(bossParticle);
         }
     }
 
@@ -74,7 +77,7 @@ public class GameMgr : MonoBehaviour
         if (isBattleStageClear)
         {
             popUpPanel.gameObject.SetActive(true);
-            popUpMessage.text = $"Stage Clear!\n gained Gold : 50";
+            popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
             Debug.Log("Stage Clear");
         }
     }
@@ -95,5 +98,12 @@ public class GameMgr : MonoBehaviour
 
         isPlayerDie = false;
         isBattleStageClear = false;
+    }
+
+    private IEnumerator PlayParticleSystem(ParticleSystem particle)
+    {
+        particle.Play();
+        yield return new WaitForSeconds(2f);
+        particle.Stop();
     }
 }

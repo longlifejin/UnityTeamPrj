@@ -17,7 +17,7 @@ public class TileBoard : MonoBehaviour
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    private float limitTime = 30f;
+    private float limitTime = 10f;
     private float timer;
 
     public Image timeBar;
@@ -98,7 +98,7 @@ public class TileBoard : MonoBehaviour
             gameMgr.isTimeOver = true;
             gameMgr.isPuzzleOver = true;
             timer = limitTime;
-            gameMgr.particlePos = grid.GetMaxGridPos();
+            gameMgr.playerParticlePos = grid.GetMaxGridPos();
         }
         else if(isGridFull)
         {
