@@ -22,12 +22,9 @@ public class PuzzleManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) 
-        {
+        if (Instance != null) {
             DestroyImmediate(gameObject);
-        } 
-        else 
-        {
+        } else {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }

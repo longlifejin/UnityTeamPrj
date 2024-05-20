@@ -37,8 +37,6 @@ public class Store : MonoBehaviour
             {
                 textComponent2.text = itemData.GetInfo;
             }
-
-            
         }
 
 
