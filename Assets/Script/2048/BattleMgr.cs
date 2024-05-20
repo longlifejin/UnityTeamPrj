@@ -104,15 +104,20 @@ public class BattleMgr : MonoBehaviour
     {
         if(!gameMgr.isPlayerDie)
         {
+            StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
+            yield return new WaitForSeconds(2f);
+
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= player.atk * gameMgr.maxValue;
             yield return new WaitForSeconds(2f);
+
             CheckHealth();
 
             bossHpBar.fillAmount = (float)boss.hp / bossOriginHp;
             Debug.Log("Boss HP : " + boss.hp);
             yield return new WaitForSeconds(2f);
+
             CheckHealth();
         }
     }
@@ -121,16 +126,23 @@ public class BattleMgr : MonoBehaviour
     {
         if (!gameMgr.isPlayerDie)
         {
+            StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
+            yield return new WaitForSeconds(2f);
+
             //왜 플레이어 피격이 먼저 재생되고 보스 공격 애니메이션이 재생될까..
             bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            yield return new WaitForSeconds(1.5f);
+
             playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
+            //yield return new WaitForSeconds(2f);
+
             player.hp -= boss.atk * gameMgr.filledGridCount;
-            yield return new WaitForSeconds(2f);
             CheckHealth();
 
             playerHpBar.fillAmount = (float)player.hp / playerOriginHp;
             Debug.Log("Player HP : " + player.hp);
             yield return new WaitForSeconds(2f);
+
             CheckHealth();
         }
     }
@@ -140,8 +152,8 @@ public class BattleMgr : MonoBehaviour
     {
         if (player.hp <= 0)
         {
-            playerAnimator.SetBool(AnimatorIds.playerDieAni, true);
-            gameMgr.isPlayerDie = true;
+            playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
+            Invoke("playerDie", 1f);
             StopAllCoroutines();
         }
         else if (boss.hp <= 0)
@@ -167,5 +179,10 @@ public class BattleMgr : MonoBehaviour
             Debug.Log("Go Next Round");
             gameMgr.StartNextRound();
         }
+    }
+
+    private void playerDie()
+    {
+        gameMgr.isPlayerDie = true;
     }
 }

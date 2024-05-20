@@ -37,6 +37,8 @@ public class GameMgr : MonoBehaviour
     public Vector2 playerParticlePos;
     public List<Vector2> bossParticlePos;
 
+    public RectTransform board;
+
     private void Start()
     {
         bossParticlePos = new List<Vector2>();
@@ -62,14 +64,14 @@ public class GameMgr : MonoBehaviour
         {
             isTimeOver = false;
             playerParticle.transform.position = playerParticlePos;
-            StartCoroutine(PlayParticleSystem(playerParticle));
+            isPlayerFirst = true;
         }
 
         if (isGridFull)
         {
             Debug.Log("GridFull");
             isGridFull = false;
-            StartCoroutine(PlayParticleSystem(bossParticle, bossParticlePos));
+            isBossFirst = true;
         }
     }
 
@@ -108,21 +110,20 @@ public class GameMgr : MonoBehaviour
         isBattleStageClear = false;
     }
 
-    private IEnumerator PlayParticleSystem(ParticleSystem particle)
+    public IEnumerator PlayParticleSystem(ParticleSystem particle)
     {
         particle.Play();
         yield return new WaitForSeconds(2f);
         particle.Stop();
-        isPlayerFirst = true;
     }
 
-    private IEnumerator PlayParticleSystem(ParticleSystem particle, List<Vector2> poses)
+    public IEnumerator PlayBossParticleSystem(ParticleSystem particle, List<Vector2> poses)
     {
         List<ParticleSystem> activeParticles = new List<ParticleSystem>();
 
         foreach(var pos in poses)
         {
-            ParticleSystem instance = Instantiate(particle, pos, Quaternion.identity);
+            ParticleSystem instance = Instantiate(particle, pos, Quaternion.identity, board);
             instance.Play();
             activeParticles.Add(instance);
         }
@@ -134,7 +135,6 @@ public class GameMgr : MonoBehaviour
             Destroy(instance.gameObject);
         }
 
-        isBossFirst = true;
 
     }
 }
