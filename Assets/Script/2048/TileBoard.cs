@@ -28,6 +28,7 @@ public class TileBoard : MonoBehaviour
     private GameMgr gameMgr;
 
     public Animator playerAnimator;
+    public Animator bossAnimator;
 
     private void Awake()
     {
@@ -125,6 +126,7 @@ public class TileBoard : MonoBehaviour
         gameMgr.filledGridCount = 0;
 
         playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
+        bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
 
         timer = limitTime;
         timeBar.fillAmount = 1f;

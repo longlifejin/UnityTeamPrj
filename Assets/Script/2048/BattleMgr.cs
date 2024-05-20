@@ -160,7 +160,7 @@ public class BattleMgr : MonoBehaviour
         }
         else if (boss.hp <= 0)
         {
-            bossAnimator.SetBool(AnimatorIds.bossDiedAni, true);
+            bossAnimator.SetTrigger(AnimatorIds.bossDiedAni);
             gameMgr.isBattleStageClear = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
             player.gold += gainedGold;

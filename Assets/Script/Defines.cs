@@ -2,6 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stage
+{
+    first = 3001,
+    second, 
+    third, 
+    fourth, 
+    fifth, 
+    sixth, 
+    seventh, 
+    eightth
+
+}
+
 public static class DataTableIds
 {
     public static readonly string PlayerTable = "PlayerDataTable";
@@ -10,7 +23,7 @@ public static class DataTableIds
     public static readonly string ItemTable = "ItemDataTable";
     public static readonly string String = "StringDataTable";
     public static readonly string playerID = "1001";
-    public static readonly string stageID = "3001";
+    public static string stageID = "3001";
 
 }
 
@@ -24,4 +37,5 @@ public static class AnimatorIds
     public static readonly string bossAtkAni = "BossAttack";
     public static readonly string bossDamagedAni = "BossDamaged";
     public static readonly string bossDiedAni = "BossDie";
+    public static readonly string bossIdledAni = "BossIdle";
 }

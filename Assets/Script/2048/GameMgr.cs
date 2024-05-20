@@ -39,8 +39,11 @@ public class GameMgr : MonoBehaviour
 
     public RectTransform board;
 
+    public Stage currentStage;
+
     private void Start()
     {
+        currentStage = Stage.first;
         bossParticlePos = new List<Vector2>();
 
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
@@ -53,6 +56,7 @@ public class GameMgr : MonoBehaviour
     private void Update()
     {
         PuzzleOver();
+        DataTableIds.stageID = ((int)currentStage).ToString();
     }
 
     private void PuzzleOver()
@@ -86,6 +90,11 @@ public class GameMgr : MonoBehaviour
             popUpPanel.gameObject.SetActive(true);
             popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
             Debug.Log("Stage Clear");
+
+            //다음 스테이지로 진행
+            currentStage += 1;
+           
+
         }
     }
 

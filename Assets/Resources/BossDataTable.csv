@@ -1,5 +1,5 @@
 Boss_ID,Boss_Name,Stage_ID,Boss_Atk,Boss_Hp,Boss_Image
-2001,BossName1,3001,3,500,image_boss_001
+2001,BossName1,3001,3,50,image_boss_001
 2002,BossName2,3002,4,70,image_boss_002
 2003,BossName3,3003,5,80,image_boss_003
 2004,BossName4,3004,6,90,image_boss_004
