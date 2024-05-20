@@ -59,4 +59,9 @@ public class Store : MonoBehaviour
         }
         return null;
     }
+
+    public void OnClickBack()
+    {
+        gameObject.SetActive(false);
+    }
 }

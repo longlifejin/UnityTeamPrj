@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 296319625}
   - component: {fileID: 296319624}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,7 +642,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 296319625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1482020199}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
+        m_MethodName: OnClickBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &296319625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,8 +2259,9 @@ GameObject:
   - component: {fileID: 1482020196}
   - component: {fileID: 1482020198}
   - component: {fileID: 1482020197}
+  - component: {fileID: 1482020199}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: StorePopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,6 +2325,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482020195}
   m_CullTransparentMesh: 1
+--- !u!114 &1482020199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482020195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d026f2753229397469a3f79059bdcb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSlot: {fileID: 16658930}
+  itemPrefab: {fileID: 8256970660327367472, guid: 71b53ba49e067a84b980f0e07130ebb3, type: 3}
 --- !u!1 &1487587746
 GameObject:
   m_ObjectHideFlags: 0
