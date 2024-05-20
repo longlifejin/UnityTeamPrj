@@ -172,6 +172,7 @@ MonoBehaviour:
   playerParticlePos: {x: 0, y: 0}
   bossParticlePos: []
   board: {fileID: 1761606470}
+  currentStage: 0
 --- !u!4 &27402488
 Transform:
   m_ObjectHideFlags: 0
@@ -2386,8 +2387,8 @@ RectTransform:
   - {fileID: 991012070}
   - {fileID: 565626961}
   - {fileID: 1265884935}
-  - {fileID: 670649087}
   - {fileID: 1905631686}
+  - {fileID: 670649087}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2605,6 +2606,7 @@ MonoBehaviour:
   puzzleStartButton: {fileID: 1265884936}
   gameManager: {fileID: 27402486}
   playerAnimator: {fileID: 791320295}
+  bossAnimator: {fileID: 665236971}
 --- !u!198 &1015820275 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1534949854296103892, guid: c4e259058854a5042bd8631af85b465b, type: 3}
@@ -4047,7 +4049,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 27402487}
         m_TargetAssemblyTypeName: GameMgr, Assembly-CSharp
         m_MethodName: OnClickOK
         m_Mode: 1
