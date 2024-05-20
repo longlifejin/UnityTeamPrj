@@ -16,6 +16,7 @@ public static class DataTableIds
 
 public static class AnimatorIds
 {
+    public static readonly string playerChargingAni = "PlayerCharging";
     public static readonly string playerAtkAni = "PlayerAttack";
     public static readonly string playerDamaedAni = "PlayerDamaged";
     public static readonly string playerDieAni = "PlayerDie";

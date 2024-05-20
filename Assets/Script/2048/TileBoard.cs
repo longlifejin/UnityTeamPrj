@@ -27,6 +27,9 @@ public class TileBoard : MonoBehaviour
     public GameObject gameManager;
     private GameMgr gameMgr;
 
+
+    public Animator playerAnimator;
+
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -310,6 +313,7 @@ public class TileBoard : MonoBehaviour
     {
         touchStartPosition = Input.GetTouch(0).position;
         gameStart = true;
+        playerAnimator.SetTrigger(AnimatorIds.playerChargingAni);
     }
 
    
