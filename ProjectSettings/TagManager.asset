@@ -8,6 +8,8 @@ TagManager:
   - StagePopup
   - ItemName
   - ItemInfo
+  - Gold
+  - ItemImage
   layers:
   - Default
   - TransparentFX

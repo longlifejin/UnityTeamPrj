@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Store : MonoBehaviour
 {
-    public ScrollRect scrollRect;
+    public GameObject itemSlot;
     private ItemDataTable itemTable;
 
     public GameObject itemPrefab;
@@ -22,11 +22,11 @@ public class Store : MonoBehaviour
             string itemId = itemTable.AllIds[i];
             ItemData itemData = itemTable.Get(itemId);
 
-            var item = Instantiate(itemPrefab, scrollRect.content);
-            item.GetComponentInChildren<RawImage>().texture = itemData.GetImage;
-
+            var item = Instantiate(itemPrefab, itemSlot.transform);
+            var itemImage = FindChildWithTag(item.transform, "ItemImage")?.GetComponentInChildren<RawImage>();
             var textComponent1 = FindChildWithTag(item.transform, "ItemName")?.GetComponentInChildren<TextMeshProUGUI>();
             var textComponent2 = FindChildWithTag(item.transform, "ItemInfo")?.GetComponentInChildren<TextMeshProUGUI>();
+            var textComponent3 = FindChildWithTag(item.transform, "Gold")?.GetComponentInChildren<TextMeshProUGUI>();
 
             if (textComponent1 != null)
             {
@@ -37,6 +37,13 @@ public class Store : MonoBehaviour
             {
                 textComponent2.text = itemData.GetInfo;
             }
+
+            if(textComponent3 != null)
+            {
+                textComponent3.text = itemData.Gold.ToString();
+            }
+
+            itemImage.texture = itemData.GetImage;
         }
 
 
