@@ -37,13 +37,11 @@ public class TileBoard : MonoBehaviour
         isGridFull = false;
 
         timer = limitTime;
-        Time.timeScale = 0f;
     }
 
     private void Start()
     {
         timer = limitTime;
-        Time.timeScale = 0f;
     }
 
     public void ClearBoard()
@@ -311,7 +309,6 @@ public class TileBoard : MonoBehaviour
     public void OnClickPuzzleStartButton()
     {
         touchStartPosition = Input.GetTouch(0).position;
-        Time.timeScale = 1f;
         gameStart = true;
     }
 
