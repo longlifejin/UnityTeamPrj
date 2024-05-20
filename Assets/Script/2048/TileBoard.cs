@@ -17,7 +17,7 @@ public class TileBoard : MonoBehaviour
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    private float limitTime = 10f;
+    private float limitTime = 30f;
     private float timer;
 
     public Image timeBar;
@@ -72,6 +72,11 @@ public class TileBoard : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            timer = 5f;
+        }
+
         if (!waiting && gameStart && !gameMgr.isPuzzleOver)
         {
             timeBar.fillAmount = timer / limitTime;
