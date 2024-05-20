@@ -77,67 +77,64 @@ public class BattleMgr : MonoBehaviour
     private IEnumerator PlayerFirst()
     {
         Debug.Log("PlayerFirst Start");
+        yield return StartCoroutine(PlayerTurn());
         if(!gameMgr.isBattleStageClear)
         {
-            playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
-            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
-            boss.hp -= player.atk * gameMgr.maxValue;
-            yield return new WaitForSeconds(2f);
-            CheckHealth();
-
-            bossHpBar.fillAmount = boss.hp / bossOriginHp;
-            Debug.Log("Boss HP : " + boss.hp);
-            yield return new WaitForSeconds(2f);
-            CheckHealth();
+            yield return StartCoroutine(BossTurn());
         }
-
-        if(!gameMgr.isPlayerDie)
+        if(!gameMgr.isPlayerDie && !gameMgr.isBattleStageClear)
         {
-            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-            player.hp -= boss.atk * gameMgr.filledGridCount;
-            yield return new WaitForSeconds(2f);
-            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
-            CheckHealth();
-
-            playerHpBar.fillAmount = player.hp / playerOriginHp;
-            Debug.Log("Player HP : " + player.hp);
-            yield return new WaitForSeconds(2f);
-            CheckHealth();
-
-            GoNextRound();
-        }
-    }   
-
-    private IEnumerator BossFirst()
-    {
-        Debug.Log("BossFirst Start");
-        if(!gameMgr.isPlayerDie)
-        {
-            int penaltyAtk = 32 * boss.atk;
-            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-            playerAnimator.SetTrigger(AnimatorIds.playerDamaedAni);
-            player.hp -= penaltyAtk * gameMgr.filledGridCount;
-            playerHpBar.fillAmount = player.hp / playerOriginHp;
-            Debug.Log("Player HP : " + player.hp);
-
-            yield return new WaitForSeconds(2f);
-            CheckHealth();
-        }
-        
-        if(!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
-        {
-            playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
-            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
-            boss.hp -= player.atk * gameMgr.maxValue;
-            bossHpBar.fillAmount = boss.hp / bossOriginHp;
-            Debug.Log("Boss HP : " + boss.hp);
-
-            yield return new WaitForSeconds(2f);
-            CheckHealth();
-
             GoNextRound();
         }
     }
+    private IEnumerator BossFirst()
+    {
+        Debug.Log("BossFirst Start");
+        boss.atk *= 32;
+        yield return StartCoroutine(BossTurn());
+
+        if (!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
+        {
+            yield return StartCoroutine(PlayerTurn());
+            GoNextRound();
+        }
+    }
+
+    private IEnumerator PlayerTurn()
+    {
+        if(!gameMgr.isPlayerDie)
+        {
+            playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
+            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
+            boss.hp -= player.atk * gameMgr.maxValue;
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+
+            bossHpBar.fillAmount = (float)boss.hp / bossOriginHp;
+            Debug.Log("Boss HP : " + boss.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+        }
+    }
+
+    private IEnumerator BossTurn()
+    {
+        if (!gameMgr.isPlayerDie)
+        {
+            //왜 플레이어 피격이 먼저 재생되고 보스 공격 애니메이션이 재생될까..
+            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
+            player.hp -= boss.atk * gameMgr.filledGridCount;
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+
+            playerHpBar.fillAmount = (float)player.hp / playerOriginHp;
+            Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
+            CheckHealth();
+        }
+    }
+    
 
     private void CheckHealth()
     {

@@ -18,9 +18,9 @@ public static class AnimatorIds
 {
     public static readonly string playerChargingAni = "PlayerCharging";
     public static readonly string playerAtkAni = "PlayerAttack";
-    public static readonly string playerDamaedAni = "PlayerDamaged";
+    public static readonly string playerDamagedAni = "PlayerDamaged";
     public static readonly string playerDieAni = "PlayerDie";
-    public static readonly string bossAtkAni = "BossIdle";
+    public static readonly string bossAtkAni = "BossAttack";
     public static readonly string bossDamagedAni = "BossDamaged";
     public static readonly string bossDiedAni = "BossDie";
 }

@@ -17,7 +17,7 @@ public class TileBoard : MonoBehaviour
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    private float limitTime = 30f;
+    private float limitTime = 10f;
     private float timer;
 
     public Image timeBar;
@@ -26,7 +26,6 @@ public class TileBoard : MonoBehaviour
     
     public GameObject gameManager;
     private GameMgr gameMgr;
-
 
     public Animator playerAnimator;
 
@@ -72,11 +71,6 @@ public class TileBoard : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            timer = 5f;
-        }
-
         if (!waiting && gameStart && !gameMgr.isPuzzleOver)
         {
             timeBar.fillAmount = timer / limitTime;
@@ -103,13 +97,18 @@ public class TileBoard : MonoBehaviour
 
         if (timer <= 0f)
         {
+            gameMgr.playerParticlePos = grid.GetMaxGridPos();
+            gameMgr.bossParticlePos = grid.GetfilledGridPos();
+
             gameMgr.isTimeOver = true;
             gameMgr.isPuzzleOver = true;
             timer = limitTime;
-            gameMgr.playerParticlePos = grid.GetMaxGridPos();
         }
         else if(isGridFull)
         {
+            gameMgr.playerParticlePos = grid.GetMaxGridPos();
+            gameMgr.bossParticlePos = grid.GetfilledGridPos();
+
             gameMgr.isGridFull = true;
             gameMgr.isPuzzleOver = true;
             gameMgr.filledGridCount = grid.cells.Length;

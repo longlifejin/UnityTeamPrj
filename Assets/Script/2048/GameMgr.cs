@@ -28,18 +28,28 @@ public class GameMgr : MonoBehaviour
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
 
+    public Animator playerAnimator;
+    public Animator bossAnimator;
+
     public ParticleSystem playerParticle;
     public ParticleSystem bossParticle;
 
     public Vector2 playerParticlePos;
+    public List<Vector2> bossParticlePos;
 
     private void Start()
     {
+        bossParticlePos = new List<Vector2>();
+
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
         popUpPanel.gameObject.SetActive(false);
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
-        playerParticle.Stop();
+
+        playerParticle.Stop(); 
+        
+        playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
+        bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
     }
     private void Update()
     {
@@ -50,7 +60,6 @@ public class GameMgr : MonoBehaviour
     {
         if (isTimeOver)
         {
-            isPlayerFirst = true;
             isTimeOver = false;
             playerParticle.transform.position = playerParticlePos;
             StartCoroutine(PlayParticleSystem(playerParticle));
@@ -59,9 +68,8 @@ public class GameMgr : MonoBehaviour
         if (isGridFull)
         {
             Debug.Log("GridFull");
-            isBossFirst = true;
             isGridFull = false;
-            //PlayParticleSystem(bossParticle);
+            StartCoroutine(PlayParticleSystem(bossParticle, bossParticlePos));
         }
     }
 
@@ -105,5 +113,28 @@ public class GameMgr : MonoBehaviour
         particle.Play();
         yield return new WaitForSeconds(2f);
         particle.Stop();
+        isPlayerFirst = true;
+    }
+
+    private IEnumerator PlayParticleSystem(ParticleSystem particle, List<Vector2> poses)
+    {
+        List<ParticleSystem> activeParticles = new List<ParticleSystem>();
+
+        foreach(var pos in poses)
+        {
+            ParticleSystem instance = Instantiate(particle, pos, Quaternion.identity);
+            instance.Play();
+            activeParticles.Add(instance);
+        }
+        yield return new WaitForSeconds(2f);
+
+        foreach (var instance in activeParticles)
+        {
+            instance.Stop();
+            Destroy(instance.gameObject);
+        }
+
+        isBossFirst = true;
+
     }
 }
