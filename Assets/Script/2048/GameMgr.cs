@@ -29,7 +29,7 @@ public class GameMgr : MonoBehaviour
     TextMeshProUGUI popUpMessage;
 
     public ParticleSystem testParticle;
-    public Vector2 particlePos;
+    public Vector2 playerParticlePos;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class GameMgr : MonoBehaviour
         {
             isPlayerFirst = true;
             isTimeOver = false;
-            testParticle.transform.position = particlePos;
+            testParticle.transform.position = playerParticlePos;
             testParticle.Play();
         }
 
@@ -74,7 +74,7 @@ public class GameMgr : MonoBehaviour
         if (isBattleStageClear)
         {
             popUpPanel.gameObject.SetActive(true);
-            popUpMessage.text = $"Stage Clear!\n gained Gold : 50";
+            popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
             Debug.Log("Stage Clear");
         }
     }

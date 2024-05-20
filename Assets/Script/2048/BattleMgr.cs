@@ -13,6 +13,7 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
+
     Player player = new Player();
     Boss boss = new Boss();
 
@@ -25,8 +26,11 @@ public class BattleMgr : MonoBehaviour
     public Animator playerAnimator;
     public Animator bossAnimator;
 
+    public int gainedGold = 0;
+
     public void Start()
     {
+        gainedGold = 0;
         gameMgr = gameManager.GetComponent<GameMgr>();
 
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
@@ -149,6 +153,9 @@ public class BattleMgr : MonoBehaviour
         {
             bossAnimator.SetBool(AnimatorIds.bossDiedAni, true);
             gameMgr.isBattleStageClear = true;
+            gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
+            player.gold += gainedGold;
+
             StopAllCoroutines();
         }
         else
