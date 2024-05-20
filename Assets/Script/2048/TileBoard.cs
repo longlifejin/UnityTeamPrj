@@ -124,11 +124,12 @@ public class TileBoard : MonoBehaviour
         gameMgr.isGridFull = false;
         gameMgr.filledGridCount = 0;
 
+        playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
+
         timer = limitTime;
         timeBar.fillAmount = 1f;
 
         gameStart = false;
-
         puzzleStartButton.enabled = true;
     }
 

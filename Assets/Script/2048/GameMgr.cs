@@ -49,9 +49,6 @@ public class GameMgr : MonoBehaviour
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         playerParticle.Stop(); 
-        
-        playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
-        bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
     }
     private void Update()
     {
@@ -103,6 +100,7 @@ public class GameMgr : MonoBehaviour
 
         if(isPlayerDie || isBattleStageClear)
         {
+            puzzleMgr.NewGame();
             battleMgr.Start();
         }
 

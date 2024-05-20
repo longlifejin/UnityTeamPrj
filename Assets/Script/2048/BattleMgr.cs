@@ -55,8 +55,10 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
 
-        playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
-        bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
+        
+
+        //playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
+        //bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
     }
 
     private void Update()
@@ -112,13 +114,11 @@ public class BattleMgr : MonoBehaviour
             boss.hp -= player.atk * gameMgr.maxValue;
             yield return new WaitForSeconds(2f);
 
-            CheckHealth();
 
-            bossHpBar.fillAmount = (float)boss.hp / bossOriginHp;
+            bossHpBar.fillAmount = boss.hp / bossOriginHp;
+            CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
             yield return new WaitForSeconds(2f);
-
-            CheckHealth();
         }
     }
 
@@ -131,19 +131,18 @@ public class BattleMgr : MonoBehaviour
 
             //왜 플레이어 피격이 먼저 재생되고 보스 공격 애니메이션이 재생될까..
             bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             yield return new WaitForSeconds(1.5f);
 
             playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
-            //yield return new WaitForSeconds(2f);
 
-            player.hp -= boss.atk * gameMgr.filledGridCount;
-            CheckHealth();
-
-            playerHpBar.fillAmount = (float)player.hp / playerOriginHp;
-            Debug.Log("Player HP : " + player.hp);
+            player.hp -= boss.atk * gameMgr.filledGridCount; 
             yield return new WaitForSeconds(2f);
 
+            playerHpBar.fillAmount = player.hp / playerOriginHp;
             CheckHealth();
+            Debug.Log("Player HP : " + player.hp);
+            yield return new WaitForSeconds(2f);
         }
     }
     
@@ -153,7 +152,10 @@ public class BattleMgr : MonoBehaviour
         if (player.hp <= 0)
         {
             playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
-            Invoke("playerDie", 1f);
+            gameMgr.isPlayerDie = true;
+
+            //Invoke("PlayerDie", 1f); 
+
             StopAllCoroutines();
         }
         else if (boss.hp <= 0)
@@ -162,6 +164,7 @@ public class BattleMgr : MonoBehaviour
             gameMgr.isBattleStageClear = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
             player.gold += gainedGold;
+
             StopAllCoroutines();
         }
         else
@@ -169,6 +172,7 @@ public class BattleMgr : MonoBehaviour
             return;
         }
 
+        //왜 이거 호출을 안할까?
         gameMgr.BattleOver();
     }
 
@@ -181,7 +185,7 @@ public class BattleMgr : MonoBehaviour
         }
     }
 
-    private void playerDie()
+    private void PlayerDie()
     {
         gameMgr.isPlayerDie = true;
     }
