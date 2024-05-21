@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public int hp = 0;
     public int atk = 0;
     public string imageId = string.Empty;
-    public int gold = 0; 
+    public int gold = 50000; 
 
     public int Gold 
     {

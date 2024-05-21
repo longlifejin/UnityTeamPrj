@@ -11,4 +11,13 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemInfo;
     public TextMeshProUGUI itemPrice;
+    public Toggle[] toggles;
+
+    private void Awake()
+    {
+        foreach(var toggle in toggles)
+        {
+            toggle.isOn = false;
+        }
+    }
 }
