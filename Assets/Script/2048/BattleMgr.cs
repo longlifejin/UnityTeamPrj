@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BattleMgr : MonoBehaviour
 {
+    
+
+
     public GameObject gameManager;
     private GameMgr gameMgr;
 
@@ -13,8 +16,8 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
-    Player player = new Player();
-    Boss boss = new Boss();
+    //public Player player = new Player();
+    public Boss boss = new Boss();
 
     public Image playerHpBar;
     public Image bossHpBar;
@@ -27,6 +30,7 @@ public class BattleMgr : MonoBehaviour
 
     public int gainedGold;
 
+  
     public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
@@ -37,10 +41,15 @@ public class BattleMgr : MonoBehaviour
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
 
         //TO-DO : 스테이지 별 체력, 공격력, 이미지 설정 추가
-        player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
-        playerOriginHp = player.hp;
-        player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
-        player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
+        //player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        //playerOriginHp = player.hp;
+        //player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
+        //player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
+
+        Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        playerOriginHp = Player.Instance.hp;
+        Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
+        Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         string bossID = stageTable.Get(DataTableIds.stageID).Boss_ID;
         boss.name = stringTable.Get(bossTable.Get(bossID).Boss_Name);
@@ -49,7 +58,7 @@ public class BattleMgr : MonoBehaviour
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
 
-        playerHpBar.fillAmount = player.hp / playerOriginHp;
+        playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         bossHpBar.fillAmount = boss.hp / bossOriginHp;
 
         gameMgr.isPlayerDie = false;
@@ -111,7 +120,7 @@ public class BattleMgr : MonoBehaviour
 
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
-            boss.hp -= player.atk * gameMgr.maxValue;
+            boss.hp -= Player.Instance.atk * gameMgr.maxValue;
             yield return new WaitForSeconds(2f);
 
 
@@ -136,12 +145,12 @@ public class BattleMgr : MonoBehaviour
 
             playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
 
-            player.hp -= boss.atk * gameMgr.filledGridCount; 
+            Player.Instance.hp -= boss.atk * gameMgr.filledGridCount; 
             yield return new WaitForSeconds(2f);
 
-            playerHpBar.fillAmount = player.hp / playerOriginHp;
+            playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
             CheckHealth();
-            Debug.Log("Player HP : " + player.hp);
+            Debug.Log("Player HP : " + Player.Instance.hp);
             yield return new WaitForSeconds(2f);
         }
     }
@@ -149,7 +158,7 @@ public class BattleMgr : MonoBehaviour
 
     private void CheckHealth()
     {
-        if (player.hp <= 0)
+        if (Player.Instance.hp <= 0)
         {
             playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
             gameMgr.isPlayerDie = true;
@@ -163,7 +172,7 @@ public class BattleMgr : MonoBehaviour
             bossAnimator.SetTrigger(AnimatorIds.bossDiedAni);
             gameMgr.isBattleStageClear = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
-            player.gold += gainedGold;
+            Player.Instance.gold += gainedGold;
 
             StopAllCoroutines();
         }
@@ -178,7 +187,7 @@ public class BattleMgr : MonoBehaviour
 
     private void GoNextRound()
     {
-        if (player.hp > 0 && boss.hp > 0)
+        if (Player.Instance.hp > 0 && boss.hp > 0)
         {
             Debug.Log("Go Next Round");
             gameMgr.StartNextRound();
