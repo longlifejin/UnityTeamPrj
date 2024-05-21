@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,7 +10,9 @@ public class Player : MonoBehaviour
     public int hp = 0;
     public int atk = 0;
     public string imageId = string.Empty;
-    public int gold = 50000; 
+    public int gold = 0;
+    public List<bool> stageClear = new List<bool>();
+    public string currentStage;
 
     public int Gold 
     {
@@ -37,6 +40,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    public string CurrentStage
+    {
+        get
+        {
+            return currentStage;
+        }
+        set
+        {
+            currentStage = value;
+        }
+    }
+
+    public List<bool> StageClear
+    {
+        get
+        {
+            return stageClear;
+        }
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -48,5 +71,12 @@ public class Player : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        stageClear.Add(true);
+        for (int i = 1; i < 8; ++i)
+        {
+            stageClear.Add(false);
+        }
+        
     }
 }

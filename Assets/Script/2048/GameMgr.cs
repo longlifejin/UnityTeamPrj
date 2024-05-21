@@ -41,13 +41,13 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
-        if(StageSelect.Instance.currStage == null)
+        if(Player.Instance.currentStage == null)
         {
             currentStage = Stage.first;
         }
         else
         {
-            currentStage = StageSelect.Instance.currStage;
+            currentStage = (Stage)int.Parse(Player.Instance.currentStage);
         }
 
         bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();

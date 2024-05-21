@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 68247539}
   m_Layer: 5
   m_Name: back
-  m_TagString: Untagged
+  m_TagString: back
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 156973294}
   m_Layer: 5
   m_Name: stage2
-  m_TagString: Untagged
+  m_TagString: stage2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6770,7 +6770,7 @@ GameObject:
   - component: {fileID: 700655901}
   m_Layer: 5
   m_Name: stage1
-  m_TagString: Untagged
+  m_TagString: stage1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9262,7 +9262,7 @@ GameObject:
   - component: {fileID: 930948989}
   m_Layer: 5
   m_Name: stage7
-  m_TagString: Untagged
+  m_TagString: stage7
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12713,7 +12713,7 @@ GameObject:
   - component: {fileID: 1222494264}
   m_Layer: 5
   m_Name: stage6
-  m_TagString: Untagged
+  m_TagString: stage6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13150,7 +13150,7 @@ GameObject:
   - component: {fileID: 1269334877}
   m_Layer: 5
   m_Name: stage8
-  m_TagString: Untagged
+  m_TagString: stage8
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13657,7 +13657,7 @@ GameObject:
   - component: {fileID: 1313305958}
   m_Layer: 5
   m_Name: stage3
-  m_TagString: Untagged
+  m_TagString: stage3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13814,7 +13814,7 @@ GameObject:
   - component: {fileID: 1321661378}
   m_Layer: 5
   m_Name: stage5
-  m_TagString: Untagged
+  m_TagString: stage5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14622,14 +14622,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageButtons:
-  - {fileID: 700655901}
-  - {fileID: 156973294}
-  - {fileID: 1313305958}
-  - {fileID: 1439177850}
-  - {fileID: 1321661378}
-  - {fileID: 1222494264}
-  - {fileID: 930948989}
-  - {fileID: 1269334877}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  backButton: {fileID: 0}
   currStage: 0
 --- !u!4 &1404882283
 Transform:
@@ -14911,7 +14912,7 @@ GameObject:
   - component: {fileID: 1439177850}
   m_Layer: 5
   m_Name: stage4
-  m_TagString: Untagged
+  m_TagString: stage4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -243,5 +243,13 @@ public class BattleMgr : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Stagebackground");
+        //StartCoroutine(CallSetButtons());
+        //StageSelect.Instance.SetButtons();
     }
+
+    //private IEnumerator CallSetButtons()
+    //{
+    //    yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Stagebackground");
+    //    StageSelect.Instance.SetButtons();
+    //}
 }
