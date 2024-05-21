@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
-    public static PuzzleManager Instance { get; private set; }
+    //public static PuzzleManager Instance { get; private set; }
 
     [SerializeField] private TileBoard board;
     [SerializeField] private CanvasGroup gameOver;
@@ -22,12 +22,12 @@ public class PuzzleManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) {
-            DestroyImmediate(gameObject);
-        } else {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        //if (Instance != null) {
+        //    DestroyImmediate(gameObject);
+        //} else {
+        //    Instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
 
     }
 

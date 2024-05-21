@@ -41,8 +41,16 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
+        if(StageSelect.Instance.currStage == null)
+        {
+            currentStage = Stage.first;
+        }
+        else
+        {
+            currentStage = StageSelect.Instance.currStage;
+        }
+
         bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
-        currentStage = Stage.first;
         bossParticlePos = new List<Vector2>();
 
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();

@@ -126,7 +126,6 @@ public class TileBoard : MonoBehaviour
         gameMgr.filledGridCount = 0;
 
         playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
-        bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
 
         timer = limitTime;
         timeBar.fillAmount = 1f;

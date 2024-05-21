@@ -9,7 +9,8 @@ public class EntranceScene : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        SceneManager.LoadScene("Puzzle&Battle");
+        //스테이지 선택 씬으로 수정하기
+        SceneManager.LoadScene("Stagebackground");
     }
 
     public void OnClickUpgrade()

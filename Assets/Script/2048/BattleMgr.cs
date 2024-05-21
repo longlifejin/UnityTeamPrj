@@ -67,6 +67,7 @@ public class BattleMgr : MonoBehaviour
         Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
         Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
+        DataTableIds.stageID = ((int)gameMgr.currentStage).ToString();
         string bossID = stageTable.Get(DataTableIds.stageID).Boss_ID;
         boss.name = stringTable.Get(bossTable.Get(bossID).Boss_Name);
         boss.hp = bossTable.Get(bossID).Boss_Hp;
@@ -153,8 +154,14 @@ public class BattleMgr : MonoBehaviour
             StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
             yield return new WaitForSeconds(2f);
 
-            //왜 플레이어 피격이 먼저 재생되고 보스 공격 애니메이션이 재생될까..
-            bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            if(gameMgr.isBossFirst)
+            {
+                bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
+            }
+            else
+            {
+                bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            }
             playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             yield return new WaitForSeconds(1.5f);
 

@@ -34,6 +34,7 @@ public static class AnimatorIds
     public static readonly string playerDieAni = "PlayerDie";
     public static readonly string playerIdleAni = "PlayerIdle";
     public static readonly string bossAtkAni = "BossAttack";
+    public static readonly string bossSpecialAtkAni = "BossSpecialAttack";
     public static readonly string bossDamagedAni = "BossDamaged";
     public static readonly string bossDiedAni = "BossDie";
     public static readonly string bossIdledAni = "BossIdle";
