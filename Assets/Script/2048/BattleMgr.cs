@@ -198,4 +198,9 @@ public class BattleMgr : MonoBehaviour
     {
         gameMgr.isPlayerDie = true;
     }
+
+    public void OnClickQuit()
+    {
+        //일시정지 팝업 띄우기
+    }
 }
