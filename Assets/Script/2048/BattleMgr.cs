@@ -224,20 +224,24 @@ public class BattleMgr : MonoBehaviour
     public void OnClickQuit()
     {
         quitMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void OnClickResume()
     {
         quitMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void OnClickRestart()
     {
+        Time.timeScale = 1f;
         gameMgr.RestartGame();
     }
 
     public void OnClickStage()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Stagebackground");
     }
 }
