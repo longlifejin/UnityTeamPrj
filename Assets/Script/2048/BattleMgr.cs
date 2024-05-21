@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleMgr : MonoBehaviour
 {
-    
-
-
     public GameObject gameManager;
     private GameMgr gameMgr;
+
+    public GameObject quitMenu;
 
     private StringTable stringTable;
     private PlayerDataTable playerTable;
@@ -64,10 +64,10 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
 
-        
+        quitMenu.SetActive(false);
 
-        //playerAnimator.SetBool(AnimatorIds.playerDieAni, false);
-        //bossAnimator.SetBool(AnimatorIds.bossDiedAni, false);
+        Debug.Log("플레이어 hp : " + Player.Instance.hp);
+        Debug.Log("보스 ID : " + bossID);
     }
 
     private void Update()
@@ -201,6 +201,21 @@ public class BattleMgr : MonoBehaviour
 
     public void OnClickQuit()
     {
-        //일시정지 팝업 띄우기
+        quitMenu.SetActive(true);
+    }
+
+    public void OnClickResume()
+    {
+        quitMenu.SetActive(false);
+    }
+
+    public void OnClickRestart()
+    {
+        gameMgr.RestartGame();
+    }
+
+    public void OnClickStage()
+    {
+        SceneManager.LoadScene("Stagebackground");
     }
 }

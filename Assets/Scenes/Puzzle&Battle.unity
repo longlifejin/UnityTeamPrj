@@ -320,7 +320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: resume
+  m_text: Resume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
   m_sharedMaterial: {fileID: 7852423568771077470, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
@@ -1123,10 +1123,10 @@ RectTransform:
   - {fileID: 44471067}
   m_Father: {fileID: 1479417253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -63.333332}
+  m_SizeDelta: {x: 140, y: 66.666664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411516066
 MonoBehaviour:
@@ -1171,7 +1171,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 411516067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1291009202}
+        m_TargetAssemblyTypeName: BattleMgr, Assembly-CSharp
+        m_MethodName: OnClickResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &411516067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,10 +2058,10 @@ RectTransform:
   - {fileID: 2113381328}
   m_Father: {fileID: 1479417253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -150}
+  m_SizeDelta: {x: 140, y: 66.666664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738695448
 MonoBehaviour:
@@ -2094,7 +2106,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 738695449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1291009202}
+        m_TargetAssemblyTypeName: BattleMgr, Assembly-CSharp
+        m_MethodName: OnClickRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &738695449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,6 +3626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 27402486}
+  quitMenu: {fileID: 1479417252}
   playerHpBar: {fileID: 1612792617}
   bossHpBar: {fileID: 1703015190}
   playerAnimator: {fileID: 791320295}
@@ -3880,7 +3905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1479417253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4362,6 +4387,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2121897162}
   - {fileID: 1479417253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5086,7 +5112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Stage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
   m_sharedMaterial: {fileID: 7852423568771077470, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
@@ -5467,10 +5493,10 @@ RectTransform:
   - {fileID: 1904996509}
   m_Father: {fileID: 1479417253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -236.66666}
+  m_SizeDelta: {x: 140, y: 66.666664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2090648828
 MonoBehaviour:
@@ -5515,7 +5541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2090648829}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1291009202}
+        m_TargetAssemblyTypeName: BattleMgr, Assembly-CSharp
+        m_MethodName: OnClickStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2090648829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5611,7 +5649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
   m_sharedMaterial: {fileID: 7852423568771077470, guid: 26b8cf9db4a1f2e4b886b9babffc3d5b, type: 2}
@@ -5773,7 +5811,6 @@ RectTransform:
   m_Children:
   - {fileID: 1703015188}
   - {fileID: 1612792615}
-  - {fileID: 2121897162}
   m_Father: {fileID: 791632070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5870,18 +5907,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121897161}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.000000016128899, y: 0.000000029802319, z: 0.00000003893861, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.19430052, y: 0.19430052, z: 0.19430052}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1215422623}
-  m_Father: {fileID: 2119595648}
+  m_Father: {fileID: 1699126503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8, y: 2.51}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 80, y: 255}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121897163
 MonoBehaviour:

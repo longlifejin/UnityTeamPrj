@@ -141,7 +141,13 @@ public class GameMgr : MonoBehaviour
             instance.Stop();
             Destroy(instance.gameObject);
         }
+    }
 
-
+    public void RestartGame()
+    {
+        puzzleMgr.NewGame();
+        battleMgr.Start();
+        isPlayerDie = false;
+        isBattleStageClear = false;
     }
 }
