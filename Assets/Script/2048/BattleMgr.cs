@@ -30,10 +30,26 @@ public class BattleMgr : MonoBehaviour
 
     public int gainedGold;
 
-  
+    public GameObject[] bossPrefabs;
+    public GameObject battleMap;
+    private GameObject bossPrefab;
+
+
+
     public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
+
+        if (bossPrefab != null)
+        {
+            Destroy(bossPrefab);
+        }
+        bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
+        bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
+        var bossRot = Quaternion.Euler(0,-130,0);
+        bossPrefab.transform.rotation = bossRot;
+
+        bossAnimator = bossPrefab.GetComponent<Animator>();
 
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
@@ -122,7 +138,6 @@ public class BattleMgr : MonoBehaviour
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= Player.Instance.atk * gameMgr.maxValue;
             yield return new WaitForSeconds(2f);
-
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();

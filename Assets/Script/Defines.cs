@@ -12,7 +12,6 @@ public enum Stage
     sixth, 
     seventh, 
     eightth
-
 }
 
 public static class DataTableIds

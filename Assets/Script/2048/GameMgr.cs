@@ -23,8 +23,6 @@ public class GameMgr : MonoBehaviour
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
-    public Store store;
-
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
 
@@ -43,6 +41,7 @@ public class GameMgr : MonoBehaviour
 
     private void Start()
     {
+        bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
         currentStage = Stage.first;
         bossParticlePos = new List<Vector2>();
 
@@ -51,7 +50,7 @@ public class GameMgr : MonoBehaviour
         popUpPanel.gameObject.SetActive(false);
         popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
 
-        playerParticle.Stop(); 
+        playerParticle.Stop();
     }
     private void Update()
     {
@@ -93,7 +92,7 @@ public class GameMgr : MonoBehaviour
 
             //다음 스테이지로 진행
             currentStage += 1;
-           
+
 
         }
     }
@@ -107,7 +106,7 @@ public class GameMgr : MonoBehaviour
     {
         popUpPanel.gameObject.SetActive(false);
 
-        if(isPlayerDie || isBattleStageClear)
+        if (isPlayerDie || isBattleStageClear)
         {
             puzzleMgr.NewGame();
             battleMgr.Start();
@@ -128,7 +127,7 @@ public class GameMgr : MonoBehaviour
     {
         List<ParticleSystem> activeParticles = new List<ParticleSystem>();
 
-        foreach(var pos in poses)
+        foreach (var pos in poses)
         {
             ParticleSystem instance = Instantiate(particle, pos, Quaternion.identity, board);
             instance.Play();

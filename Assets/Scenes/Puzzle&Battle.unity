@@ -163,15 +163,14 @@ MonoBehaviour:
   maxValue: 0
   puzzleManager: {fileID: 1601929138}
   battleManager: {fileID: 1291009201}
-  store: {fileID: 0}
   popUpPanel: {fileID: 670649088}
   playerAnimator: {fileID: 791320295}
-  bossAnimator: {fileID: 665236971}
+  bossAnimator: {fileID: 0}
   playerParticle: {fileID: 1015820275}
   bossParticle: {fileID: 1015820275}
   playerParticlePos: {x: 0, y: 0}
   bossParticlePos: []
-  board: {fileID: 0}
+  board: {fileID: 997205596}
   currentStage: 0
 --- !u!4 &27402488
 Transform:
@@ -1729,6 +1728,10 @@ PrefabInstance:
     - target: {fileID: 3231139025801560393, guid: 14201e77aca54a14b82101c6c3416568, type: 3}
       propertyPath: m_Name
       value: Boss1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231139025801560393, guid: 14201e77aca54a14b82101c6c3416568, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3608,7 +3611,7 @@ GameObject:
   - component: {fileID: 1291009202}
   m_Layer: 0
   m_Name: BattleMgr
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3630,8 +3633,18 @@ MonoBehaviour:
   playerHpBar: {fileID: 1612792617}
   bossHpBar: {fileID: 1703015190}
   playerAnimator: {fileID: 791320295}
-  bossAnimator: {fileID: 665236971}
+  bossAnimator: {fileID: 0}
   gainedGold: 0
+  bossPrefabs:
+  - {fileID: 662468794185850985, guid: 9335c065ed7a481da275af3658f7fc9c, type: 3}
+  - {fileID: 1524411113276028, guid: 1d8185d9435b4336992f61038cedcc35, type: 3}
+  - {fileID: 4735800100427854253, guid: 79f672655dc3457b9f7fb1885ae42138, type: 3}
+  - {fileID: 6285209290496832306, guid: a604ffbac01747d6b33aff45d9e3dd8a, type: 3}
+  - {fileID: 7379252335875583254, guid: 8ebe1b609afd461fa7d3d8510bad65b0, type: 3}
+  - {fileID: 3347061273194974142, guid: c851df38d05441a6861cb42d0a8a8bab, type: 3}
+  - {fileID: 1134332420552193122, guid: 74e4f6a9a4f34e719a2cff02ca666eda, type: 3}
+  - {fileID: 3972964382682025698, guid: 93b94039cf7541e8a7c9453819da38f0, type: 3}
+  battleMap: {fileID: 791632066}
 --- !u!4 &1291009203
 Transform:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
         set
         {
-            atk += value;
+            atk = value;
         }
     }
 

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EntranceStorePopUp.unity
     guid: 99545a73b8df1f14ba000016e665d741
   - enabled: 1
-    path: Assets/Scenes/Stagebackground.unity
+    path: Assets/Scenes/Stagebackground_before.unity
     guid: 6f187f2eee4360f45836c3c0883dcfec
   - enabled: 1
     path: Assets/Scenes/Puzzle&Battle.unity
