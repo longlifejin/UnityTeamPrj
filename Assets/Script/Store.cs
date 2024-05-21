@@ -12,7 +12,7 @@ public class Store : MonoBehaviour
     private ItemDataTable itemTable;
 
     public ItemSlot itemPrefab;
-    public Player player;
+    //public Player player;
 
 
     private void Start()
@@ -38,16 +38,16 @@ public class Store : MonoBehaviour
             item.purchaseButton.onClick.AddListener(() =>
             {
                 var price = int.Parse(item.itemPrice.text);
-                if (player.Gold < price)
+                if (Player.Instance.Gold < price)
                 {
                     Debug.Log("소지한 골드가 부족합니다.");
                     return;
                 }
                 else
                 {
-                    player.Gold -= price;
+                    Player.Instance.Gold -= price;
                     item.enabled = false;
-                    player.atk += itemData.Value;
+                    Player.Instance.atk += itemData.Value;
                 }
             });
         }

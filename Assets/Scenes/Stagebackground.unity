@@ -1644,7 +1644,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 68247540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 886597337}
+        m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
+        m_MethodName: OnClickBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &68247540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22989,6 +23001,7 @@ GameObject:
   - component: {fileID: 886597334}
   - component: {fileID: 886597336}
   - component: {fileID: 886597335}
+  - component: {fileID: 886597337}
   m_Layer: 5
   m_Name: Level SelectionPanel
   m_TagString: Untagged
@@ -23054,6 +23067,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886597333}
   m_CullTransparentMesh: 1
+--- !u!114 &886597337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886597333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54d08d33f4394742bdef3bf71bf730e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &890146838
 GameObject:
   m_ObjectHideFlags: 0
