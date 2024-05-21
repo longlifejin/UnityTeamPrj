@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2057,7 +2057,7 @@ GameObject:
   - component: {fileID: 78990388}
   - component: {fileID: 78990387}
   m_Layer: 5
-  m_Name: Button (13)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2412,7 +2412,7 @@ GameObject:
   - component: {fileID: 89736029}
   - component: {fileID: 89736028}
   m_Layer: 5
-  m_Name: Button (8)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2590,7 +2590,7 @@ GameObject:
   - component: {fileID: 110896442}
   - component: {fileID: 110896441}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5985,7 +5985,7 @@ GameObject:
   - component: {fileID: 265171958}
   - component: {fileID: 265171957}
   m_Layer: 5
-  m_Name: Button (6)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9282,7 +9282,7 @@ GameObject:
   - component: {fileID: 390037140}
   - component: {fileID: 390037139}
   m_Layer: 5
-  m_Name: Button (13)
+  m_Name: stage6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11759,7 +11759,7 @@ GameObject:
   - component: {fileID: 498897345}
   - component: {fileID: 498897344}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14696,7 +14696,7 @@ GameObject:
   - component: {fileID: 599641843}
   - component: {fileID: 599641842}
   m_Layer: 5
-  m_Name: Button (20)
+  m_Name: stage5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16618,7 +16618,7 @@ GameObject:
   - component: {fileID: 665315337}
   - component: {fileID: 665315336}
   m_Layer: 5
-  m_Name: Button
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19468,7 +19468,7 @@ GameObject:
   - component: {fileID: 771947122}
   - component: {fileID: 771947121}
   m_Layer: 5
-  m_Name: Button (12)
+  m_Name: stage6&7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19960,7 +19960,7 @@ GameObject:
   - component: {fileID: 799476077}
   - component: {fileID: 799476076}
   m_Layer: 5
-  m_Name: Button (26)
+  m_Name: stage4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22122,7 +22122,7 @@ GameObject:
   - component: {fileID: 867741679}
   - component: {fileID: 867741678}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25545,7 +25545,7 @@ GameObject:
   - component: {fileID: 981075325}
   - component: {fileID: 981075324}
   m_Layer: 5
-  m_Name: Button (11)
+  m_Name: stage5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26517,7 +26517,7 @@ GameObject:
   - component: {fileID: 1010675730}
   - component: {fileID: 1010675729}
   m_Layer: 5
-  m_Name: Button (8)
+  m_Name: stage7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27913,7 +27913,7 @@ GameObject:
   - component: {fileID: 1047452088}
   - component: {fileID: 1047452087}
   m_Layer: 5
-  m_Name: Button (28)
+  m_Name: stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28994,7 +28994,7 @@ GameObject:
   - component: {fileID: 1082646661}
   - component: {fileID: 1082646660}
   m_Layer: 5
-  m_Name: Button (23)
+  m_Name: stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30556,7 +30556,7 @@ GameObject:
   - component: {fileID: 1131099215}
   - component: {fileID: 1131099214}
   m_Layer: 5
-  m_Name: Button (10)
+  m_Name: stage8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40359,7 +40359,7 @@ GameObject:
   - component: {fileID: 1474440347}
   - component: {fileID: 1474440346}
   m_Layer: 5
-  m_Name: Button (27)
+  m_Name: stage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46001,7 +46001,7 @@ GameObject:
   - component: {fileID: 1711207844}
   - component: {fileID: 1711207843}
   m_Layer: 5
-  m_Name: Button (9)
+  m_Name: stage4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46539,7 +46539,7 @@ GameObject:
   - component: {fileID: 1730397481}
   - component: {fileID: 1730397480}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48112,7 +48112,7 @@ GameObject:
   - component: {fileID: 1763854627}
   - component: {fileID: 1763854626}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: stage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50397,7 +50397,7 @@ GameObject:
   - component: {fileID: 1862912508}
   - component: {fileID: 1862912507}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: stage8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57224,7 +57224,7 @@ GameObject:
   - component: {fileID: 2133772543}
   - component: {fileID: 2133772542}
   m_Layer: 5
-  m_Name: Button (7)
+  m_Name: .
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
