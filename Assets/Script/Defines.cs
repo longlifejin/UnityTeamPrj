@@ -23,6 +23,7 @@ public static class DataTableIds
     public static readonly string String = "StringDataTable";
     public static readonly string playerID = "1001";
     public static string stageID = "3001";
+    public static readonly string AttackItemID = "41001";
 
 }
 

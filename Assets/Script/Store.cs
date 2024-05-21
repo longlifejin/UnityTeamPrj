@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class Store : MonoBehaviour
 {
@@ -12,48 +13,109 @@ public class Store : MonoBehaviour
     private ItemDataTable itemTable;
 
     public ItemSlot itemPrefab;
-    //public Player player;
-
+    private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
+    private List<string> hpItemIds = new List<string> { "42001", "42002", "42003", "42004", "42005" };
+    private int currentAtkIndex = 0;
+    private int currentHpIndex = 0;
+    private ItemSlot currentItem;
 
     private void Start()
     {
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
+        CreateItem(attackItemIds[currentAtkIndex]);
+        CreateItem(hpItemIds[currentHpIndex]);
 
-        for(int i = 0; i < itemTable.AllIds.Count; ++i)
+        //for(int i = 0; i < itemTable.AllIds.Count; ++i)
+        //{
+        //    string itemId = itemTable.AllIds[i];
+        //    ItemData itemData = itemTable.Get(itemId);
+
+        //    var item = Instantiate(itemPrefab, scrollRect.content);
+
+        //    item.itemName.text = itemData.GetName;
+        //    item.itemInfo.text = itemData.GetInfo;
+        //    item.itemPrice.text = itemData.Gold.ToString();
+        //    item.itemImage.texture = itemData.GetImage;
+
+        //    item.purchaseButton.onClick.AddListener(() =>
+        //    {
+        //        var price = int.Parse(item.itemPrice.text);
+        //        if (Player.Instance.Gold < price)
+        //        {
+        //            Debug.Log("소지한 골드가 부족합니다.");
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            Player.Instance.Gold -= price;
+        //            item.enabled = false;
+        //            Player.Instance.atk += itemData.Value;
+        //        }
+        //    });
+        //}
+    }
+
+    private void CreateItem(string itemId)
+    {
+        ItemData itemData = itemTable.Get(itemId);
+        currentItem = Instantiate(itemPrefab, scrollRect.content);
+        currentItem.itemName.text = itemData.GetName;
+        currentItem.itemInfo.text = itemData.GetInfo;
+        currentItem.itemPrice.text = itemData.Gold.ToString();
+        currentItem.itemImage.texture = itemData.GetImage;
+
+        currentItem.purchaseButton.onClick.AddListener(() => PurchaseAtkItem(itemData));
+    }
+
+    private void PurchaseAtkItem(ItemData itemData)
+    {
+        var price = int.Parse(currentItem.itemPrice.text);
+
+        if (Player.Instance.Gold < price)
         {
-            string itemId = itemTable.AllIds[i];
-            ItemData itemData = itemTable.Get(itemId);
+            Debug.Log("소지한 골드가 부족합니다.");
+            return;
+        }
+        else
+        {
+            Player.Instance.Gold -= price;
+            Player.Instance.atk += itemData.Value;
 
-            var item = Instantiate(itemPrefab, scrollRect.content);
-            //item.itemImage = FindChildWithTag(item.transform, "ItemImage")?.GetComponentInChildren<RawImage>();
-            //item.itemName = FindChildWithTag(item.transform, "ItemName")?.GetComponentInChildren<TextMeshProUGUI>();
-            //item.itemInfo = FindChildWithTag(item.transform, "ItemInfo")?.GetComponentInChildren<TextMeshProUGUI>();
-            //item.itemPrice = FindChildWithTag(item.transform, "Gold")?.GetComponentInChildren<TextMeshProUGUI>();
+            Destroy(currentItem.gameObject);
 
-            item.itemName.text = itemData.GetName;
-            item.itemInfo.text = itemData.GetInfo;
-            item.itemPrice.text = itemData.Gold.ToString();
-            item.itemImage.texture = itemData.GetImage;
-
-            item.purchaseButton.onClick.AddListener(() =>
+            if(itemData.Item_type == 1)
             {
-                var price = int.Parse(item.itemPrice.text);
-                if (Player.Instance.Gold < price)
+                currentAtkIndex++;
+                if (currentAtkIndex < attackItemIds.Count)
                 {
-                    Debug.Log("소지한 골드가 부족합니다.");
-                    return;
+                    CreateItem(attackItemIds[currentAtkIndex]);
                 }
                 else
                 {
-                    Player.Instance.Gold -= price;
-                    item.enabled = false;
-                    Player.Instance.atk += itemData.Value;
+                    currentItem.purchaseButton.interactable = false;
+                    Debug.Log("모든 아이템을 구매했습니다.");
                 }
-            });
+            }
+            else if(itemData.Item_type == 2)
+            {
+                currentHpIndex++;
+                if (currentHpIndex < attackItemIds.Count)
+                {
+                    CreateItem(attackItemIds[currentHpIndex]);
+                }
+                else
+                {
+                    currentItem.purchaseButton.interactable = false;
+                    Debug.Log("모든 아이템을 구매했습니다.");
+                }
+            }
+            
         }
-
-
     }
+
+
+
+
     private Transform FindChildWithTag(Transform parent, string tag)
     {
         foreach (Transform child in parent.GetComponentsInChildren<Transform>())
