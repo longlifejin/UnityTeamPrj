@@ -21,6 +21,7 @@ TagManager:
   - stage7
   - stage8
   - lock
+  - stageInfo
   layers:
   - Default
   - TransparentFX

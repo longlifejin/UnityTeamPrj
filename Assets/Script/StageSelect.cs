@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class StageSelect : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class StageSelect : MonoBehaviour
 
     public Button[] stageButtons;
     public Button backButton;
+    private StageInfo stageInfo;
+    private StageData stage;
+    private bool isCancel;
+    private bool isStart;
+
+    private StageDataTable stageTable;
+    public StageInfo stagePrefab;
+    public GameObject canvas;
 
     public Stage currStage;
     private List<bool> stageState = new List<bool>();
@@ -36,7 +45,14 @@ public class StageSelect : MonoBehaviour
     }
     private void OnEnable()
     {
+        stageInfo = Instantiate(stagePrefab, canvas.transform);
+        stageInfo.gameObject.SetActive(false);
+        stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
         SetButtons();
+
+
+        isCancel = false;
+        isStart = false;
         //StartCoroutine(SetButtonsAfterSceneLoad());
     }
 
@@ -58,18 +74,21 @@ public class StageSelect : MonoBehaviour
         backButton = buttons.GetComponentInChildren<Button>();
         backButton.onClick.AddListener(() => OnClickBack());
 
+        
+
         for (int i = 0; i < stageButtons.Length; ++i)
         {
             int index = i;
             int stageNum = i + 1;
             GameObject stageButton = GameObject.FindWithTag("stage" + stageNum.ToString());
             stageButtons[i] = stageButton.GetComponentInChildren<Button>();
+            currStage = (Stage)(index + 3001);
+            stage = stageTable.Get(((int)currStage).ToString());
+
+            int stagePopupIndex = index;
             stageButtons[i].onClick.AddListener(() =>
             {
-                currStage = (Stage)(index + 3001);
-                Player.Instance.currentStage = ((int)currStage).ToString();
-                SceneManager.LoadScene("Puzzle&Battle");
-                Debug.Log("stage selected");
+                PopStageInfo(stagePopupIndex);                
             });
 
             var toggle = stageButton.GetComponentInChildren<Toggle>();
@@ -77,9 +96,10 @@ public class StageSelect : MonoBehaviour
             {
                 toggle.isOn = true;
                 var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                Color color = image.color;
-                color.a = 0;
-                image.color = color;
+                //Color color = image.color;
+                //color.a = 0;
+                //image.color = color;
+                SetImageAlpha(image, 0);
                 stageButtons[i].interactable = true;
                 toggle.interactable = false;
             }
@@ -87,13 +107,44 @@ public class StageSelect : MonoBehaviour
             {
                 toggle.isOn = false;
                 var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                Color color = image.color;
-                color.a = 255;
-                image.color = color;
+                //Color color = image.color;
+                //color.a = 255;
+                //image.color = color;
+                SetImageAlpha(image, 255);
                 stageButtons[i].interactable = false;
                 toggle.interactable = false;
             }
         }
+    }
+
+    private void PopStageInfo(int index)
+    {
+        var selectedStage = (Stage)(index + 3001);
+        StageData stage = stageTable.Get(((int)selectedStage).ToString());
+
+        stageInfo.gameObject.SetActive(true);
+        stageInfo.stageName.text = stage.Stage_Name;
+        stageInfo.stageDescription.text = stage.Stage_Info;
+        stageInfo.stageImage.texture = stage.GetImage;
+
+        stageInfo.cancel.onClick.RemoveAllListeners();
+        stageInfo.cancel.onClick.AddListener(() => stageInfo.gameObject.SetActive(false));
+
+        stageInfo.start.onClick.RemoveAllListeners();
+        stageInfo.start.onClick.AddListener(() =>
+        {
+            currStage = selectedStage;
+            Player.Instance.currentStage = ((int)currStage).ToString();
+            SceneManager.LoadScene("Puzzle&Battle");
+            Debug.Log("Stage " + (index + 1) + " selected");
+        });
+    }
+
+    private void SetImageAlpha(Image image, float alpha)
+    {
+        Color color = image.color;
+        color.a = alpha;
+        image.color = color;
     }
 
     public void OnClickBack()

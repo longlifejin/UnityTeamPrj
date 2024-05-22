@@ -9,12 +9,24 @@ using UnityEngine;
 
 public class StageData
 {
+    public readonly string path = "StageImage/{0}";
+
     public string Stage_ID { get; set; }
     public string Boss_ID { get; set; }
     public string Stage_Name { get; set; }
     public int Stage_Reward { get; set; }
     public string Stage_Info { get; set; }
     public string Stage_Image { get; set; }
+
+    public Texture GetImage
+    {
+        get
+        {
+            return Resources.Load<Texture>(string.Format(path, Stage_Image));
+        }
+    }
+
+
 }
 
 
