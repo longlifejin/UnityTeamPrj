@@ -100,7 +100,7 @@ public class GameMgr : MonoBehaviour
 
             //다음 스테이지로 진행
             currentStage += 1;
-
+            Player.Instance.stageClear[(int)currentStage-3001] = true;
 
         }
     }
