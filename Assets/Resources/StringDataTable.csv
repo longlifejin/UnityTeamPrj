@@ -1,12 +1,12 @@
-ï»¿String_ID,Text
-BossName1,ë³€ì¢… ì„ ì¸ìž¥
-BossName2,ê°€ì‹œì™¸ëˆˆë‹¬íŒ½ì´
-BossName3,í¬ì•…í•œ ë¯¸ë¯¹
-BossName4,ìŠ¤ì¼ˆë ˆí†¤ ì „ì‚¬
-BossName5,ì‚¬ë‚˜ìš´ ì›¨ì–´ìš¸í”„
-BossName6,ê³ ë¸”ë¦° ëŒ€ìž¥
-BossName7,ì§€ì˜¥ì˜ ë°œë¡
-BossName8,ì €ì£¼ë°›ì€ ë§ˆë²•ì‚¬
+String_ID,Text
+BossName1,º¯Á¾ ¼±ÀÎÀå
+BossName2,°¡½Ã¿Ü´«´ÞÆØÀÌ
+BossName3,Æ÷¾ÇÇÑ ¹Ì¹Í
+BossName4,½ºÄÌ·¹Åæ Àü»ç
+BossName5,»ç³ª¿î ¿þ¾î¿ïÇÁ
+BossName6,°íºí¸° ´ëÀå
+BossName7,Áö¿ÁÀÇ ¹ß·Ï
+BossName8,ÀúÁÖ¹ÞÀº ¸¶¹ý»ç
 StageName1,STAGE 1
 StageName2,STAGE 2
 StageName3,STAGE 3
@@ -15,31 +15,48 @@ StageName5,STAGE 5
 StageName6,STAGE 6
 StageName7,STAGE 7
 StageName8,STAGE 8
-StageInfo1,ì´Œìž¥ìœ¼ë¡œë¶€í„° ë§ˆë¬¼ì´ ê¸‰ê²©ížˆ ëŠ˜ì–´ë‚œ ì›ì¸ì„ ì°¾ê³  ì´ë¥¼ ì œê±°í•´ë‹¬ë¼ëŠ” ë¶€íƒì„ ë°›ì•˜ë‹¤. ì¡°ì‚¬ë¥¼ ìœ„í•´ ìˆ²ì— ë°œì„ ë“¤ì¸ ìˆœê°„ ë³€ì¢… ì„ ì¸ìž¥ê³¼ ë§ˆì£¼ì³¤ë‹¤.
-StageInfo2,ë³€ì¢… ì„ ì¸ìž¥ì˜ ì‹œì²´ë¥¼ ì¡°ì‚¬í•˜ë˜ ì¤‘ í’€ìˆ²ì—ì„œ ê°€ì‹œ ì™¸ëˆˆ ë‹¬íŒ½ì´ê°€ íŠ€ì–´ë‚˜ì™”ë‹¤. ìˆ²ì˜ ì´ˆìž…ê¹Œì§€ ë§ˆë¬¼ì´ ë‚´ë ¤ì˜¤ëŠ” ì¼ì€ ë“œë¬¸ë°â€¦ ë¬´ì–¸ê°€ ì´ìƒí•˜ë‹¤.
-StageInfo3,ë‹¬íŒ½ì´ë¥¼ ë¬´ì‚¬ížˆ ì“°ëŸ¬íŠ¸ë¦¬ê³  ìˆ²ê¸¸ì„ ë”°ë¼ ê°€ë˜ ì¤‘ ê¸¸ í•œê°€ìš´ë° ë©ê·¸ëŸ¬ë‹ˆ ë†“ì¸ ìƒìžë¥¼ ë°œê²¬í–ˆë‹¤. ìƒìžë¥¼ í–¥í•´ ì†ì„ ë»—ëŠ” ìˆœê°„ ìƒìžê°€ ë²Œì–´ì§€ê³  ë‚ ì¹´ë¡œìš´ ì´ë¹¨ì´ ë“œëŸ¬ë‚¬ë‹¤.
-StageInfo4,ë¯¸ë¯¹ ê°™ì€ ë§ˆë¬¼ê¹Œì§€ ëª¨ìŠµì„ ë“œëŸ¬ë‚´ë‹¤ë‹ˆ. ê²½ê³„í•˜ë©° ì•žìœ¼ë¡œ ë‚˜ì•„ê°€ëŠ”ë° ê·¼ì²˜ì—ì„œ ì‚¬ëžŒì˜ ë¹„ëª… ì†Œë¦¬ê°€ ë“¤ë ¸ë‹¤. ë‹¬ë ¤ê°€ë³´ë‹ˆ ìŠ¤ì¼ˆë ˆí†¤ ì „ì‚¬ê°€ ë§ˆì„ ì£¼ë¯¼ì„ ìœ„í˜‘í•˜ê³  ìžˆì—ˆë‹¤.
-StageInfo5,ë§ˆê³„ì˜ ë§ˆë¬¼ë“¤ì´ ì†Œí™˜ë˜ëŠ” ê²ƒì´ í™•ì‹¤í•´ì¡Œë‹¤. í¬ì•…í•œ ë§ˆë¬¼ë“¤ì„ í—¤ì¹˜ê³  ì†Œí™˜ìžë¥¼ ì°¾ì•„ì•¼ í•œë‹¤.
-StageInfo6,ìˆ²ì˜ ì‹¬ì¸µë¶€ ìˆ˜ì‹­ ë§ˆë¦¬ì˜ ë¬´ìž¥í•œ ê³ ë¸”ë¦°ì´ ë¬´ë¦¬ ì§€ì–´ìžˆë‹¤. ë‹¤ìˆ˜ì˜ ê³ ë¸”ë¦° ë¬´ë¦¬ì™€ ì‹¸ìš¸ ë•Œ ê°€ìž¥ ì¢‹ì€ ë°©ë²•ì€ ë°”ë¡œ ë¬´ë¦¬ì˜ ëŒ€ìž¥ì„ í•´ì¹˜ìš°ëŠ” ê²ƒì´ë‹¤.
-StageInfo7,í¬íš¨ì™€ í•¨ê»˜ ë‚ ê°œ ë‹¬ë¦° ê±°ëŒ€í•œ ë§ˆë¬¼ì´ ë‚˜íƒ€ë‚¬ë‹¤. í•œ ìŒì˜ ë¿”ê³¼ ë‚ ê°œ ë¶‰ê²Œ ë¹›ë‚˜ëŠ” ëˆˆ. ì§€ì˜¥ì— ì‚°ë‹¤ëŠ” ì „ì„¤ì˜ ë§ˆë¬¼ ë°œë¡ê³¼ ë™ì¼í•œ ëª¨ìŠµì´ë‹¤. ë‚´ê°€ ì´ê¸¸ ìˆ˜ ìžˆì„ê¹Œ?
-StageInfo8,ëª¨ë“  ì‚¬íƒœì˜ ì›í‰ ë§ˆë¬¼ì„ ì†Œí™˜í•œ ë§ˆë²•ì‚¬ë¥¼ ë°œê²¬í–ˆë‹¤. ë§ˆë²•ì‚¬ë¥¼ ì“°ëŸ¬íŠ¸ë¦¬ë©´ ëª¨ë“  ë§ˆë¬¼ë“¤ì˜ ì†Œí™˜ì´ í’€ë¦´ ê²ƒì´ë‹¤.
-ItemName1,[ê³µê²©ë ¥] ê°•í™” + 1
-ItemName2,[ê³µê²©ë ¥] ê°•í™” + 2
-ItemName3,[ê³µê²©ë ¥] ê°•í™” + 3
-ItemName4,[ê³µê²©ë ¥] ê°•í™” + 4
-ItemName5,[ê³µê²©ë ¥] ê°•í™” + 5
-ItemName6,[ì²´ë ¥] ê°•í™” + 1
-ItemName7,[ì²´ë ¥] ê°•í™” + 2
-ItemName8,[ì²´ë ¥] ê°•í™” + 3
-ItemName9,[ì²´ë ¥] ê°•í™” + 4
-ItemName10,[ì²´ë ¥] ê°•í™” + 5
-ItemInfo1,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 3 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo2,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 5 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo3,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 5 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo4,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 7 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo5,í”Œë ˆì´ì–´ì˜ ê³µê²©ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 10 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo6,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 30 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo7,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 50 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo8,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 50 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo9,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 70 ìƒìŠ¹í•©ë‹ˆë‹¤.
-ItemInfo10,í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì´ ì˜êµ¬ì ìœ¼ë¡œ 100 ìƒìŠ¹í•©ë‹ˆë‹¤.
+StageInfo1,ÃÌÀåÀ¸·ÎºÎÅÍ ¸¶¹°ÀÌ ±Þ°ÝÈ÷ ´Ã¾î³­ ¿øÀÎÀ» Ã£°í ÀÌ¸¦ Á¦°ÅÇØ´Þ¶ó´Â ºÎÅ¹À» ¹Þ¾Ò´Ù. Á¶»ç¸¦ À§ÇØ ½£¿¡ ¹ßÀ» µéÀÎ ¼ø°£ º¯Á¾ ¼±ÀÎÀå°ú ¸¶ÁÖÃÆ´Ù.
+StageInfo2,º¯Á¾ ¼±ÀÎÀåÀÇ ½ÃÃ¼¸¦ Á¶»çÇÏ´ø Áß Ç®½£¿¡¼­ °¡½Ã ¿Ü´« ´ÞÆØÀÌ°¡ Æ¢¾î³ª¿Ô´Ù. ½£ÀÇ ÃÊÀÔ±îÁö ¸¶¹°ÀÌ ³»·Á¿À´Â ÀÏÀº µå¹®µ¥¡¦ ¹«¾ð°¡ ÀÌ»óÇÏ´Ù.
+StageInfo3,´ÞÆØÀÌ¸¦ ¹«»çÈ÷ ¾²·¯Æ®¸®°í ½£±æÀ» µû¶ó °¡´ø Áß ±æ ÇÑ°¡¿îµ¥ µ¢±×·¯´Ï ³õÀÎ »óÀÚ¸¦ ¹ß°ßÇß´Ù. »óÀÚ¸¦ ÇâÇØ ¼ÕÀ» »¸´Â ¼ø°£ »óÀÚ°¡ ¹ú¾îÁö°í ³¯Ä«·Î¿î ÀÌ»¡ÀÌ µå·¯³µ´Ù.
+StageInfo4,¹Ì¹Í °°Àº ¸¶¹°±îÁö ¸ð½ÀÀ» µå·¯³»´Ù´Ï. °æ°èÇÏ¸ç ¾ÕÀ¸·Î ³ª¾Æ°¡´Âµ¥ ±ÙÃ³¿¡¼­ »ç¶÷ÀÇ ºñ¸í ¼Ò¸®°¡ µé·È´Ù. ´Þ·Á°¡º¸´Ï ½ºÄÌ·¹Åæ Àü»ç°¡ ¸¶À» ÁÖ¹ÎÀ» À§ÇùÇÏ°í ÀÖ¾ú´Ù.
+StageInfo5,¸¶°èÀÇ ¸¶¹°µéÀÌ ¼ÒÈ¯µÇ´Â °ÍÀÌ È®½ÇÇØÁ³´Ù. Æ÷¾ÇÇÑ ¸¶¹°µéÀ» ÇìÄ¡°í ¼ÒÈ¯ÀÚ¸¦ Ã£¾Æ¾ß ÇÑ´Ù.
+StageInfo6,½£ÀÇ ½ÉÃþºÎ ¼ö½Ê ¸¶¸®ÀÇ ¹«ÀåÇÑ °íºí¸°ÀÌ ¹«¸® Áö¾îÀÖ´Ù. ´Ù¼öÀÇ °íºí¸° ¹«¸®¿Í ½Î¿ï ¶§ °¡Àå ÁÁÀº ¹æ¹ýÀº ¹Ù·Î ¹«¸®ÀÇ ´ëÀåÀ» ÇØÄ¡¿ì´Â °ÍÀÌ´Ù.
+StageInfo7,Æ÷È¿¿Í ÇÔ²² ³¯°³ ´Þ¸° °Å´ëÇÑ ¸¶¹°ÀÌ ³ªÅ¸³µ´Ù. ÇÑ ½ÖÀÇ »Ô°ú ³¯°³ ºÓ°Ô ºû³ª´Â ´«. Áö¿Á¿¡ »ê´Ù´Â Àü¼³ÀÇ ¸¶¹° ¹ß·Ï°ú µ¿ÀÏÇÑ ¸ð½ÀÀÌ´Ù. ³»°¡ ÀÌ±æ ¼ö ÀÖÀ»±î?
+StageInfo8,¸ðµç »çÅÂÀÇ ¿øÈä ¸¶¹°À» ¼ÒÈ¯ÇÑ ¸¶¹ý»ç¸¦ ¹ß°ßÇß´Ù. ¸¶¹ý»ç¸¦ ¾²·¯Æ®¸®¸é ¸ðµç ¸¶¹°µéÀÇ ¼ÒÈ¯ÀÌ Ç®¸± °ÍÀÌ´Ù.
+ItemName1,[°ø°Ý·Â] °­È­ + 1
+ItemName2,[°ø°Ý·Â] °­È­ + 2
+ItemName3,[°ø°Ý·Â] °­È­ + 3
+ItemName4,[°ø°Ý·Â] °­È­ + 4
+ItemName5,[°ø°Ý·Â] °­È­ + 5
+ItemName6,[Ã¼·Â] °­È­ + 1
+ItemName7,[Ã¼·Â] °­È­ + 2
+ItemName8,[Ã¼·Â] °­È­ + 3
+ItemName9,[Ã¼·Â] °­È­ + 4
+ItemName10,[Ã¼·Â] °­È­ + 5
+ItemInfo1,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 3 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo2,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 5 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo3,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 5 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo4,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 7 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo5,ÇÃ·¹ÀÌ¾îÀÇ °ø°Ý·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 10 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo6,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 30 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo7,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 50 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo8,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 50 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo9,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 70 »ó½ÂÇÕ´Ï´Ù.
+ItemInfo10,ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ ¿µ±¸ÀûÀ¸·Î 100 »ó½ÂÇÕ´Ï´Ù.
+Tutorial1_1,[ÆÛÁñ]
+Tutorial1_2,ÆÛÁñÀ» ½ÃÀÛÇÏ¸é 2°³ÀÇ Å¸ÀÏÀÌ »ý¼ºµË´Ï´Ù.
+Tutorial1_3,"¸ðµç ¼ýÀÚÄ«µå´Â ½½¶óÀÌµå ¹æÇâÀ¸·Î ÀÌµ¿ÇÏ¸ç, ¼ýÀÚ°¡ °°À» °æ¿ì ÇÕÃÄÁý´Ï´Ù."
+Tutorial1_4,½½¶óÀÌµå·Î ÀÌµ¿ÇÒ ¶§¸¶´Ù ·£´ýÇÑ ºó Ä­¿¡ »õ·Î¿î ¼ýÀÚ°¡ »ý¼ºµË´Ï´Ù.
+Tutorial1_5,"(90%È®·ü·Î ""2"", 10%È®·ü·Î ""4"" »ý¼º)"
+Tutorial1_6,ÆÛÁñÀº 30ÃÊ°¡ Áö³ª°Å³ª 16Ä­ÀÌ ¸ðµÎ »ç¿ëµÇ¾î ÀÌµ¿ÇÒ ¼ö ¾øÀ»¶§ Á¾·áµË´Ï´Ù.
+Tutorial2_1,[ÀüÅõ]
+Tutorial2_2,ÇÃ·¹ÀÌ¾î´Â ±âº» °ø°Ý·Â x ÆÛÁñÀÇ °¡Àå ³ôÀº¼ýÀÚ¸¦ °è»êÇÏ¿© º¸½º¸¦ °ø°ÝÇÕ´Ï´Ù.
+Tutorial2_3,(ÇÃ·¹ÀÌ¾îÀÇ ±âº» °ø°Ý·ÂÀº 5ºÎÅÍ ½ÃÀÛÇÕ´Ï´Ù)
+Tutorial2_4,º¸½º´Â ±âº» °ø°Ý·Â x ¼ýÀÚ°¡ ÀÖ´Â Å¸ÀÏÀÇ °³¼ö¸¦ °è»êÇÏ¿© ÇÃ·¹ÀÌ¾î¸¦ °ø°ÝÇÕ´Ï´Ù.
+Tutorial2_5,"´Ü, 16Ä­ÀÌ ¸ðµÎ »ç¿ëµÇ¾î ÆÛÁñÀÌ Á¾·áµÇ¾úÀ» ¶§¿¡´Â º¸½º°¡ ±âº»°ø°Ý·Â x 32ÀÇ °­·ÂÇÑ °ø°ÝÀ¸·Î ÇÃ·¹ÀÌ¾î¸¦ ¸ÕÀú °ø°ÝÇÕ´Ï´Ù."
+Tutorial2_6,ÇÃ·¹ÀÌ¾î ¶Ç´Â º¸½ºÀÇ Ã¼·ÂÀÌ 0ÀÌ µÇ¸é ½ºÅ×ÀÌÁö°¡ Á¾·áµË´Ï´Ù.
+Tutorial3_1,[°­È­]
+Tutorial3_2,½ºÅ×ÀÌÁöÀÇ º¸»óÀ¸·Î È¹µæÇÑ °ñµå¸¦ »ç¿ëÇÏ¿© ÀÌ¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+Tutorial3_3,°¢ »óÇ°º°·Î ÀÜ¿©°³¼ö ¸¸Å­ ±¸¸Å ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+Tutorial3_4,°ø°Ý·Â °­È­ : ÇÃ·¹ÀÌ¾îÀÇ ±âº» °ø°Ý·ÂÀ» Áõ°¡½ÃÅµ´Ï´Ù.
+Tutorial3_5,Ã¼·Â °­È­ : ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀ» Áõ°¡½ÃÅµ´Ï´Ù.
