@@ -11,7 +11,9 @@ public class Store : MonoBehaviour
 {
     public GameObject atkItemSpace;
     public GameObject hpItemSpace;
+    public TextMeshProUGUI ownGold;
     private ItemDataTable itemTable;
+
 
     public ItemSlot itemPrefab;
     private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
@@ -26,6 +28,7 @@ public class Store : MonoBehaviour
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
         CreateAtkItem(attackItemIds[currentAtkIndex]);
         CreateHpItem(hpItemIds[currentHpIndex]);
+        ownGold.text = Player.Instance.Gold.ToString();
     }
 
     private void CreateAtkItem(string itemId)
@@ -62,6 +65,7 @@ public class Store : MonoBehaviour
         else
         {
             Player.Instance.Gold -= price;
+            ownGold.text = Player.Instance.Gold.ToString();
             Player.Instance.atk += itemData.Value;
 
             if (currentAtkIndex < attackItemIds.Count - 1)

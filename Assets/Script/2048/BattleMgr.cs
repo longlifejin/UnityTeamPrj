@@ -16,7 +16,6 @@ public class BattleMgr : MonoBehaviour
     private BossDataTable bossTable;
     private StageDataTable stageTable;
 
-    //public Player player = new Player();
     public Boss boss = new Boss();
 
     public Image playerHpBar;
@@ -56,12 +55,6 @@ public class BattleMgr : MonoBehaviour
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
         bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
-
-        //TO-DO : 스테이지 별 체력, 공격력, 이미지 설정 추가
-        //player.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
-        //playerOriginHp = player.hp;
-        //player.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
-        //player.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
         playerOriginHp = Player.Instance.hp;
