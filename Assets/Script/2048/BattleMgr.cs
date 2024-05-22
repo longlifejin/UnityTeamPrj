@@ -184,7 +184,7 @@ public class BattleMgr : MonoBehaviour
         {
             playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
             gameMgr.isPlayerDie = true;
-
+            bossAnimator.SetTrigger(AnimatorIds.bossVictorydAni);
             //Invoke("PlayerDie", 1f); 
 
             StopAllCoroutines();

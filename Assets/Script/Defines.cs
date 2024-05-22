@@ -39,4 +39,5 @@ public static class AnimatorIds
     public static readonly string bossDamagedAni = "BossDamaged";
     public static readonly string bossDiedAni = "BossDie";
     public static readonly string bossIdledAni = "BossIdle";
+    public static readonly string bossVictorydAni = "BossVictory";
 }
