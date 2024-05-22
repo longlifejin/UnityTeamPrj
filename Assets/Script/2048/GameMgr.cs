@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameMgr : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class GameMgr : MonoBehaviour
 
     public Image popUpPanel;
     TextMeshProUGUI popUpMessage;
+
+    public GameObject popUpVictory;
+    public Text victoryGoldText;
+    public Button victoryNextButton;
+
+    public GameObject popUpDefeat;
+    public Button defeatNextButton;
+    public Button defeatRestartButton;
 
     public Animator playerAnimator;
     public Animator bossAnimator;
@@ -55,8 +64,28 @@ public class GameMgr : MonoBehaviour
 
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
-        popUpPanel.gameObject.SetActive(false);
-        popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
+
+        //victoryGoldText = popUpVictory.GetComponentInChildren<TextMeshProUGUI>();
+        //victoryNextButton = popUpVictory.GetComponentInChildren<Button>();
+        victoryNextButton.onClick.AddListener(() => 
+        { 
+            OnClickOK(); 
+            popUpVictory.SetActive(false);
+        });
+
+        popUpVictory.gameObject.SetActive(false);
+
+        defeatNextButton.onClick.AddListener(()=> { SceneManager.LoadScene("Stagebackground"); });
+        defeatRestartButton.onClick.AddListener(() => 
+        { 
+            OnClickOK();
+            popUpDefeat.gameObject.SetActive(false);
+        });
+
+        popUpDefeat.gameObject.SetActive(false);
+
+        //popUpPanel.gameObject.SetActive(false);
+        //popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         playerParticle.Stop();
     }
@@ -87,15 +116,18 @@ public class GameMgr : MonoBehaviour
     {
         if (isPlayerDie)
         {
-            popUpPanel.gameObject.SetActive(true);
-            popUpMessage.text = $"Stage Failed!\n gained Gold : 0";
+            //popUpPanel.gameObject.SetActive(true);
+            //popUpMessage.text = $"Stage Failed!\n gained Gold : 0";
+            popUpDefeat.gameObject.SetActive(true);
             Debug.Log("Player Die");
         }
 
         if (isBattleStageClear)
         {
-            popUpPanel.gameObject.SetActive(true);
-            popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
+            //popUpPanel.gameObject.SetActive(true);
+            //popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
+            popUpVictory.gameObject.SetActive(true);
+            victoryGoldText.text = $"{battleMgr.gainedGold}";
             Debug.Log("Stage Clear");
 
             //다음 스테이지로 진행
@@ -112,7 +144,7 @@ public class GameMgr : MonoBehaviour
 
     public void OnClickOK()
     {
-        popUpPanel.gameObject.SetActive(false);
+        //popUpPanel.gameObject.SetActive(false);
 
         if (isPlayerDie || isBattleStageClear)
         {
