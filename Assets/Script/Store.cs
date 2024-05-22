@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using static UnityEditor.Progress;
 
 public class Store : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class Store : MonoBehaviour
     public GameObject hpItemSpace;
     public TextMeshProUGUI ownGold;
     private ItemDataTable itemTable;
-
 
     public ItemSlot itemPrefab;
     private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
@@ -23,12 +21,15 @@ public class Store : MonoBehaviour
     private ItemSlot currentAtkItem;
     private ItemSlot currentHpItem;
 
+    public GameObject lackOfGoldPopUp;
+
     private void Start()
     {
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
         CreateAtkItem(attackItemIds[currentAtkIndex]);
         CreateHpItem(hpItemIds[currentHpIndex]);
         ownGold.text = Player.Instance.Gold.ToString();
+        lackOfGoldPopUp.SetActive(false);
     }
 
     private void CreateAtkItem(string itemId)
@@ -59,7 +60,7 @@ public class Store : MonoBehaviour
 
         if (Player.Instance.Gold < price)
         {
-            Debug.Log("소지한 골드가 부족합니다.");
+            lackOfGoldPopUp.SetActive(true);
             return;
         }
         else
@@ -91,12 +92,13 @@ public class Store : MonoBehaviour
 
         if (Player.Instance.Gold < price)
         {
-            Debug.Log("소지한 골드가 부족합니다.");
+            lackOfGoldPopUp.SetActive(true);
             return;
         }
         else
         {
             Player.Instance.Gold -= price;
+            ownGold.text = Player.Instance.Gold.ToString();
             Player.Instance.hp += itemData.Value;
 
             if (currentHpIndex < hpItemIds.Count - 1)
@@ -122,6 +124,11 @@ public class Store : MonoBehaviour
         {
             itemSlot.toggles[i].isOn = i <= index;
         }
+    }
+
+    public void OnClickLackOfGoldBack()
+    {
+        lackOfGoldPopUp.SetActive(false);
     }
 
     //private Transform FindChildWithTag(Transform parent, string tag)
