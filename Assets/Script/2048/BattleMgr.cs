@@ -34,7 +34,7 @@ public class BattleMgr : MonoBehaviour
     public GameObject battleMap;
     private GameObject bossPrefab;
 
-
+    private bool bossSpecialAttack = false;
 
     public void Start()
     {
@@ -50,6 +50,7 @@ public class BattleMgr : MonoBehaviour
         bossPrefab.transform.rotation = bossRot;
 
         bossAnimator = bossPrefab.GetComponent<Animator>();
+        bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
 
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
@@ -82,6 +83,7 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isBattleStageClear = false;
 
         quitMenu.SetActive(false);
+        bossSpecialAttack = false;
 
         Debug.Log("플레이어 hp : " + Player.Instance.hp);
         Debug.Log("보스 ID : " + bossID);
@@ -99,6 +101,7 @@ public class BattleMgr : MonoBehaviour
         {
             StartCoroutine(BossFirst());
             gameMgr.isBossFirst = false;
+            bossSpecialAttack = true;
         }
     }
 
@@ -154,14 +157,16 @@ public class BattleMgr : MonoBehaviour
             StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
             yield return new WaitForSeconds(2f);
 
-            if(gameMgr.isBossFirst)
+            if(bossSpecialAttack)
             {
                 bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
+
             }
             else
             {
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
             }
+            bossSpecialAttack = false;
             playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             yield return new WaitForSeconds(1.5f);
 
@@ -184,8 +189,8 @@ public class BattleMgr : MonoBehaviour
         {
             playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
             gameMgr.isPlayerDie = true;
-            bossAnimator.SetTrigger(AnimatorIds.bossVictorydAni);
-            //Invoke("PlayerDie", 1f); 
+
+            bossAnimator.SetTrigger(AnimatorIds.bossVictoryAni);
 
             StopAllCoroutines();
         }

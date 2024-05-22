@@ -34,10 +34,12 @@ public static class AnimatorIds
     public static readonly string playerDamagedAni = "PlayerDamaged";
     public static readonly string playerDieAni = "PlayerDie";
     public static readonly string playerIdleAni = "PlayerIdle";
+    public static readonly string playerVictoryAni = "PlayerVictory";
+
     public static readonly string bossAtkAni = "BossAttack";
     public static readonly string bossSpecialAtkAni = "BossSpecialAttack";
     public static readonly string bossDamagedAni = "BossDamaged";
     public static readonly string bossDiedAni = "BossDie";
     public static readonly string bossIdledAni = "BossIdle";
-    public static readonly string bossVictorydAni = "BossVictory";
+    public static readonly string bossVictoryAni = "BossVictory";
 }
