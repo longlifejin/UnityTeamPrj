@@ -38,6 +38,8 @@ public class BattleMgr : MonoBehaviour
     public GameObject battleGround;
     public RawImage battleBack;
 
+    public ParticleSystem[] bossAttackParticles;
+
 
     public void Start()
     {
