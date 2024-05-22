@@ -35,6 +35,10 @@ public class BattleMgr : MonoBehaviour
 
     private bool bossSpecialAttack = false;
 
+    public GameObject battleGround;
+    public RawImage battleBack;
+
+
     public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
@@ -68,6 +72,13 @@ public class BattleMgr : MonoBehaviour
         bossOriginHp = boss.hp;
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
+
+        battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
+        var ground = stageTable.Get(DataTableIds.stageID).GetGround;
+        Material groundMaterial = new Material(Shader.Find("Standard"));
+        groundMaterial.mainTexture = ground;
+        battleGround.GetComponent<MeshRenderer>().material = groundMaterial;
+
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         bossHpBar.fillAmount = boss.hp / bossOriginHp;

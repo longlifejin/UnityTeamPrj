@@ -17,6 +17,8 @@ public class StageData
     public int Stage_Reward { get; set; }
     public string Stage_Info { get; set; }
     public string Stage_Image { get; set; }
+    public string Stage_Back {  get; set; }
+    public string Stage_Ground { get; set; }
 
     public string GetName
     {
@@ -41,7 +43,21 @@ public class StageData
             return Resources.Load<Texture>(string.Format(path, Stage_Image));
         }
     }
+    public Texture GetBack
+    {
+        get
+        {
+            return Resources.Load<Texture>(string.Format(path, Stage_Back));
+        }
+    }
 
+    public Texture GetGround
+    {
+        get
+        {
+            return Resources.Load<Texture>(string.Format(path, Stage_Ground));
+        }
+    }
 
 }
 
