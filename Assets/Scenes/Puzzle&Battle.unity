@@ -198,7 +198,6 @@ MonoBehaviour:
   maxValue: 0
   puzzleManager: {fileID: 1601929138}
   battleManager: {fileID: 1291009201}
-  popUpPanel: {fileID: 670649088}
   popUpVictory: {fileID: 434561755}
   victoryGoldText: {fileID: 217138109}
   victoryNextButton: {fileID: 1565434700}
@@ -5031,7 +5030,42 @@ MonoBehaviour:
   battleMap: {fileID: 791632066}
   battleGround: {fileID: 791632066}
   battleBack: {fileID: 52516153}
-  bossAttackParticles: []
+  bossAttackParticles:
+  - {fileID: 7242367112545350938, guid: 713b050d59f059d4d89b143918cdb8ca, type: 3}
+  - {fileID: 7242367112545350938, guid: 713b050d59f059d4d89b143918cdb8ca, type: 3}
+  - {fileID: 7242367112545350938, guid: 713b050d59f059d4d89b143918cdb8ca, type: 3}
+  - {fileID: 2567784236978358139, guid: 6a19011a5473dcb45b0b386dfcb28670, type: 3}
+  - {fileID: 2567784236978358139, guid: 6a19011a5473dcb45b0b386dfcb28670, type: 3}
+  - {fileID: 2567784236978358139, guid: 6a19011a5473dcb45b0b386dfcb28670, type: 3}
+  - {fileID: 4109359571012548714, guid: 46136fa94794bec4ab283dc58c51a7b4, type: 3}
+  - {fileID: 5160898490186375212, guid: 37eef929626f6904faaf4b69b066d715, type: 3}
+  bossAttackAudioes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bossSpecialAttackParticles:
+  - {fileID: 4375571408008603111, guid: 5872ab001153cf34b8a4372b75aa4bf8, type: 3}
+  - {fileID: 5838977389106482588, guid: dd2dba16c3d8cb94eb0700c99f3e2fe4, type: 3}
+  - {fileID: 1527517236649021181, guid: 4a4c268ad765f6e48a130570da19bd1a, type: 3}
+  - {fileID: 860312576810373781, guid: 093a32ade00fda74bbc2f8a7e57c32bf, type: 3}
+  - {fileID: 367774876930652421, guid: b0599c0d4c6dbf444b6180fa1666d53b, type: 3}
+  - {fileID: 198174665931829960, guid: c91639566deccc74489652ecf4528557, type: 3}
+  - {fileID: 198985041237790212, guid: 938a6f4810753fc46ac6d8235f82afaa, type: 3}
+  - {fileID: 198049818700294864, guid: da420a91596617b4ab0f8941677b52e2, type: 3}
+  bossSpecialAttackAudioes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1291009203
 Transform:
   m_ObjectHideFlags: 0

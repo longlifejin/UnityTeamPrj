@@ -39,6 +39,13 @@ public class BattleMgr : MonoBehaviour
     public RawImage battleBack;
 
     public ParticleSystem[] bossAttackParticles;
+    public AudioClip[] bossAttackAudioes;
+    
+    public ParticleSystem[] bossSpecialAttackParticles;
+    public AudioClip[] bossSpecialAttackAudioes;
+
+    private Vector3 playerPos;
+    private Vector3 bossPos;
 
 
     public void Start()
@@ -51,6 +58,10 @@ public class BattleMgr : MonoBehaviour
         }
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
+
+        playerPos = new Vector3(-1.3f, 0f, 0f);
+        bossPos = bossPrefab.transform.localPosition;
+
         var bossRot = Quaternion.Euler(0,-130,0);
         bossPrefab.transform.rotation = bossRot;
 

@@ -24,9 +24,6 @@ public class GameMgr : MonoBehaviour
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
-    public Image popUpPanel;
-    TextMeshProUGUI popUpMessage;
-
     public GameObject popUpVictory;
     public Text victoryGoldText;
     public Button victoryNextButton;
@@ -65,8 +62,6 @@ public class GameMgr : MonoBehaviour
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
 
-        //victoryGoldText = popUpVictory.GetComponentInChildren<TextMeshProUGUI>();
-        //victoryNextButton = popUpVictory.GetComponentInChildren<Button>();
         victoryNextButton.onClick.AddListener(() => 
         { 
             OnClickOK(); 
@@ -84,11 +79,10 @@ public class GameMgr : MonoBehaviour
 
         popUpDefeat.gameObject.SetActive(false);
 
-        //popUpPanel.gameObject.SetActive(false);
-        //popUpMessage = popUpPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         playerParticle.Stop();
     }
+
     private void Update()
     {
         PuzzleOver();
@@ -106,7 +100,6 @@ public class GameMgr : MonoBehaviour
 
         if (isGridFull)
         {
-            Debug.Log("GridFull");
             isGridFull = false;
             isBossFirst = true;
         }
@@ -116,21 +109,14 @@ public class GameMgr : MonoBehaviour
     {
         if (isPlayerDie)
         {
-            //popUpPanel.gameObject.SetActive(true);
-            //popUpMessage.text = $"Stage Failed!\n gained Gold : 0";
             popUpDefeat.gameObject.SetActive(true);
-            Debug.Log("Player Die");
         }
 
         if (isBattleStageClear)
         {
-            //popUpPanel.gameObject.SetActive(true);
-            //popUpMessage.text = $"Stage Clear!\n gained Gold : {battleMgr.gainedGold}";
             popUpVictory.gameObject.SetActive(true);
             victoryGoldText.text = $"{battleMgr.gainedGold}";
-            Debug.Log("Stage Clear");
 
-            //다음 스테이지로 진행
             currentStage += 1;
             Player.Instance.stageClear[(int)currentStage-3001] = true;
 
@@ -144,8 +130,6 @@ public class GameMgr : MonoBehaviour
 
     public void OnClickOK()
     {
-        //popUpPanel.gameObject.SetActive(false);
-
         if (isPlayerDie || isBattleStageClear)
         {
             puzzleMgr.NewGame();
