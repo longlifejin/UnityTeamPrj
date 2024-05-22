@@ -18,6 +18,22 @@ public class StageData
     public string Stage_Info { get; set; }
     public string Stage_Image { get; set; }
 
+    public string GetName
+    {
+        get
+        {
+            return DataTableMgr.Get<StringTable>(DataTableIds.String).Get(Stage_Name);
+        }
+    }
+
+    public string GetInfo
+    {
+        get
+        {
+            return DataTableMgr.Get<StringTable>(DataTableIds.String).Get(Stage_Info);
+        }
+    }
+
     public Texture GetImage
     {
         get

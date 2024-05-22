@@ -123,8 +123,8 @@ public class StageSelect : MonoBehaviour
         StageData stage = stageTable.Get(((int)selectedStage).ToString());
 
         stageInfo.gameObject.SetActive(true);
-        stageInfo.stageName.text = stage.Stage_Name;
-        stageInfo.stageDescription.text = stage.Stage_Info;
+        stageInfo.stageName.text = stage.GetName;
+        stageInfo.stageDescription.text = stage.GetInfo;
         stageInfo.stageImage.texture = stage.GetImage;
 
         stageInfo.cancel.onClick.RemoveAllListeners();
