@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement;
 public class EntranceScene : MonoBehaviour
 {
     public GameObject upgradePopUp;
+    public GameObject tutorialPopUp;
+
+    private void Start()
+    {
+        upgradePopUp.SetActive(false);
+        tutorialPopUp.SetActive(false);
+    }
 
     public void OnClickGameStart()
     {
-        //스테이지 선택 씬으로 수정하기
         SceneManager.LoadScene("Stagebackground");
     }
 
@@ -20,6 +26,21 @@ public class EntranceScene : MonoBehaviour
 
     public void OnClickTutorial()
     {
-        Debug.Log("튜토리얼 작업중");
+        tutorialPopUp.SetActive(true);
+    }
+
+    public void OnClickQuitGame()
+    {
+        Application.Quit();
+
+#if UNITY_EDITOR
+        // 유니티 에디터에서 게임 플레이를 종료합니다
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    public void OnClickTutorialBack()
+    {
+        tutorialPopUp.SetActive(false);
     }
 }

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EntranceStorePopUp.unity
+    path: Assets/Scenes/EntranceStorePopUp_before1.unity
     guid: 99545a73b8df1f14ba000016e665d741
   - enabled: 1
     path: Assets/Scenes/Puzzle&Battle.unity
