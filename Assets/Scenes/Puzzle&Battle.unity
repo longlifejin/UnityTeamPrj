@@ -213,8 +213,11 @@ MonoBehaviour:
   bossParticlePos: []
   board: {fileID: 997205596}
   currentStage: 0
+  audioSource: {fileID: 0}
   clearSound: {fileID: 8300000, guid: 7784f5d57c87e4ac9a864beeee8ffe04, type: 3}
   defeatSound: {fileID: 8300000, guid: 9bc42deff956046efb6450884a4b5669, type: 3}
+  puzzleStartSound: {fileID: 8300000, guid: 6909afde8273049ac97a7985f974d97c, type: 3}
+  puzzleEndSound: {fileID: 8300000, guid: d19f5f9c25b4c4d249f972617e72087b, type: 3}
 --- !u!4 &27402488
 Transform:
   m_ObjectHideFlags: 0

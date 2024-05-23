@@ -320,6 +320,7 @@ public class TileBoard : MonoBehaviour
         touchStartPosition = Input.GetTouch(0).position;
         gameStart = true;
         playerAnimator.SetTrigger(AnimatorIds.playerChargingAni);
+        gameMgr.audioSource.PlayOneShot(gameMgr.puzzleStartSound);
     }
 
    

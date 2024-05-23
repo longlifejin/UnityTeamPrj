@@ -45,9 +45,11 @@ public class GameMgr : MonoBehaviour
 
     public Stage currentStage;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip clearSound;
     public AudioClip defeatSound;
+    public AudioClip puzzleStartSound;
+    public AudioClip puzzleEndSound;
 
 
     private void Start()
@@ -97,8 +99,10 @@ public class GameMgr : MonoBehaviour
 
     private void PuzzleOver()
     {
+
         if (isTimeOver)
         {
+            audioSource.PlayOneShot(puzzleEndSound);
             isTimeOver = false;
             playerParticle.transform.position = playerParticlePos;
             isPlayerFirst = true;
@@ -106,6 +110,7 @@ public class GameMgr : MonoBehaviour
 
         if (isGridFull)
         {
+            audioSource.PlayOneShot(puzzleEndSound);
             isGridFull = false;
             isBossFirst = true;
         }
