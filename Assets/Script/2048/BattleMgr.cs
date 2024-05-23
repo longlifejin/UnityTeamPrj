@@ -38,6 +38,10 @@ public class BattleMgr : MonoBehaviour
     public GameObject battleGround;
     public RawImage battleBack;
 
+    private AudioSource battleAudioSource;
+    public AudioClip[] battleBGMClips;
+
+
     public ParticleSystem[] bossAttackParticles;
     public AudioClip[] bossAttackAudioes;
     
@@ -56,10 +60,13 @@ public class BattleMgr : MonoBehaviour
     public Vector3 playerPos;
     public Vector3 bossPos;
 
-
     public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
+        battleAudioSource = GetComponent<AudioSource>();
+        battleAudioSource.loop = true;
+        battleAudioSource.clip = battleBGMClips[(int)gameMgr.currentStage - 3001];
+        battleAudioSource.Play();
 
         if (bossPrefab != null)
         {
