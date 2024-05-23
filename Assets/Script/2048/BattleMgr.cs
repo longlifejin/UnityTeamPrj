@@ -44,6 +44,9 @@ public class BattleMgr : MonoBehaviour
     public ParticleSystem[] bossSpecialAttackParticles;
     public AudioClip[] bossSpecialAttackAudioes;
 
+    public ParticleSystem[] playerAttackParticles;
+    public AudioClip[] playerAttackAudioes;
+
     public Vector3 playerPos;
     public Vector3 bossPos;
 
@@ -184,7 +187,6 @@ public class BattleMgr : MonoBehaviour
             else
             {
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-                //BossAttackPlay();
             }
             bossSpecialAttack = false;
             playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
@@ -239,11 +241,6 @@ public class BattleMgr : MonoBehaviour
         }
     }
 
-    private void PlayerDie()
-    {
-        gameMgr.isPlayerDie = true;
-    }
-
     public void OnClickQuit()
     {
         quitMenu.SetActive(true);
@@ -266,34 +263,5 @@ public class BattleMgr : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Stagebackground");
-        //StartCoroutine(CallSetButtons());
-        //StageSelect.Instance.SetButtons();
     }
-
-    public void BossAttackPlay()
-    {
-        bossAttackParticles[(int)gameMgr.currentStage - 3001].transform.position = playerPos;
-        bossAttackParticles[(int)gameMgr.currentStage - 3001].Play();
-        StartCoroutine(StopBossParticle(2f));
-    }
-
-    private IEnumerator StopBossParticle(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        bossAttackParticles[(int)gameMgr.currentStage - 3001].Stop();
-    }
-
-    private void playerAttackParticlePlay()
-    {
-
-    }
-
-    //private IEnumerator CallSetButtons()
-    //{
-    //    yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Stagebackground");
-    //    StageSelect.Instance.SetButtons();
-    //}
-
-
 }

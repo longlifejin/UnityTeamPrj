@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EntranceStorePopUp_before1.unity
-    guid: 99545a73b8df1f14ba000016e665d741
-  - enabled: 1
-    path: Assets/Scenes/Puzzle&Battle.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/EntranceStorePopUp.unity
+    guid: d735342ac5b5e094aa369118a238971b
   - enabled: 1
     path: Assets/Scenes/Stagebackground.unity
     guid: 90bfc877579edaa44a173bffe4ab2658
+  - enabled: 1
+    path: Assets/Scenes/Puzzle&Battle.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
