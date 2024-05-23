@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     public string imageId = string.Empty;
     public int gold = 0;
     public List<bool> stageClear = new List<bool>();
+    public List<bool> purchasedHpItem = new List<bool>();
+    public List<bool> purchasedAtkItem = new List<bool>();
+    public int atkItemIndex = 0;
+    public int hpItemIndex = 0;
     public string currentStage;
 
     public int Gold 
@@ -55,11 +59,13 @@ public class Player : MonoBehaviour
     }
 
     public List<bool> StageClear
-    {
-        get
-        { return stageClear; }
-    }
+    { get { return stageClear; } }
 
+    public List<bool> PurchasedHpItem
+    { get { return purchasedHpItem; } }
+
+    public List<bool> PurchasedAtkItem
+    { get { return purchasedAtkItem; } }
 
     private void Awake()
     {
@@ -77,6 +83,11 @@ public class Player : MonoBehaviour
         for (int i = 1; i < 8; ++i)
         {
             stageClear.Add(false);
+        }
+
+        for(int i = 0; i < 5; ++i)
+        {
+            purchasedAtkItem.Add(false);
         }
         
     }

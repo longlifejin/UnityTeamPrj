@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class Store : MonoBehaviour
 {
@@ -20,19 +21,52 @@ public class Store : MonoBehaviour
     private int currentHpIndex = 0;
     private ItemSlot currentAtkItem;
     private ItemSlot currentHpItem;
+    private int atkIndex;
 
     public GameObject lackOfGoldPopUp;
 
     private void Start()
     {
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
-        CreateAtkItem(attackItemIds[currentAtkIndex]);
+
+        var count = Player.Instance.PurchasedAtkItem.Count;
+        //atkIndex = Player.Instance.atkItemIndex;
+        if(Player.Instance.atkItemIndex < attackItemIds.Count)
+        {
+            CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex], Player.Instance.atkItemIndex);
+        }
+        else
+        {
+            {
+                CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex-1], Player.Instance.atkItemIndex-1);
+            }
+        }
+
+        //for (int i = 0; i < count; ++i)
+        //{
+        //    if (!Player.Instance.PurchasedAtkItem[i])
+        //    {
+
+        //    }
+        //    if(Player.Instance.PurchasedAtkItem[count-1])
+        //    {
+        //        ItemData itemData = itemTable.Get("41005");
+        //        currentAtkItem = Instantiate(itemPrefab, atkItemSpace.transform);
+        //        currentAtkItem.itemName.text = itemData.GetName;
+        //        currentAtkItem.itemInfo.text = itemData.GetInfo;
+        //        currentAtkItem.itemPrice.text = itemData.Gold.ToString();
+        //        currentAtkItem.itemImage.texture = itemData.GetImage;
+        //        currentAtkItem.purchaseButton.interactable = false;
+        //    }
+        //}
+
+        //CreateAtkItem(attackItemIds[currentAtkIndex]);
         CreateHpItem(hpItemIds[currentHpIndex]);
         ownGold.text = Player.Instance.Gold.ToString();
         lackOfGoldPopUp.SetActive(false);
     }
 
-    private void CreateAtkItem(string itemId)
+    private void CreateAtkItem(string itemId, int index)
     {
         ItemData itemData = itemTable.Get(itemId);
         currentAtkItem = Instantiate(itemPrefab, atkItemSpace.transform);
@@ -41,6 +75,15 @@ public class Store : MonoBehaviour
         currentAtkItem.itemPrice.text = itemData.Gold.ToString();
         currentAtkItem.itemImage.texture = itemData.GetImage;
         currentAtkItem.purchaseButton.onClick.AddListener(() => PurchaseAtkItem(itemData));
+        for(int i = 0; i < index; ++i)
+        {
+            currentAtkItem.toggles[i].isOn = true;
+        }
+        if (Player.Instance.atkItemIndex == attackItemIds.Count)
+        {
+            currentAtkItem.toggles[attackItemIds.Count - 1].isOn = true;
+            currentAtkItem.purchaseButton.interactable = false;
+        }
     }
 
     private void CreateHpItem(string itemId)
@@ -57,6 +100,9 @@ public class Store : MonoBehaviour
     private void PurchaseAtkItem(ItemData itemData)
     {
         var price = int.Parse(currentAtkItem.itemPrice.text);
+        //Player.Instance.PurchasedAtkItem[Player.Instance.atkItemIndex] = true;
+        //++Player.Instance.atkItemIndex;
+        //++atkIndex;
 
         if (Player.Instance.Gold < price)
         {
@@ -70,20 +116,21 @@ public class Store : MonoBehaviour
 
             Player.Instance.GainedAtk += itemData.Value;
 
-            if (currentAtkIndex < attackItemIds.Count - 1)
+            if (Player.Instance.atkItemIndex < attackItemIds.Count - 1)
             {
-                currentAtkIndex++;
+                ++Player.Instance.atkItemIndex;
                 Destroy(currentAtkItem.gameObject);
-                CreateAtkItem(attackItemIds[currentAtkIndex]);
+                CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex], Player.Instance.atkItemIndex);
             }
             else
             {
-                currentAtkItem.toggles[currentAtkIndex].isOn = true;
+                ++Player.Instance.atkItemIndex;
+                currentAtkItem.toggles[Player.Instance.atkItemIndex-1].isOn = true;
                 currentAtkItem.purchaseButton.interactable = false;
                 Debug.Log("모든 공격 아이템을 구매했습니다.");
             }
 
-            UpdateToggle(currentAtkItem, currentAtkIndex);
+            UpdateToggle(currentAtkItem, Player.Instance.atkItemIndex);
         }
     }
     private void PurchaseHpItem(ItemData itemData)
@@ -122,7 +169,7 @@ public class Store : MonoBehaviour
     {
         for (int i = 0; i < index; ++i)
         {
-            itemSlot.toggles[i].isOn = i <= index;
+            itemSlot.toggles[i].isOn = true;
         }
     }
 
