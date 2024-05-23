@@ -66,7 +66,8 @@ public class BattleMgr : MonoBehaviour
         bossPrefab.transform.rotation = bossRot;
 
         bossAnimator = bossPrefab.GetComponent<Animator>();
-        bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
+        //bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
+        //Debug.Log("SetTirgger Idle");
 
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
