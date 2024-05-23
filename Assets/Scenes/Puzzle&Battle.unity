@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 27402487}
   m_Layer: 0
   m_Name: GameMgr
-  m_TagString: Untagged
+  m_TagString: GameMgr
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4630,6 +4630,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
   isGridFull: 0
+  limitTime: 10
   timeBar: {fileID: 41981602}
   puzzleStartButton: {fileID: 1265884936}
   gameManager: {fileID: 27402486}
@@ -5127,7 +5128,7 @@ GameObject:
   - component: {fileID: 1291009202}
   m_Layer: 0
   m_Name: BattleMgr
-  m_TagString: Boss
+  m_TagString: BattleMgr
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5199,6 +5200,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 938dcba4fdd93bd4898e7b524ce1606a, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: 4793780d1eb3c9149bbda8a3d4d3df49, type: 3}
+  playerPos: {x: 0, y: 0, z: 0}
+  bossPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1291009203
 Transform:
   m_ObjectHideFlags: 0

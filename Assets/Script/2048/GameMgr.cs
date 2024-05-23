@@ -56,7 +56,7 @@ public class GameMgr : MonoBehaviour
             currentStage = (Stage)int.Parse(Player.Instance.currentStage);
         }
 
-        bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
+        //bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
         bossParticlePos = new List<Vector2>();
 
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();

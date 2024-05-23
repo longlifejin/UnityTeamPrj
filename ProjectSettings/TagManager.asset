@@ -22,6 +22,8 @@ TagManager:
   - stage8
   - lock
   - stageInfo
+  - BattleMgr
+  - GameMgr
   layers:
   - Default
   - TransparentFX

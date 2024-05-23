@@ -44,8 +44,8 @@ public class BattleMgr : MonoBehaviour
     public ParticleSystem[] bossSpecialAttackParticles;
     public AudioClip[] bossSpecialAttackAudioes;
 
-    private Vector3 playerPos;
-    private Vector3 bossPos;
+    public Vector3 playerPos;
+    public Vector3 bossPos;
 
 
     public void Start()
@@ -57,6 +57,7 @@ public class BattleMgr : MonoBehaviour
             Destroy(bossPrefab);
         }
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
+        bossPrefab.AddComponent<EffectSystem>();
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
 
         playerPos = new Vector3(-1.3f, 0f, 0f);
@@ -183,6 +184,7 @@ public class BattleMgr : MonoBehaviour
             else
             {
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+                //BossAttackPlay();
             }
             bossSpecialAttack = false;
             playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
@@ -225,8 +227,6 @@ public class BattleMgr : MonoBehaviour
         {
             return;
         }
-
-        //왜 이거 호출을 안할까?
         gameMgr.BattleOver();
     }
 
@@ -270,9 +270,30 @@ public class BattleMgr : MonoBehaviour
         //StageSelect.Instance.SetButtons();
     }
 
+    public void BossAttackPlay()
+    {
+        bossAttackParticles[(int)gameMgr.currentStage - 3001].transform.position = playerPos;
+        bossAttackParticles[(int)gameMgr.currentStage - 3001].Play();
+        StartCoroutine(StopBossParticle(2f));
+    }
+
+    private IEnumerator StopBossParticle(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        bossAttackParticles[(int)gameMgr.currentStage - 3001].Stop();
+    }
+
+    private void playerAttackParticlePlay()
+    {
+
+    }
+
     //private IEnumerator CallSetButtons()
     //{
     //    yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Stagebackground");
     //    StageSelect.Instance.SetButtons();
     //}
+
+
 }
