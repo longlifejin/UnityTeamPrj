@@ -82,9 +82,9 @@ public class BattleMgr : MonoBehaviour
         bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
 
-        Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp;
+        Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
         playerOriginHp = Player.Instance.hp;
-        Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk;
+        Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
         Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         DataTableIds.stageID = ((int)gameMgr.currentStage).ToString();

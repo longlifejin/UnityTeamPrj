@@ -68,7 +68,7 @@ public class Store : MonoBehaviour
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
 
-            Player.Instance.atk += itemData.Value;
+            Player.Instance.GainedAtk += itemData.Value;
 
             if (currentAtkIndex < attackItemIds.Count - 1)
             {
@@ -99,7 +99,7 @@ public class Store : MonoBehaviour
         {
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
-            Player.Instance.hp += itemData.Value;
+            Player.Instance.GainedHp += itemData.Value;
 
             if (currentHpIndex < hpItemIds.Count - 1)
             {
