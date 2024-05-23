@@ -44,8 +44,12 @@ public class BattleMgr : MonoBehaviour
     public ParticleSystem[] bossSpecialAttackParticles;
     public AudioClip[] bossSpecialAttackAudioes;
 
+    public ParticleSystem[] playerChargingParticles;
+    public AudioClip[] playerChargingAudioes;
+
     public ParticleSystem[] playerAttackParticles;
     public AudioClip[] playerAttackAudioes;
+
 
     public Vector3 playerPos;
     public Vector3 bossPos;
@@ -163,12 +167,12 @@ public class BattleMgr : MonoBehaviour
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= Player.Instance.atk * gameMgr.maxValue;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -189,18 +193,17 @@ public class BattleMgr : MonoBehaviour
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
             }
             bossSpecialAttack = false;
-            playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
-            yield return new WaitForSeconds(1.5f);
-
+            //playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
+            yield return new WaitForSeconds(0.5f);
             playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
 
             Player.Instance.hp -= boss.atk * gameMgr.filledGridCount; 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
             CheckHealth();
             Debug.Log("Player HP : " + Player.Instance.hp);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
     

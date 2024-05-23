@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class EffectSystem : MonoBehaviour
     public GameMgr gameMgr;
 
     ParticleSystem bossParticle;
-    ParticleSystem playerParticle;
+    ParticleSystem[] playerParticle = new ParticleSystem[2];
 
 
     private void Awake()
@@ -41,10 +42,10 @@ public class EffectSystem : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         bossParticle.Stop();
-        Destroy(bossParticle);
+        Destroy(bossParticle.gameObject);
     }
 
-    public void PlayerAttackPlay()
+    public void PlayerChargingPlay()
     {
         int value = gameMgr.maxValue;
         int index = 0;
@@ -78,18 +79,59 @@ public class EffectSystem : MonoBehaviour
 
         for(int i = 0; i < count; ++i)
         {
-            playerParticle = Instantiate(battleMgr.playerAttackParticles[index+i], battleMgr.battleMap.transform);
-            playerParticle.transform.localPosition = battleMgr.bossPos;
-            playerParticle.Play();
-            StartCoroutine(StopPlayer(2f));
+            playerParticle[i] = Instantiate(battleMgr.playerChargingParticles[index+i], battleMgr.battleMap.transform);
+            Vector3 pos = new Vector3(-1.53f, 1.75f, -0.3f);
+            playerParticle[i].transform.localPosition = pos;
+            playerParticle[i].Play();
         }
     }
 
-    private IEnumerator StopPlayer(float delay)
+    public void PlayerAttackPlay()
+    {
+        foreach(var particle in playerParticle)
+        {
+            if(particle != null)
+                particle.Stop();
+        }
+
+        int value = gameMgr.maxValue;
+        int index = 0;
+
+        if (value <= 16)
+        {
+            index = 0;
+        }
+        else if (value == 32)
+        {
+            index = 1;
+        }
+        else if (value == 64)
+        {
+            index = 2;
+        }
+        else if (value == 128)
+        {
+            index = 3;
+        }
+        else if (value == 256)
+        {
+            index = 5;
+        }
+
+        playerParticle[1] = Instantiate(battleMgr.playerAttackParticles[index], battleMgr.battleMap.transform);
+        
+        Vector3 pos = new Vector3(1.1f,0.5f,-0.5f);
+        playerParticle[1].transform.localPosition = pos;
+        playerParticle[1].Play();
+        StartCoroutine(StopPlayerPlay(1.5f, 1));
+
+    }
+
+    private IEnumerator StopPlayerPlay(float delay, int index)
     {
         yield return new WaitForSeconds(delay);
 
-        playerParticle.Stop();
-        Destroy(playerParticle);
+        playerParticle[index].Stop();
+        Destroy(playerParticle[index].gameObject);
     }
 }

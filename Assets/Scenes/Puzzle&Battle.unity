@@ -5222,8 +5222,32 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 938dcba4fdd93bd4898e7b524ce1606a, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: 4793780d1eb3c9149bbda8a3d4d3df49, type: 3}
-  playerAttackParticles: []
-  playerAttackAudioes: []
+  playerChargingParticles:
+  - {fileID: 198268702260891104, guid: 614ff6000abfeb947991ba62665d0281, type: 3}
+  - {fileID: 198268702260891104, guid: 614ff6000abfeb947991ba62665d0281, type: 3}
+  - {fileID: 250511867138393966, guid: 6637ddd9f5fde8f4198cceb175fe2345, type: 3}
+  - {fileID: 250511867138393966, guid: 6637ddd9f5fde8f4198cceb175fe2345, type: 3}
+  - {fileID: 4442060289081832930, guid: 34df0162e35622c42b35f8bbd41a5298, type: 3}
+  - {fileID: 250511867138393966, guid: 6637ddd9f5fde8f4198cceb175fe2345, type: 3}
+  - {fileID: 1889743066747688984, guid: 41503e5db06023b46873ae2eb41ca3b7, type: 3}
+  playerChargingAudioes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerAttackParticles:
+  - {fileID: 198472046996112406, guid: 97786ae8e944f4c47953c0d63ca0293e, type: 3}
+  - {fileID: 7492493242934495992, guid: 0cba2c4c51fac4f4c8cf0ceb5b8e2689, type: 3}
+  - {fileID: 5377148055180459308, guid: 8552d32b513b77347afa9c6a68fcc6ec, type: 3}
+  - {fileID: 198300217198752340, guid: 848fa759b9145764d8a5a8fbf331237c, type: 3}
+  - {fileID: 461605289283535234, guid: 46660d7c20f9b264084e19daa4b93b1e, type: 3}
+  playerAttackAudioes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playerPos: {x: 0, y: 0, z: 0}
   bossPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1291009203
