@@ -130,18 +130,18 @@ public class TileGrid : MonoBehaviour
         return maxGridPos;
     }
 
-    public List<Vector2> GetFilledGridPos()
-    {
-        List<Vector2> filledGridPoses = new List<Vector2>();
-        for(int i = 0; i < cells.Length; ++i)
-        {
-            if (cells[i].Occupied)
-            {
-                filledGridPoses.Add(cells[i].gameObject.GetComponent<RectTransform>().position);
-            }
-        }
-        return filledGridPoses;
-    }
+    //public List<Vector2> GetFilledGridPos()
+    //{
+    //    List<Vector2> filledGridPoses = new List<Vector2>();
+    //    for(int i = 0; i < cells.Length; ++i)
+    //    {
+    //        if (cells[i].Occupied)
+    //        {
+    //            filledGridPoses.Add(cells[i].gameObject.GetComponent<RectTransform>().position);
+    //        }
+    //    }
+    //    return filledGridPoses;
+    //}
 
     public List<Vector2> GetfilledGridPos()
     {

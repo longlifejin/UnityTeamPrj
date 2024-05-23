@@ -17,7 +17,7 @@ public class TileBoard : MonoBehaviour
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    private float limitTime = 10f;
+    public float limitTime = 10f;
     private float timer;
 
     public Image timeBar;
