@@ -4869,7 +4869,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
   isGridFull: 0
-  limitTime: 10
+  limitTime: 30
   timeBar: {fileID: 41981602}
   puzzleStartButton: {fileID: 1265884936}
   gameManager: {fileID: 27402486}
