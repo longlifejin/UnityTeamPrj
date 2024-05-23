@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class EffectSystem : MonoBehaviour
@@ -11,6 +12,13 @@ public class EffectSystem : MonoBehaviour
     ParticleSystem bossParticle;
     ParticleSystem[] playerParticle = new ParticleSystem[2];
 
+    private AudioSource playerAudioSource;
+    private AudioSource bossAudioSource;
+    private AudioClip playerChargingAudioClip;
+    private AudioClip playerAttackAudioClip;
+    private AudioClip bossAttackAudioClip;
+    private AudioClip bossSpecialAttackAudioClip;
+
 
     private void Awake()
     {
@@ -19,12 +27,21 @@ public class EffectSystem : MonoBehaviour
         
         GameObject battleManager = GameObject.FindWithTag("BattleMgr");
         battleMgr = battleManager.GetComponent<BattleMgr>();
+
+        int stage = (int)gameMgr.currentStage - 3001;
+
+        playerAudioSource = battleMgr.playerAudioSource;
+
     }
     public void BossAttackPlay()
     {
         bossParticle = Instantiate(battleMgr.bossAttackParticles[(int)gameMgr.currentStage - 3001], battleMgr.battleMap.transform);
         bossParticle.transform.localPosition = battleMgr.playerPos;
         bossParticle.Play();
+
+        bossAudioSource = battleMgr.bossAudioSource;
+        bossAttackAudioClip = battleMgr.bossAttackAudioes[(int)gameMgr.currentStage - 3001];
+        bossAudioSource.PlayOneShot(bossAttackAudioClip);
 
         StartCoroutine(StopBossPlay(2f));
     }
@@ -33,6 +50,8 @@ public class EffectSystem : MonoBehaviour
         bossParticle = Instantiate(battleMgr.bossSpecialAttackParticles[(int)gameMgr.currentStage - 3001], battleMgr.battleMap.transform);
         bossParticle.transform.localPosition = battleMgr.playerPos;
         bossParticle.Play();
+        bossSpecialAttackAudioClip = battleMgr.bossSpecialAttackAudioes[(int)gameMgr.currentStage - 3001];
+        bossAudioSource.PlayOneShot(bossSpecialAttackAudioClip);
 
         StartCoroutine(StopBossPlay(2f));
     }
@@ -47,6 +66,11 @@ public class EffectSystem : MonoBehaviour
 
     public void PlayerChargingPlay()
     {
+        playerChargingAudioClip = battleMgr.playerChargingAudioes[(int)gameMgr.currentStage - 3001];
+        playerAudioSource.clip = playerChargingAudioClip;
+        playerAudioSource.loop = true;
+        playerAudioSource.Play();
+
         int value = gameMgr.maxValue;
         int index = 0;
         int count = 1;
@@ -88,7 +112,12 @@ public class EffectSystem : MonoBehaviour
 
     public void PlayerAttackPlay()
     {
-        foreach(var particle in playerParticle)
+        playerAudioSource.Stop();
+        playerAudioSource.loop = false;
+
+        playerAttackAudioClip = battleMgr.playerAttackAudioes[(int)gameMgr.currentStage - 3001];
+
+        foreach (var particle in playerParticle)
         {
             if(particle != null)
                 particle.Stop();
@@ -122,6 +151,8 @@ public class EffectSystem : MonoBehaviour
         
         Vector3 pos = new Vector3(1.1f,0.5f,-0.5f);
         playerParticle[1].transform.localPosition = pos;
+
+        playerAudioSource.PlayOneShot(playerAttackAudioClip);
         playerParticle[1].Play();
         StartCoroutine(StopPlayerPlay(1.5f, 1));
 

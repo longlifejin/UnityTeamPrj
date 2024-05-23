@@ -42,12 +42,14 @@ public class BattleMgr : MonoBehaviour
     public AudioClip[] bossAttackAudioes;
     
     public ParticleSystem[] bossSpecialAttackParticles;
+    public AudioSource bossAudioSource;
     public AudioClip[] bossSpecialAttackAudioes;
 
     public ParticleSystem[] playerChargingParticles;
     public AudioClip[] playerChargingAudioes;
 
     public ParticleSystem[] playerAttackParticles;
+    public AudioSource playerAudioSource;
     public AudioClip[] playerAttackAudioes;
 
 
@@ -66,9 +68,11 @@ public class BattleMgr : MonoBehaviour
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
         bossPrefab.AddComponent<EffectSystem>();
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
+        bossPrefab.AddComponent<AudioSource>();
 
         playerPos = new Vector3(-1.3f, 0f, 0f);
         bossPos = bossPrefab.transform.localPosition;
+        bossAudioSource = bossPrefab.GetComponent<AudioSource>();
 
         var bossRot = Quaternion.Euler(0,-130,0);
         bossPrefab.transform.rotation = bossRot;
