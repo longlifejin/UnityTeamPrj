@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 27402488}
   - component: {fileID: 27402487}
   - component: {fileID: 27402489}
+  - component: {fileID: 27402490}
   m_Layer: 0
   m_Name: GameMgr
   m_TagString: GameMgr
@@ -329,6 +330,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &27402490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27402486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7c18620c323414a849913f889acb05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultData: {fileID: 11400000, guid: f9ddd94cce1665c45bd440b4b10d399e, type: 2}
+  _canvasPrefab: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
+  _mainCamera: {fileID: 491233661}
 --- !u!1 &40351836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5461,6 +5477,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0a0f62b38b834d60ae25e935990a757, type: 3}
   - {fileID: 8300000, guid: eb5ab437d26b64721b9c6866c2802d6e, type: 3}
   - {fileID: 8300000, guid: 26e5d602b741c47a597d12aa2eac2b34, type: 3}
+  playerfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
+  bossfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
   playerPos: {x: 0, y: 0, z: 0}
   bossPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1291009203

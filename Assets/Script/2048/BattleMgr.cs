@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class BattleMgr : MonoBehaviour
 {
@@ -56,6 +58,9 @@ public class BattleMgr : MonoBehaviour
     public AudioSource playerAudioSource;
     public AudioClip[] playerAttackAudioes;
 
+    public GameObject playerfloatingDamage;
+    public GameObject bossfloatingDamage;
+
 
     public Vector3 playerPos;
     public Vector3 bossPos;
@@ -74,6 +79,7 @@ public class BattleMgr : MonoBehaviour
         }
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
         bossPrefab.AddComponent<EffectSystem>();
+        bossPrefab.AddComponent<Enemy>();
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
         bossPrefab.AddComponent<AudioSource>();
 
@@ -178,6 +184,10 @@ public class BattleMgr : MonoBehaviour
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
             boss.hp -= Player.Instance.atk * gameMgr.maxValue;
+            Vector3 pos = new Vector3(1.2f, 2f, -0.5f);
+            ShowDamage(Player.Instance.atk * gameMgr.maxValue, pos);
+
+
             yield return new WaitForSeconds(1f);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
@@ -204,11 +214,12 @@ public class BattleMgr : MonoBehaviour
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
             }
             bossSpecialAttack = false;
-            //playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             yield return new WaitForSeconds(0.5f);
             playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
 
-            Player.Instance.hp -= boss.atk * gameMgr.filledGridCount; 
+            Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
+            Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
+            ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
             yield return new WaitForSeconds(1f);
 
             playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
@@ -253,6 +264,22 @@ public class BattleMgr : MonoBehaviour
             Debug.Log("Go Next Round");
             gameMgr.StartNextRound();
         }
+    }
+    public void ShowDamage(int damage, Vector3 position)
+    {
+        var floatingText = Instantiate(playerfloatingDamage, battleMap.transform);
+       
+        floatingText.transform.localPosition = position;
+        var text = floatingText.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = damage.ToString();
+
+        StartCoroutine(RemoveDamageText(floatingText));
+    }
+
+    private IEnumerator RemoveDamageText(GameObject textObject)
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(textObject);
     }
 
     public void OnClickQuit()
