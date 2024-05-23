@@ -45,6 +45,11 @@ public class GameMgr : MonoBehaviour
 
     public Stage currentStage;
 
+    private AudioSource audioSource;
+    public AudioClip clearSound;
+    public AudioClip defeatSound;
+
+
     private void Start()
     {
         if(Player.Instance.currentStage == null)
@@ -56,6 +61,7 @@ public class GameMgr : MonoBehaviour
             currentStage = (Stage)int.Parse(Player.Instance.currentStage);
         }
 
+        audioSource = GetComponent<AudioSource>();
         //bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
         bossParticlePos = new List<Vector2>();
 
@@ -110,11 +116,13 @@ public class GameMgr : MonoBehaviour
         if (isPlayerDie)
         {
             popUpDefeat.gameObject.SetActive(true);
+            audioSource.PlayOneShot(defeatSound);
         }
 
         if (isBattleStageClear)
         {
             popUpVictory.gameObject.SetActive(true);
+            audioSource.PlayOneShot(clearSound);
             victoryGoldText.text = $"{battleMgr.gainedGold}";
 
             currentStage += 1;
@@ -134,6 +142,7 @@ public class GameMgr : MonoBehaviour
         {
             puzzleMgr.NewGame();
             battleMgr.Start();
+            audioSource.Stop();
         }
 
         isPlayerDie = false;
