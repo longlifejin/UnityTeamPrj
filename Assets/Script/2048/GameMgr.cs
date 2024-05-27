@@ -44,8 +44,8 @@ public class GameMgr : MonoBehaviour
     public Vector2 playerParticlePos;
     public List<Vector2> bossParticlePos;
 
-    public Vector2 testParticlePos;
-    public ParticleSystem testParticle;
+    public Vector2 particularParticlePos;
+    public ParticleSystem particularParticle;
 
     public RectTransform board;
 

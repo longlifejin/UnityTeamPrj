@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.ParticleSystem;
 
 public class TileBoard : MonoBehaviour
 {
@@ -33,10 +34,16 @@ public class TileBoard : MonoBehaviour
     public Animator playerAnimator;
     public Animator bossAnimator;
 
+    private List<ParticleSystem> activeParticularParticles;
+    private List<GameObject> activeParticleImages;
+
+    public GameObject framePrefab;
+
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
+        activeParticularParticles = new List<ParticleSystem>();
 
         specialPos = new List<Vector2Int>
         {
@@ -64,7 +71,7 @@ public class TileBoard : MonoBehaviour
     private void Start()
     {
         timer = limitTime;
-
+        activeParticleImages = new List<GameObject>();
         
     }
 
@@ -144,6 +151,15 @@ public class TileBoard : MonoBehaviour
 
     public void ResetPuzzle()
     {
+        if (activeParticleImages != null)
+        {
+            foreach (var image in activeParticleImages)
+            {
+                Destroy(image);
+            }
+            activeParticleImages.Clear();
+        }
+
         gameMgr.isTimeOver = false;
         gameMgr.isPuzzleOver = false;
         gameMgr.isGridFull = false;
@@ -158,6 +174,18 @@ public class TileBoard : MonoBehaviour
         puzzleStartButton.enabled = true;
 
         UpdateSpeicalPos();
+        foreach (var pos in specialPos)
+        {
+            //gameMgr.particularParticlePos = CoordinatesToPos(pos);
+            //gameMgr.particularParticle.transform.position = gameMgr.particularParticlePos;
+            //gameMgr.particularParticle.Play();
+
+            GameObject instance = Instantiate(framePrefab, gameObject.transform);
+            instance.transform.position = CoordinatesToPos(pos);
+            activeParticleImages.Add(instance);
+            //instance.Play();
+            //activeParticularParticles.Add(instance);
+        }
     }
 
     private void TouchEvents()
@@ -266,10 +294,8 @@ public class TileBoard : MonoBehaviour
             //TO-DO : 게임 오버 처리하기
         }
         gameMgr.maxValue = grid.GetMaxGridValue();
-        Debug.Log(CoordinatesToPos(new Vector2Int(0, 0)));
-        gameMgr.testParticlePos = CoordinatesToPos(new Vector2Int(0, 0));
-        gameMgr.testParticle.transform.position = gameMgr.testParticlePos;
-        gameMgr.testParticle.Play();
+        
+        
     }
 
     private bool MoveTile(Tile tile, Vector2Int direction)

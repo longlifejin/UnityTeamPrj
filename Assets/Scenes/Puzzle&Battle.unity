@@ -214,8 +214,8 @@ MonoBehaviour:
   bossParticle: {fileID: 317954969}
   playerParticlePos: {x: 0, y: 0}
   bossParticlePos: []
-  testParticlePos: {x: 0, y: 0}
-  testParticle: {fileID: 317954969}
+  particularParticlePos: {x: 0, y: 0}
+  particularParticle: {fileID: 868038289}
   board: {fileID: 997205596}
   currentStage: 0
   audioSource: {fileID: 0}
@@ -4126,6 +4126,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4638536802293286, guid: 98958d79521880540984f3838adbee94, type: 3}
   m_PrefabInstance: {fileID: 868038286}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &868038289 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198312184567787930, guid: 98958d79521880540984f3838adbee94, type: 3}
+  m_PrefabInstance: {fileID: 868038286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &893719379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,6 +4959,7 @@ MonoBehaviour:
   gameManager: {fileID: 27402486}
   playerAnimator: {fileID: 791320295}
   bossAnimator: {fileID: 665236971}
+  framePrefab: {fileID: 855350098398943213, guid: e191ca5cb989cc74d916dc07a0375fd4, type: 3}
 --- !u!1 &1029602668
 GameObject:
   m_ObjectHideFlags: 0
