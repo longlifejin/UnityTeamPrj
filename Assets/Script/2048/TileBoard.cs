@@ -25,8 +25,8 @@ public class TileBoard : MonoBehaviour
 
     public Image timeBar;
 
-    public Button puzzleStartButton; 
-    
+    public Button puzzleStartButton;
+
     public GameObject gameManager;
     private GameMgr gameMgr;
 
@@ -44,6 +44,14 @@ public class TileBoard : MonoBehaviour
             new Vector2Int(1, 0),
             new Vector2Int(2, 0),
             new Vector2Int(3, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(3, 1),
+            new Vector2Int(0, 2),
+            new Vector2Int(3, 2),
+            new Vector2Int(0, 3),
+            new Vector2Int(1, 3),
+            new Vector2Int(2, 3),
+            new Vector2Int(3, 3),
         };
 
         tiles = new List<Tile>(16);
@@ -56,16 +64,18 @@ public class TileBoard : MonoBehaviour
     private void Start()
     {
         timer = limitTime;
+
+        
     }
 
     public void ClearBoard()
     {
-        foreach (var cell in grid.cells) 
+        foreach (var cell in grid.cells)
         {
             cell.tile = null;
         }
 
-        foreach (var tile in tiles) 
+        foreach (var tile in tiles)
         {
             Destroy(tile.gameObject);
         }
@@ -88,7 +98,7 @@ public class TileBoard : MonoBehaviour
             timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
             puzzleStartButton.enabled = false;
-            
+
             TouchEvents();
 
 
@@ -119,7 +129,7 @@ public class TileBoard : MonoBehaviour
         //    gameMgr.isPuzzleOver = true;
         //    timer = limitTime;
         //}
-        else if(isGridFull)
+        else if (isGridFull)
         {
             gameMgr.playerParticlePos = grid.GetMaxGridPos();
             gameMgr.bossParticlePos = grid.GetfilledGridPos();
@@ -146,6 +156,8 @@ public class TileBoard : MonoBehaviour
 
         gameStart = false;
         puzzleStartButton.enabled = true;
+
+        UpdateSpeicalPos();
     }
 
     private void TouchEvents()
@@ -220,7 +232,7 @@ public class TileBoard : MonoBehaviour
 
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
-        
+
 
         bool changed = false;
 
@@ -237,12 +249,12 @@ public class TileBoard : MonoBehaviour
             }
         }
 
-        if(IsTile16AtPosition())
+        if (IsTile16AtPosition())
         {
             gameMgr.is16Value = true;
         }
 
-        if (changed) 
+        if (changed)
         {
             StartCoroutine(WaitForChanges());
         }
@@ -312,7 +324,7 @@ public class TileBoard : MonoBehaviour
     {
         for (int i = 0; i < tileStates.Length; i++)
         {
-            if (state == tileStates[i]) 
+            if (state == tileStates[i])
             {
                 return i;
             }
@@ -329,11 +341,13 @@ public class TileBoard : MonoBehaviour
 
         waiting = false;
 
-        foreach (var tile in tiles) {
+        foreach (var tile in tiles)
+        {
             tile.locked = false;
         }
 
-        if (tiles.Count != grid.Size) {
+        if (tiles.Count != grid.Size)
+        {
             CreateTile();
         }
 
@@ -344,7 +358,8 @@ public class TileBoard : MonoBehaviour
 
     public bool CheckForGameOver()
     {
-        if (tiles.Count != grid.Size) {
+        if (tiles.Count != grid.Size)
+        {
             return false;
         }
 
@@ -355,19 +370,23 @@ public class TileBoard : MonoBehaviour
             TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
             TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
 
-            if (up != null && CanMerge(tile, up.tile)) {
+            if (up != null && CanMerge(tile, up.tile))
+            {
                 return false;
             }
 
-            if (down != null && CanMerge(tile, down.tile)) {
+            if (down != null && CanMerge(tile, down.tile))
+            {
                 return false;
             }
 
-            if (left != null && CanMerge(tile, left.tile)) {
+            if (left != null && CanMerge(tile, left.tile))
+            {
                 return false;
             }
 
-            if (right != null && CanMerge(tile, right.tile)) {
+            if (right != null && CanMerge(tile, right.tile))
+            {
                 return false;
             }
         }
@@ -386,10 +405,6 @@ public class TileBoard : MonoBehaviour
 
     public bool IsTile16AtPosition()
     {
-        //TileCell cell = grid.Get16ValueTile();
-        //if (cell == null) 
-        //    return false;
-
         foreach (var tile in tiles)
         {
             if (specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
@@ -412,5 +427,110 @@ public class TileBoard : MonoBehaviour
             return cell.transform.position;
         }
         return Vector3.zero;
+    }
+
+    private void UpdateSpeicalPos()
+    {
+        switch (gameMgr.currentStage)
+        {
+            case Stage.first:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                new Vector2Int(0, 0),
+                new Vector2Int(1, 0),
+                new Vector2Int(2, 0),
+                new Vector2Int(3, 0),
+                new Vector2Int(0, 1),
+                new Vector2Int(3, 1),
+                new Vector2Int(0, 2),
+                new Vector2Int(3, 2),
+                new Vector2Int(0, 3),
+                new Vector2Int(1, 3),
+                new Vector2Int(2, 3),
+                new Vector2Int(3, 3),
+        };
+                break;
+            case Stage.second:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                new Vector2Int(1, 0),
+                new Vector2Int(2, 0),
+                new Vector2Int(0, 1),
+                new Vector2Int(3, 1),
+                new Vector2Int(0, 2),
+                new Vector2Int(3, 2),
+                new Vector2Int(1, 3),
+                new Vector2Int(2, 3),
+                };
+                break;
+            case Stage.third:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                     new Vector2Int(0, 0),
+            new Vector2Int(1, 0),
+            new Vector2Int(3, 0),
+            new Vector2Int(3, 1),
+            new Vector2Int(0, 2),
+            new Vector2Int(0, 3),
+            new Vector2Int(2, 3),
+            new Vector2Int(3, 3),
+                };
+                break;
+            case Stage.fourth:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                     new Vector2Int(0, 0),
+            new Vector2Int(2, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(2, 1),
+            new Vector2Int(1, 2),
+            new Vector2Int(3, 2),
+            new Vector2Int(1, 3),
+            new Vector2Int(3, 3),
+                };
+                break;
+            case Stage.fifth:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                    new Vector2Int(0, 0),
+            new Vector2Int(3, 0),
+            new Vector2Int(0, 3),
+            new Vector2Int(3, 3),
+                };
+                break;
+            case Stage.sixth:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                    new Vector2Int(0, 2),
+            new Vector2Int(0, 1),
+            new Vector2Int(3, 2),
+            new Vector2Int(1, 3),
+                };
+                break;
+            case Stage.seventh:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                    new Vector2Int(1, 0),
+            new Vector2Int(3, 1),
+            new Vector2Int(1, 2),
+                };
+                break;
+            case Stage.eightth:
+                specialPos.Clear();
+                specialPos = new List<Vector2Int>
+                {
+                    new Vector2Int(1, 1),
+            new Vector2Int(2, 2),
+                };
+                break;
+
+        }
     }
 }

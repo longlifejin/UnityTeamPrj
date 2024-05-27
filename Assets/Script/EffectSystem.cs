@@ -175,7 +175,10 @@ public class EffectSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        playerParticle[index].Stop();
-        Destroy(playerParticle[index].gameObject);
+        if (playerParticle[index] != null)
+        {
+            playerParticle[index].Stop();
+            Destroy(playerParticle[index].gameObject);
+        }
     }
 }
