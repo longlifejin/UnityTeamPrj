@@ -14,6 +14,17 @@ public class EntranceScene : MonoBehaviour
         tutorialPopUp.SetActive(false);
     }
 
+    // 테스트용 메소드
+    public void Load()
+    {
+        SaveLoadSystem.Load();
+    }
+
+    public void Save()
+    {
+        SaveLoadSystem.Save();
+    }
+
     public void OnClickGameStart()
     {
         SceneManager.LoadScene("Stagebackground");

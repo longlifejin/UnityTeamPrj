@@ -62,6 +62,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        //if(!SaveLoadSystem.Load())
+        //{
+        //    SaveLoadSystem.Load();
+        //}
+
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -77,6 +82,5 @@ public class Player : MonoBehaviour
         {
             stageClear.Add(false);
         }
-        
     }
 }
