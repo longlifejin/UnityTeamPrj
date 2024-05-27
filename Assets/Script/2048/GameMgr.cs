@@ -134,6 +134,7 @@ public class GameMgr : MonoBehaviour
             Player.Instance.stageClear[(int)currentStage-3001] = true;
 
         }
+        SaveLoadSystem.Save();
     }
 
     public void StartNextRound()
