@@ -17,12 +17,7 @@ public class EntranceScene : MonoBehaviour
     // 테스트용 메소드
     public void Load()
     {
-        SaveLoadSystem.Load();
-    }
-
-    public void Save()
-    {
-        SaveLoadSystem.Save();
+        
     }
 
     public void OnClickGameStart()
@@ -42,10 +37,10 @@ public class EntranceScene : MonoBehaviour
 
     public void OnClickQuitGame()
     {
+        SaveLoadSystem.Save();
         Application.Quit();
 
 #if UNITY_EDITOR
-        // 유니티 에디터에서 게임 플레이를 종료합니다
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }

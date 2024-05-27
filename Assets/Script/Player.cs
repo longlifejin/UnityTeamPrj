@@ -62,10 +62,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        //if(!SaveLoadSystem.Load())
-        //{
-        //    SaveLoadSystem.Load();
-        //}
 
         if (Instance != null)
         {
@@ -77,10 +73,15 @@ public class Player : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        stageClear.Add(true);
-        for (int i = 1; i < 8; ++i)
+        SaveLoadSystem.Load();
+        if(SaveLoadSystem.CurrSaveData == null)
         {
-            stageClear.Add(false);
+            stageClear.Add(true);
+            for (int i = 1; i < 8; ++i)
+            {
+                stageClear.Add(false);
+            }
         }
+        
     }
 }
