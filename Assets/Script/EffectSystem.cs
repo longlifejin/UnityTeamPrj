@@ -49,6 +49,7 @@ public class EffectSystem : MonoBehaviour
         bossParticle = Instantiate(battleMgr.bossSpecialAttackParticles[(int)gameMgr.currentStage - 3001], battleMgr.battleMap.transform);
         bossParticle.transform.localPosition = battleMgr.playerPos;
         bossParticle.Play();
+        bossAudioSource = battleMgr.bossAudioSource;
         bossSpecialAttackAudioClip = battleMgr.bossSpecialAttackAudioes[(int)gameMgr.currentStage - 3001];
         bossAudioSource.PlayOneShot(bossSpecialAttackAudioClip);
 

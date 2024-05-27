@@ -18,6 +18,10 @@ public class GameMgr : MonoBehaviour
     public bool isBattleStageClear = false;
     public bool is16Value = false;
 
+    public bool isReverseSAttack = false;
+    public bool isStopAttack = false;
+    public bool isSecreteAttack = false;
+
 
     public int filledGridCount;
     public int maxValue;

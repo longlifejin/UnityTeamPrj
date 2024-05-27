@@ -39,6 +39,8 @@ public class TileBoard : MonoBehaviour
 
     public GameObject framePrefab;
 
+    public GameObject secretePanel;
+
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -72,7 +74,7 @@ public class TileBoard : MonoBehaviour
     {
         timer = limitTime;
         activeParticleImages = new List<GameObject>();
-        
+        secretePanel.SetActive(false);
     }
 
     public void ClearBoard()
@@ -106,7 +108,27 @@ public class TileBoard : MonoBehaviour
             timer -= Time.deltaTime;
             puzzleStartButton.enabled = false;
 
-            TouchEvents();
+            if(gameMgr.isReverseSAttack)
+            {
+                ReverseTouchEvents();
+                secretePanel.SetActive(false);
+            }
+            else if(gameMgr.isStopAttack)
+            {
+                secretePanel.SetActive(false);
+
+            }
+            else if(gameMgr.isSecreteAttack)
+            {
+                TouchEvents();
+                secretePanel.SetActive(true);
+            }
+            else
+            {
+                TouchEvents();
+                secretePanel.SetActive(false);
+            }
+
 
 
             //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
@@ -223,7 +245,7 @@ public class TileBoard : MonoBehaviour
         }
     }
 
-    private void SwipedTouchEvents()
+    private void ReverseTouchEvents()
     {
         if (Input.touchCount == 0)
         {

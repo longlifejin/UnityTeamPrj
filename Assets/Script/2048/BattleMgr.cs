@@ -83,22 +83,42 @@ public class BattleMgr : MonoBehaviour
 
     private void BossNormalAttack()
     {
-        Debug.Log("일반 공격");
+        bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
+        playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
+        Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
+        Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
+        ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
+
+        playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
+        CheckHealth();
+
+        gameMgr.isStopAttack = false;
+        gameMgr.isReverseSAttack = false;
+        gameMgr.isSecreteAttack = false;
     }
 
     private void BossStopSwipe()
     {
-        Debug.Log("퍼즐 스와이프 막기");
+        Debug.Log("StopSwipe");
+        gameMgr.isStopAttack = true;
+        gameMgr.isReverseSAttack = false;
+        gameMgr.isSecreteAttack = false;
     }
 
     private void BossReverseSwipe()
     {
-        Debug.Log("퍼즐 스와이프 반대로");
+        Debug.Log("ReverseSwipe");
+        gameMgr.isReverseSAttack = true;
+        gameMgr.isStopAttack = false;
+        gameMgr.isSecreteAttack = false;
     }
 
     private void BossSecretePuzzle()
     {
-        Debug.Log("퍼즐 감추기");
+        Debug.Log("SecretePuzzle");
+        gameMgr.isSecreteAttack = true;
+        gameMgr.isStopAttack = false;
+        gameMgr.isReverseSAttack = false;
     }
 
 
@@ -266,9 +286,9 @@ public class BattleMgr : MonoBehaviour
             //StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
             //yield return new WaitForSeconds(1f);
 
-            //if(bossSpecialAttack)
+            //if (bossSpecialAttack)
             //{
-            //    bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
+                
 
             //}
             //else
@@ -276,18 +296,10 @@ public class BattleMgr : MonoBehaviour
             //    bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
             //}
             //bossSpecialAttack = false;
-
-            //playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
-            //Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
-            //Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
-            //ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
-
-            //playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
-            //CheckHealth();
-            //Debug.Log("Player HP : " + Player.Instance.hp);
+            
             //yield return new WaitForSeconds(0.1f);
 
-            
+
 
             if (currentBossAttackPattern >= 5)
             {
