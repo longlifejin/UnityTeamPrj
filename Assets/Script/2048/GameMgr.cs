@@ -15,6 +15,8 @@ public class GameMgr : MonoBehaviour
     public bool isBossFirst = false;
     public bool isPlayerDie = false;
     public bool isBattleStageClear = false;
+    public bool is16Value = false;
+
 
     public int filledGridCount;
     public int maxValue;
@@ -95,11 +97,16 @@ public class GameMgr : MonoBehaviour
     {
         PuzzleOver();
         DataTableIds.stageID = ((int)currentStage).ToString();
+
+        if(is16Value)
+        {
+            battleMgr.is16Attack = true;
+            is16Value = false;
+        }
     }
 
     private void PuzzleOver()
     {
-
         if (isTimeOver)
         {
             audioSource.PlayOneShot(puzzleEndSound);
@@ -158,7 +165,7 @@ public class GameMgr : MonoBehaviour
     public IEnumerator PlayParticleSystem(ParticleSystem particle)
     {
         particle.Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         particle.Stop();
     }
 
@@ -172,7 +179,7 @@ public class GameMgr : MonoBehaviour
             instance.Play();
             activeParticles.Add(instance);
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         foreach (var instance in activeParticles)
         {

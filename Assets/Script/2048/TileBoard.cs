@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,12 @@ public class TileBoard : MonoBehaviour
     private bool gameStart;
     public bool isGridFull;
 
+    private List<Vector2Int> specialPos;
+
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    public float limitTime = 10f;
+    private float limitTime = 20f;
     private float timer;
 
     public Image timeBar;
@@ -34,6 +37,14 @@ public class TileBoard : MonoBehaviour
     {
         grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
+
+        specialPos = new List<Vector2Int>
+        {
+            new Vector2Int(0, 0),
+            new Vector2Int(1, 0),
+            new Vector2Int(2, 0),
+            new Vector2Int(3, 0),
+        };
 
         tiles = new List<Tile>(16);
         gameStart = false;
@@ -94,6 +105,10 @@ public class TileBoard : MonoBehaviour
             //{
             //    Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
             //}
+
+            //퍼즐 진행되는 동안 16이 나오면 처리할 내용 넣기
+
+
         }
 
         if (timer <= 0f)
@@ -186,18 +201,28 @@ public class TileBoard : MonoBehaviour
             }
         }
 
-        gameMgr.filledGridCount = grid.CountFilledGrid();
-        if(gameMgr.filledGridCount == 16)
+        
+        //if(gameMgr.maxValue == 16)
+        //{
+        //    gameMgr.is16Value = true;
+        //}
+
+        if(IsTile16AtPosition())
         {
-            isGridFull = true;
+            gameMgr.is16Value = true;
         }
-        gameMgr.maxValue = grid.GetMaxGridValue();
-        Debug.Log("MaxGridPos : " + grid.GetMaxGridPos());
 
         if (changed) 
         {
             StartCoroutine(WaitForChanges());
         }
+
+        gameMgr.filledGridCount = grid.CountFilledGrid();
+        if (gameMgr.filledGridCount == 16)
+        {
+            isGridFull = true;
+        }
+        gameMgr.maxValue = grid.GetMaxGridValue();
     }
 
     private bool MoveTile(Tile tile, Vector2Int direction)
@@ -323,5 +348,18 @@ public class TileBoard : MonoBehaviour
         gameMgr.audioSource.PlayOneShot(gameMgr.puzzleStartSound);
     }
 
-   
+    public bool IsTile16AtPosition()
+    {
+        foreach(var tile in tiles)
+        {
+            if(specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
+            {
+                Debug.Log("16Value in special Position");
+                tiles.Remove(tile);
+                Destroy(tile.gameObject);
+                return true;
+            }
+        }
+        return false;
+    }
 }

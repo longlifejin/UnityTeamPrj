@@ -85,4 +85,9 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public int GetNumber()
+    {
+        return state != null ? state.number : 0;
+    }
+
 }

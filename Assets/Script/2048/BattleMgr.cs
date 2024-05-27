@@ -60,6 +60,9 @@ public class BattleMgr : MonoBehaviour
     public GameObject playerfloatingDamage;
     public GameObject bossfloatingDamage;
 
+    public bool is16Attack = false;
+    public bool isBossAttack = false;
+
 
     public Vector3 playerPos;
     public Vector3 bossPos;
@@ -90,8 +93,6 @@ public class BattleMgr : MonoBehaviour
         bossPrefab.transform.rotation = bossRot;
 
         bossAnimator = bossPrefab.GetComponent<Animator>();
-        //bossAnimator.SetTrigger(AnimatorIds.bossIdledAni);
-        //Debug.Log("SetTirgger Idle");
 
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
@@ -133,17 +134,28 @@ public class BattleMgr : MonoBehaviour
 
     private void Update()
     {
-        if (gameMgr.isPlayerFirst && !gameMgr.isBossFirst)
+        //if (gameMgr.isPlayerFirst && !gameMgr.isBossFirst)
+        //{
+        //    StartCoroutine(PlayerFirst());
+        //    gameMgr.isPlayerFirst = false;
+        //}
+
+        //if (gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
+        //{
+        //    StartCoroutine(BossFirst());
+        //    gameMgr.isBossFirst = false;
+        //    bossSpecialAttack = true;
+        //}
+
+        if (gameMgr.is16Value)
         {
-            StartCoroutine(PlayerFirst());
-            gameMgr.isPlayerFirst = false;
+            StartCoroutine(PlayerTurn());
+            gameMgr.is16Value = false;
         }
-        
-        if(gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
+
+        if(isBossAttack)
         {
-            StartCoroutine(BossFirst());
-            gameMgr.isBossFirst = false;
-            bossSpecialAttack = true;
+            StartCoroutine(BossTurn());
         }
     }
 
@@ -178,7 +190,7 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
@@ -186,13 +198,9 @@ public class BattleMgr : MonoBehaviour
             Vector3 pos = new Vector3(1.2f, 2f, -0.5f);
             ShowDamage(Player.Instance.atk * gameMgr.maxValue, pos);
 
-
-            yield return new WaitForSeconds(1f);
-
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
             Debug.Log("Boss HP : " + boss.hp);
-            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -201,7 +209,7 @@ public class BattleMgr : MonoBehaviour
         if (!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             if(bossSpecialAttack)
             {
@@ -213,18 +221,15 @@ public class BattleMgr : MonoBehaviour
                 bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
             }
             bossSpecialAttack = false;
-            yield return new WaitForSeconds(0.5f);
-            playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
 
+            playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
             Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
             Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
             ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
-            yield return new WaitForSeconds(1f);
-
+          
             playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
             CheckHealth();
             Debug.Log("Player HP : " + Player.Instance.hp);
-            yield return new WaitForSeconds(1f);
         }
     }
     
