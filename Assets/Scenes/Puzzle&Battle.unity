@@ -190,12 +190,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPuzzleOver: 0
+  isGameStart: 0
   isTimeOver: 0
   isGridFull: 0
   isPlayerFirst: 0
   isBossFirst: 0
   isPlayerDie: 0
   isBattleStageClear: 0
+  is16Value: 0
   filledGridCount: 0
   maxValue: 0
   puzzleManager: {fileID: 1601929138}
@@ -212,6 +214,8 @@ MonoBehaviour:
   bossParticle: {fileID: 317954969}
   playerParticlePos: {x: 0, y: 0}
   bossParticlePos: []
+  testParticlePos: {x: 0, y: 0}
+  testParticle: {fileID: 317954969}
   board: {fileID: 997205596}
   currentStage: 0
   audioSource: {fileID: 0}
@@ -4945,7 +4949,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
   isGridFull: 0
-  limitTime: 30
   timeBar: {fileID: 1244357467}
   puzzleStartButton: {fileID: 1265884936}
   gameManager: {fileID: 27402486}
@@ -5706,6 +5709,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 26e5d602b741c47a597d12aa2eac2b34, type: 3}
   playerfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
   bossfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
+  is16Attack: 0
+  isBossAttack: 0
   playerPos: {x: 0, y: 0, z: 0}
   bossPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1291009203

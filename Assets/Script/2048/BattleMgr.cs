@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -67,15 +68,41 @@ public class BattleMgr : MonoBehaviour
     float bossAttackInterval = 2f;
 
     int currentBossAttackPattern;
+    private Dictionary<BossSkill, System.Action> bossSkillActions;
 
     public Vector3 playerPos;
     public Vector3 bossPos;
 
-    enum bossSkill
+    public enum BossSkill
     {
-        normal,
-
+        Normal = 1,
+        StopSwipe,
+        ReverseSwipe,
+        SecretePuzzle,
     }
+
+    private void BossNormalAttack()
+    {
+        Debug.Log("일반 공격");
+    }
+
+    private void BossStopSwipe()
+    {
+        Debug.Log("퍼즐 스와이프 막기");
+    }
+
+    private void BossReverseSwipe()
+    {
+        Debug.Log("퍼즐 스와이프 반대로");
+    }
+
+    private void BossSecretePuzzle()
+    {
+        Debug.Log("퍼즐 감추기");
+    }
+
+
+
 
     public void Start()
     {
@@ -130,8 +157,6 @@ public class BattleMgr : MonoBehaviour
         boss.bossPattern[4] = bossTable.Get(bossID).Boss_patternE;
         currentBossAttackPattern = 0;
 
-
-
         battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
         var ground = stageTable.Get(DataTableIds.stageID).GetGround;
         Material groundMaterial = new Material(Shader.Find("Standard"));
@@ -152,6 +177,7 @@ public class BattleMgr : MonoBehaviour
 
         Debug.Log("플레이어 hp : " + Player.Instance.hp);
         Debug.Log("보스 ID : " + bossID);
+        InitBossSkill();
     }
 
     private void Update()
@@ -261,11 +287,14 @@ public class BattleMgr : MonoBehaviour
             //Debug.Log("Player HP : " + Player.Instance.hp);
             //yield return new WaitForSeconds(0.1f);
 
-            if(currentBossAttackPattern >= 5)
+            
+
+            if (currentBossAttackPattern >= 5)
             {
                 currentBossAttackPattern = 0;
             }
-            Debug.Log(boss.bossPattern[currentBossAttackPattern] + "번 스킬 사용");
+            BossSkill skill = (BossSkill)boss.bossPattern[currentBossAttackPattern];
+            bossSkillActions[skill].Invoke();
             ++currentBossAttackPattern;
 
         }
@@ -347,5 +376,16 @@ public class BattleMgr : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Stagebackground");
+    }
+
+    private void InitBossSkill()
+    {
+        bossSkillActions = new Dictionary<BossSkill, System.Action>
+        {
+            { BossSkill.Normal, BossNormalAttack },
+            { BossSkill.StopSwipe, BossStopSwipe },
+            { BossSkill.ReverseSwipe, BossReverseSwipe },
+            { BossSkill.SecretePuzzle, BossSecretePuzzle }
+        };
     }
 }

@@ -88,7 +88,10 @@ public class TileBoard : MonoBehaviour
             timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
             puzzleStartButton.enabled = false;
+            
             TouchEvents();
+
+
             //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
             //{
             //    Move(Vector2Int.up, 0, 1, 1, 1);
@@ -105,10 +108,6 @@ public class TileBoard : MonoBehaviour
             //{
             //    Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
             //}
-
-            //퍼즐 진행되는 동안 16이 나오면 처리할 내용 넣기
-
-
         }
 
         //if (timer <= 0f)
@@ -184,8 +183,45 @@ public class TileBoard : MonoBehaviour
         }
     }
 
+    private void SwipedTouchEvents()
+    {
+        if (Input.touchCount == 0)
+        {
+            return;
+        }
+        if (Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            touchStartPosition = Input.GetTouch(0).position;
+        }
+        if (Input.GetTouch(0).phase != TouchPhase.Ended) return;
+        var swipeDelta = (Input.GetTouch(0).position - touchStartPosition);
+        if (swipeDelta.magnitude < MinSwipeDistance)
+        {
+            return;
+        }
+        swipeDelta.Normalize();
+        if (swipeDelta.y > 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        {
+            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+        }
+        else if (swipeDelta.y < 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        {
+            Move(Vector2Int.up, 0, 1, 1, 1);
+        }
+        else if (swipeDelta.x > 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        {
+            Move(Vector2Int.left, 1, 1, 0, 1);
+        }
+        else if (swipeDelta.x < 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        {
+            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+        }
+    }
+
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
+        
+
         bool changed = false;
 
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
@@ -218,6 +254,10 @@ public class TileBoard : MonoBehaviour
             //TO-DO : 게임 오버 처리하기
         }
         gameMgr.maxValue = grid.GetMaxGridValue();
+        Debug.Log(CoordinatesToPos(new Vector2Int(0, 0)));
+        gameMgr.testParticlePos = CoordinatesToPos(new Vector2Int(0, 0));
+        gameMgr.testParticle.transform.position = gameMgr.testParticlePos;
+        gameMgr.testParticle.Play();
     }
 
     private bool MoveTile(Tile tile, Vector2Int direction)
@@ -362,5 +402,15 @@ public class TileBoard : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Vector3 CoordinatesToPos(Vector2Int coordinate)
+    {
+        TileCell cell = grid.GetCell(coordinate);
+        if (cell != null)
+        {
+            return cell.transform.position;
+        }
+        return Vector3.zero;
     }
 }

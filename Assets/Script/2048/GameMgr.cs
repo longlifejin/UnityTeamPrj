@@ -44,6 +44,9 @@ public class GameMgr : MonoBehaviour
     public Vector2 playerParticlePos;
     public List<Vector2> bossParticlePos;
 
+    public Vector2 testParticlePos;
+    public ParticleSystem testParticle;
+
     public RectTransform board;
 
     public Stage currentStage;
@@ -53,6 +56,8 @@ public class GameMgr : MonoBehaviour
     public AudioClip defeatSound;
     public AudioClip puzzleStartSound;
     public AudioClip puzzleEndSound;
+
+    
 
 
     private void Start()
