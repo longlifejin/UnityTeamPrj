@@ -13,7 +13,12 @@ public class BossData
     public string Boss_Name { get; set; }
     public int Boss_Atk { get; set; }
     public int Boss_Hp { get; set; }
-    public string Boss_Image { get; set; }
+    public int Boss_ATKtime { get; set; }
+    public int Boss_patternA { get; set; }
+    public int Boss_patternB { get; set; }
+    public int Boss_patternC { get; set; }
+    public int Boss_patternD { get; set; }
+    public int Boss_patternE { get; set; }
 
     public string GetName
     {

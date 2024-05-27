@@ -66,6 +66,8 @@ public class BattleMgr : MonoBehaviour
     float timer;
     float bossAttackInterval = 2f;
 
+    int currentBossAttackPattern;
+
     public Vector3 playerPos;
     public Vector3 bossPos;
 
@@ -118,10 +120,17 @@ public class BattleMgr : MonoBehaviour
         boss.hp = bossTable.Get(bossID).Boss_Hp;
         bossOriginHp = boss.hp;
         boss.atk = bossTable.Get(bossID).Boss_Atk;
-        boss.imageId = bossTable.Get(bossID).Boss_Image;
 
-        //데이터 테이블에서 가져오기
-        //boss.interval = bossAttackInterval;
+        bossAttackInterval = bossTable.Get(bossID).Boss_ATKtime;
+
+        boss.bossPattern[0] = bossTable.Get(bossID).Boss_patternA;
+        boss.bossPattern[1] = bossTable.Get(bossID).Boss_patternB;
+        boss.bossPattern[2] = bossTable.Get(bossID).Boss_patternC;
+        boss.bossPattern[3] = bossTable.Get(bossID).Boss_patternD;
+        boss.bossPattern[4] = bossTable.Get(bossID).Boss_patternE;
+        currentBossAttackPattern = 0;
+
+
 
         battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
         var ground = stageTable.Get(DataTableIds.stageID).GetGround;
@@ -166,6 +175,7 @@ public class BattleMgr : MonoBehaviour
            
            is16Attack = false;
         }
+
         if(gameMgr.isGameStart)
         {
             timer -= Time.deltaTime;
@@ -173,8 +183,7 @@ public class BattleMgr : MonoBehaviour
 
         if (timer <= 0f && !gameMgr.isBattleStageClear && gameMgr.isGameStart)
         {
-            
-            StartCoroutine(BossTurn());
+            BossTurn();
             timer = bossAttackInterval;
         }
     }
@@ -224,33 +233,41 @@ public class BattleMgr : MonoBehaviour
         }
     }
 
-    private IEnumerator BossTurn()
+    private void BossTurn()
     {
         if (!gameMgr.isPlayerDie)
         {
             //StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
             //yield return new WaitForSeconds(1f);
 
-            if(bossSpecialAttack)
-            {
-                bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
+            //if(bossSpecialAttack)
+            //{
+            //    bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
 
-            }
-            else
-            {
-                bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-            }
-            bossSpecialAttack = false;
+            //}
+            //else
+            //{
+            //    bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
+            //}
+            //bossSpecialAttack = false;
 
-            playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
-            Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
-            Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
-            ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
-          
-            playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
-            CheckHealth();
-            Debug.Log("Player HP : " + Player.Instance.hp);
-            yield return new WaitForSeconds(0.1f);
+            //playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
+            //Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
+            //Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
+            //ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
+
+            //playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
+            //CheckHealth();
+            //Debug.Log("Player HP : " + Player.Instance.hp);
+            //yield return new WaitForSeconds(0.1f);
+
+            if(currentBossAttackPattern >= 5)
+            {
+                currentBossAttackPattern = 0;
+            }
+            Debug.Log(boss.bossPattern[currentBossAttackPattern] + "번 스킬 사용");
+            ++currentBossAttackPattern;
+
         }
     }
     
