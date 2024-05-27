@@ -61,11 +61,19 @@ public class BattleMgr : MonoBehaviour
     public GameObject bossfloatingDamage;
 
     public bool is16Attack = false;
-    public bool isBossAttack = false;
-
+    public bool isBossAttack = false; 
+    
+    float timer;
+    float bossAttackInterval = 2f;
 
     public Vector3 playerPos;
     public Vector3 bossPos;
+
+    enum bossSkill
+    {
+        normal,
+
+    }
 
     public void Start()
     {
@@ -112,6 +120,9 @@ public class BattleMgr : MonoBehaviour
         boss.atk = bossTable.Get(bossID).Boss_Atk;
         boss.imageId = bossTable.Get(bossID).Boss_Image;
 
+        //데이터 테이블에서 가져오기
+        //boss.interval = bossAttackInterval;
+
         battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
         var ground = stageTable.Get(DataTableIds.stageID).GetGround;
         Material groundMaterial = new Material(Shader.Find("Standard"));
@@ -121,6 +132,8 @@ public class BattleMgr : MonoBehaviour
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         bossHpBar.fillAmount = boss.hp / bossOriginHp;
+
+        timer = bossAttackInterval;
 
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;
@@ -147,50 +160,57 @@ public class BattleMgr : MonoBehaviour
         //    bossSpecialAttack = true;
         //}
 
-        if (gameMgr.is16Value)
+        if (is16Attack)
         {
-            StartCoroutine(PlayerTurn());
-            gameMgr.is16Value = false;
+            PlayerTurn();
+           
+           is16Attack = false;
+        }
+        if(gameMgr.isGameStart)
+        {
+            timer -= Time.deltaTime;
         }
 
-        if(isBossAttack)
+        if (timer <= 0f && !gameMgr.isBattleStageClear && gameMgr.isGameStart)
         {
+            
             StartCoroutine(BossTurn());
+            timer = bossAttackInterval;
         }
     }
 
-    private IEnumerator PlayerFirst()
-    {
-        Debug.Log("PlayerFirst Start");
-        yield return StartCoroutine(PlayerTurn());
-        if(!gameMgr.isBattleStageClear)
-        {
-            yield return StartCoroutine(BossTurn());
-        }
-        if(!gameMgr.isPlayerDie && !gameMgr.isBattleStageClear)
-        {
-            GoNextRound();
-        }
-    }
-    private IEnumerator BossFirst()
-    {
-        Debug.Log("BossFirst Start");
-        boss.atk *= 32;
-        yield return StartCoroutine(BossTurn());
+    //private IEnumerator PlayerFirst()
+    //{
+    //    Debug.Log("PlayerFirst Start");
+    //    yield return StartCoroutine(PlayerTurn());
+    //    if(!gameMgr.isBattleStageClear)
+    //    {
+    //        yield return StartCoroutine(BossTurn());
+    //    }
+    //    if(!gameMgr.isPlayerDie && !gameMgr.isBattleStageClear)
+    //    {
+    //        GoNextRound();
+    //    }
+    //}
+    //private IEnumerator BossFirst()
+    //{
+    //    Debug.Log("BossFirst Start");
+    //    boss.atk *= 32;
+    //    yield return StartCoroutine(BossTurn());
 
-        if (!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
-        {
-            yield return StartCoroutine(PlayerTurn());
-            GoNextRound();
-        }
-    }
+    //    if (!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
+    //    {
+    //        yield return StartCoroutine(PlayerTurn());
+    //        GoNextRound();
+    //    }
+    //}
 
-    private IEnumerator PlayerTurn()
+    private void PlayerTurn()
     {
         if(!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
 
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
@@ -208,8 +228,8 @@ public class BattleMgr : MonoBehaviour
     {
         if (!gameMgr.isPlayerDie)
         {
-            StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
-            yield return new WaitForSeconds(1f);
+            //StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
+            //yield return new WaitForSeconds(1f);
 
             if(bossSpecialAttack)
             {
@@ -230,6 +250,7 @@ public class BattleMgr : MonoBehaviour
             playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
             CheckHealth();
             Debug.Log("Player HP : " + Player.Instance.hp);
+            yield return new WaitForSeconds(0.1f);
         }
     }
     
@@ -243,16 +264,17 @@ public class BattleMgr : MonoBehaviour
 
             bossAnimator.SetTrigger(AnimatorIds.bossVictoryAni);
 
-            StopAllCoroutines();
+            //StopAllCoroutines();
         }
         else if (boss.hp <= 0)
         {
             bossAnimator.SetTrigger(AnimatorIds.bossDiedAni);
+            playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             gameMgr.isBattleStageClear = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
             Player.Instance.gold += gainedGold;
 
-            StopAllCoroutines();
+           // StopAllCoroutines();
         }
         else
         {

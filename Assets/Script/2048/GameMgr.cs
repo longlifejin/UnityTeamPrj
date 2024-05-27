@@ -9,6 +9,7 @@ public class GameMgr : MonoBehaviour
 {
     public bool isPuzzleOver = false;
 
+    public bool isGameStart = false;
     public bool isTimeOver = false;
     public bool isGridFull = false;
     public bool isPlayerFirst = false;
@@ -64,6 +65,7 @@ public class GameMgr : MonoBehaviour
         {
             currentStage = (Stage)int.Parse(Player.Instance.currentStage);
         }
+        isGameStart = false;
 
         audioSource = GetComponent<AudioSource>();
         //bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
@@ -100,6 +102,7 @@ public class GameMgr : MonoBehaviour
 
         if(is16Value)
         {
+            playerParticle.transform.position = playerParticlePos;
             battleMgr.is16Attack = true;
             is16Value = false;
         }
@@ -118,8 +121,9 @@ public class GameMgr : MonoBehaviour
         if (isGridFull)
         {
             audioSource.PlayOneShot(puzzleEndSound);
+            isPlayerDie = true;
             isGridFull = false;
-            isBossFirst = true;
+            //isBossFirst = true;
         }
     }
 
@@ -157,7 +161,7 @@ public class GameMgr : MonoBehaviour
             battleMgr.Start();
             audioSource.Stop();
         }
-
+        isGameStart = false;
         isPlayerDie = false;
         isBattleStageClear = false;
     }
@@ -194,5 +198,6 @@ public class GameMgr : MonoBehaviour
         battleMgr.Start();
         isPlayerDie = false;
         isBattleStageClear = false;
+        isGameStart = false;
     }
 }

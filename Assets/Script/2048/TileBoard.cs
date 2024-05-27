@@ -111,15 +111,15 @@ public class TileBoard : MonoBehaviour
 
         }
 
-        if (timer <= 0f)
-        {
-            gameMgr.playerParticlePos = grid.GetMaxGridPos();
-            gameMgr.bossParticlePos = grid.GetfilledGridPos();
+        //if (timer <= 0f)
+        //{
+        //    gameMgr.playerParticlePos = grid.GetMaxGridPos();
+        //    gameMgr.bossParticlePos = grid.GetfilledGridPos();
 
-            gameMgr.isTimeOver = true;
-            gameMgr.isPuzzleOver = true;
-            timer = limitTime;
-        }
+        //    gameMgr.isTimeOver = true;
+        //    gameMgr.isPuzzleOver = true;
+        //    timer = limitTime;
+        //}
         else if(isGridFull)
         {
             gameMgr.playerParticlePos = grid.GetMaxGridPos();
@@ -201,12 +201,6 @@ public class TileBoard : MonoBehaviour
             }
         }
 
-        
-        //if(gameMgr.maxValue == 16)
-        //{
-        //    gameMgr.is16Value = true;
-        //}
-
         if(IsTile16AtPosition())
         {
             gameMgr.is16Value = true;
@@ -221,6 +215,7 @@ public class TileBoard : MonoBehaviour
         if (gameMgr.filledGridCount == 16)
         {
             isGridFull = true;
+            //TO-DO : 게임 오버 처리하기
         }
         gameMgr.maxValue = grid.GetMaxGridValue();
     }
@@ -344,17 +339,23 @@ public class TileBoard : MonoBehaviour
     {
         touchStartPosition = Input.GetTouch(0).position;
         gameStart = true;
+        gameMgr.isGameStart = true;
         playerAnimator.SetTrigger(AnimatorIds.playerChargingAni);
         gameMgr.audioSource.PlayOneShot(gameMgr.puzzleStartSound);
     }
 
     public bool IsTile16AtPosition()
     {
-        foreach(var tile in tiles)
+        //TileCell cell = grid.Get16ValueTile();
+        //if (cell == null) 
+        //    return false;
+
+        foreach (var tile in tiles)
         {
-            if(specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
+            if (specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
             {
                 Debug.Log("16Value in special Position");
+                gameMgr.playerParticlePos = tile.cell.transform.position;
                 tiles.Remove(tile);
                 Destroy(tile.gameObject);
                 return true;

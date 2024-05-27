@@ -42,7 +42,7 @@ public class EffectSystem : MonoBehaviour
         bossAttackAudioClip = battleMgr.bossAttackAudioes[(int)gameMgr.currentStage - 3001];
         bossAudioSource.PlayOneShot(bossAttackAudioClip);
 
-        StartCoroutine(StopBossPlay(2f));
+        StartCoroutine(StopBossPlay(1f));
     }
     public void BossSpecialAttackPlay()
     {
@@ -52,15 +52,18 @@ public class EffectSystem : MonoBehaviour
         bossSpecialAttackAudioClip = battleMgr.bossSpecialAttackAudioes[(int)gameMgr.currentStage - 3001];
         bossAudioSource.PlayOneShot(bossSpecialAttackAudioClip);
 
-        StartCoroutine(StopBossPlay(2f));
+        StartCoroutine(StopBossPlay(1f));
     }
 
     private IEnumerator StopBossPlay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        bossParticle.Stop();
-        Destroy(bossParticle.gameObject);
+        if(bossParticle != null)
+        {
+            bossParticle.Stop();
+            Destroy(bossParticle.gameObject);
+        }
+        
     }
 
     public void PlayerChargingPlay()
@@ -106,6 +109,17 @@ public class EffectSystem : MonoBehaviour
             Vector3 pos = new Vector3(-1.53f, 1.75f, -0.3f);
             playerParticle[i].transform.localPosition = pos;
             playerParticle[i].Play();
+        }
+    }
+
+    public void SetBasicState()
+    {
+        playerAudioSource.Stop();
+        playerAudioSource.loop = false;
+        foreach (var particle in playerParticle)
+        {
+            if (particle != null)
+                particle.Stop();
         }
     }
 

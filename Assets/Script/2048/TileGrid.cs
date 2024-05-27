@@ -130,6 +130,21 @@ public class TileGrid : MonoBehaviour
         return maxGridPos;
     }
 
+    public TileCell Get16ValueTile()
+    {
+        Vector2 pos = Vector2.zero;
+
+        for (int i = 0; i < cells.Length; ++i)
+        {
+            if (cells[i].tile.state.number == 16)
+            {
+                return cells[i];
+            }
+        }
+        return null;
+        
+    }
+
     //public List<Vector2> GetFilledGridPos()
     //{
     //    List<Vector2> filledGridPoses = new List<Vector2>();
@@ -147,7 +162,7 @@ public class TileGrid : MonoBehaviour
     {
         List<Vector2> filledGridPosList = new List<Vector2>();
 
-        for(int i = 0; i < cells.Length; ++i)
+        for (int i = 0; i < cells.Length; ++i)
         {
             if (cells[i].Occupied)
             {
