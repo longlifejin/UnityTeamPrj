@@ -11,14 +11,17 @@ public class EntranceScene : MonoBehaviour
     private AudioSource entranceAudioSource;
     public AudioClip entranceBGM;
 
+    private void Awake()
+    {
+        entranceAudioSource = GetComponent<AudioSource>();
+        entranceAudioSource.loop = true;
+    }
     private void Start()
     {
         upgradePopUp.SetActive(false);
         tutorialPopUp.SetActive(false);
-        entranceAudioSource = GetComponent<AudioSource>();
-        entranceAudioSource.loop = true;
+       
         entranceAudioSource.PlayOneShot(entranceBGM);
-
     }
 
     public void OnClickGameStart()

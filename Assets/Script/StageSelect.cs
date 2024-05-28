@@ -23,9 +23,15 @@ public class StageSelect : MonoBehaviour
     public Stage currStage;
     private List<bool> stageState = new List<bool>();
 
+    private AudioSource stageSelectAudioSource;
+    public AudioClip stageSelectBGM;
+
 
     private void Awake()
     {
+        stageSelectAudioSource = GetComponent<AudioSource>();
+        stageSelectAudioSource.loop = true;
+
         stageState.Add(true);
         for (int i = 1; i < Player.Instance.stageClear.Count; ++i)
         {
@@ -53,6 +59,12 @@ public class StageSelect : MonoBehaviour
         isCancel = false;
         isStart = false;
         //StartCoroutine(SetButtonsAfterSceneLoad());
+    }
+
+    private void Start()
+    {
+
+        stageSelectAudioSource.PlayOneShot(stageSelectBGM);
     }
 
     private void Update()
@@ -95,9 +107,6 @@ public class StageSelect : MonoBehaviour
             {
                 toggle.isOn = true;
                 var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                //Color color = image.color;
-                //color.a = 0;
-                //image.color = color;
                 SetImageAlpha(image, 0);
                 stageButtons[i].interactable = true;
                 toggle.interactable = false;
@@ -106,9 +115,6 @@ public class StageSelect : MonoBehaviour
             {
                 toggle.isOn = false;
                 var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                //Color color = image.color;
-                //color.a = 255;
-                //image.color = color;
                 SetImageAlpha(image, 255);
                 stageButtons[i].interactable = false;
                 toggle.interactable = false;
@@ -134,6 +140,7 @@ public class StageSelect : MonoBehaviour
         {
             currStage = selectedStage;
             Player.Instance.currentStage = ((int)currStage).ToString();
+            stageSelectAudioSource.Stop();
             SceneManager.LoadScene("Puzzle&Battle");
             Debug.Log("Stage " + (index + 1) + " selected");
         });
@@ -148,8 +155,10 @@ public class StageSelect : MonoBehaviour
 
     public void OnClickBack()
     {
+        stageSelectAudioSource.Stop();
         //TO-DO : string define에 선언해서 사용하기
         SceneManager.LoadScene("EntranceStorePopUp");
+
     }
 
     private GameObject FindChildWithTag(GameObject parent, string tag)
