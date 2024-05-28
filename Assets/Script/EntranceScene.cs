@@ -8,21 +8,23 @@ public class EntranceScene : MonoBehaviour
     public GameObject upgradePopUp;
     public GameObject tutorialPopUp;
 
+    private AudioSource entranceAudioSource;
+    public AudioClip entranceBGM;
+
     private void Start()
     {
         upgradePopUp.SetActive(false);
         tutorialPopUp.SetActive(false);
-    }
+        entranceAudioSource = GetComponent<AudioSource>();
+        entranceAudioSource.loop = true;
+        entranceAudioSource.PlayOneShot(entranceBGM);
 
-    // 테스트용 메소드
-    public void Load()
-    {
-        
     }
 
     public void OnClickGameStart()
     {
         SceneManager.LoadScene("Stagebackground");
+        entranceAudioSource.Stop();
     }
 
     public void OnClickUpgrade()
