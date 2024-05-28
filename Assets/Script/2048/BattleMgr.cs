@@ -19,6 +19,7 @@ public class BattleMgr : MonoBehaviour
     private StageDataTable stageTable;
 
     public Boss boss = new Boss();
+    private GameObject player;
 
     public Image playerHpBar;
     public Image bossHpBar;
@@ -60,6 +61,8 @@ public class BattleMgr : MonoBehaviour
 
     public GameObject playerfloatingDamage;
     public GameObject bossfloatingDamage;
+
+    public DynamicTextData floatTextData;
 
     public bool is16Attack = false;
     public bool isBossAttack = false; 
@@ -121,7 +124,12 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isReverseSAttack = false;
     }
 
-
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player");
+        player.AddComponent<Enemy>();
+        player.GetComponent<Enemy>().textData = floatTextData;
+    }
 
 
     public void Start()
@@ -139,6 +147,7 @@ public class BattleMgr : MonoBehaviour
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
         bossPrefab.AddComponent<EffectSystem>();
         bossPrefab.AddComponent<Enemy>();
+        bossPrefab.GetComponent<Enemy>().textData = floatTextData;
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
         bossPrefab.AddComponent<AudioSource>();
 
@@ -195,6 +204,8 @@ public class BattleMgr : MonoBehaviour
         quitMenu.SetActive(false);
         bossSpecialAttack = false;
 
+        playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
+
         Debug.Log("플레이어 hp : " + Player.Instance.hp);
         Debug.Log("보스 ID : " + bossID);
         InitBossSkill();
@@ -231,6 +242,13 @@ public class BattleMgr : MonoBehaviour
         {
             BossTurn();
             timer = bossAttackInterval;
+        }
+
+        if(gameMgr.isGridFull)
+        {
+            Player.Instance.hp = 0;
+            playerHpBar.fillAmount = 0f;
+            CheckHealth();
         }
     }
 

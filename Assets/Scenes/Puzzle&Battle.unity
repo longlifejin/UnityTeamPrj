@@ -3389,6 +3389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5737175193067998639, guid: 11adece7b3570cd4ea1a9cc4a391579e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5881802503152632093, guid: 11adece7b3570cd4ea1a9cc4a391579e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5573,7 +5577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1267094704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5590,7 +5594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -131.32}
+  m_AnchoredPosition: {x: 0, y: -131.31995}
   m_SizeDelta: {x: -346.33, y: -587.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1267094705
@@ -5790,6 +5794,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 26e5d602b741c47a597d12aa2eac2b34, type: 3}
   playerfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
   bossfloatingDamage: {fileID: 1926280506753864649, guid: dd88e50c89d53eb46abb5b1e73d9d025, type: 3}
+  floatTextData: {fileID: 11400000, guid: f9ddd94cce1665c45bd440b4b10d399e, type: 2}
   is16Attack: 0
   isBossAttack: 0
   playerPos: {x: 0, y: 0, z: 0}

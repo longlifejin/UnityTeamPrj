@@ -11,6 +11,8 @@ public class EntranceScene : MonoBehaviour
     private AudioSource entranceAudioSource;
     public AudioClip entranceBGM;
 
+
+
     private void Awake()
     {
         entranceAudioSource = GetComponent<AudioSource>();

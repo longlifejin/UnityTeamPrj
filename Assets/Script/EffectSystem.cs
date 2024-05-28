@@ -32,6 +32,12 @@ public class EffectSystem : MonoBehaviour
         playerAudioSource = battleMgr.playerAudioSource;
 
     }
+
+    private void Start()
+    {
+        //StopAllCoroutines();
+    }
+
     public void BossAttackPlay()
     {
         bossParticle = Instantiate(battleMgr.bossAttackParticles[(int)gameMgr.currentStage - 3001], battleMgr.battleMap.transform);
@@ -168,7 +174,7 @@ public class EffectSystem : MonoBehaviour
 
         playerAudioSource.PlayOneShot(playerAttackAudioClip);
         playerParticle[1].Play();
-        StartCoroutine(StopPlayerPlay(1.5f, 1));
+        StartCoroutine(StopPlayerPlay(1f, 1));
 
     }
 

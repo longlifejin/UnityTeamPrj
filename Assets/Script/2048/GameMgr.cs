@@ -130,7 +130,7 @@ public class GameMgr : MonoBehaviour
         if (isGridFull)
         {
             audioSource.PlayOneShot(puzzleEndSound);
-            isPlayerDie = true;
+            //isPlayerDie = true;
             isGridFull = false;
             //isBossFirst = true;
         }
