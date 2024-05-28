@@ -11,6 +11,7 @@ public class PlayerData
     public string Player_ID {  get; set; }
     public int Player_Atk { get; set; }
     public int Player_Hp { get; set; }
+    public int Player_Critical { get; set; }
     public string Player_Image { get; set; }
 
     public override string ToString()

@@ -51,6 +51,7 @@ public static class SaveLoadSystem
         {
             gainedHp = Player.Instance.gainedHp,
             gainedAtk = Player.Instance.gainedAtk,
+            gainedCritical = Player.Instance.gainedCritical,
             gold = Player.Instance.gold,
             lastCleardStage = Player.Instance.stageClear.FindLastIndex(stage => stage),
             atkItemIndex = Player.Instance.atkItemIndex,
@@ -104,6 +105,7 @@ public static class SaveLoadSystem
 
         Player.Instance.gainedHp = CurrSaveData.gainedHp;
         Player.Instance.gainedAtk = CurrSaveData.gainedAtk;
+        Player.Instance.gainedCritical = CurrSaveData.gainedCritical;
         Player.Instance.gold = CurrSaveData.gold;
         Player.Instance.atkItemIndex = CurrSaveData.atkItemIndex;
         Player.Instance.hpItemIndex = CurrSaveData.hpItemIndex;

@@ -91,7 +91,7 @@ public class GameMgr : MonoBehaviour
 
         popUpVictory.gameObject.SetActive(false);
 
-        defeatNextButton.onClick.AddListener(()=> { SceneManager.LoadScene("Stagebackground"); });
+        defeatNextButton.onClick.AddListener(()=> { SceneManager.LoadScene("StageSelect"); });
         defeatRestartButton.onClick.AddListener(() => 
         { 
             OnClickOK();

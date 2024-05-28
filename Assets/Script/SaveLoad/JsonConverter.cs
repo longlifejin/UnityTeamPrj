@@ -14,6 +14,7 @@ public class GameDataJsonConverter : JsonConverter<SaveDataV1>
         JObject jobj = JObject.Load(reader);
         data.gainedHp = (int)(jobj["GainedHp"]);
         data.gainedAtk = (int)(jobj["GainedAtk"]);
+        data.gainedCritical = (int)(jobj["GainedCritical"]);
         data.gold = (int)(jobj["Gold"]);
         data.lastCleardStage = (int)jobj["LastClearedStage"];
         data.atkItemIndex = (int)(jobj["AtkItemIndex"]);
@@ -28,6 +29,8 @@ public class GameDataJsonConverter : JsonConverter<SaveDataV1>
         writer.WriteValue(value.gainedHp);
         writer.WritePropertyName("GainedAtk");
         writer.WriteValue(value.gainedAtk);
+        writer.WritePropertyName("GainedCritical");
+        writer.WriteValue(value.gainedCritical);
         writer.WritePropertyName("Gold");
         writer.WriteValue(value.gold);
         writer.WritePropertyName("LastClearedStage");

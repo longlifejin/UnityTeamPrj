@@ -169,6 +169,7 @@ public class BattleMgr : MonoBehaviour
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
         playerOriginHp = Player.Instance.hp;
         Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
+        Player.Instance.critical = playerTable.Get(DataTableIds.playerID).Player_Critical + Player.Instance.gainedCritical;
         Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         DataTableIds.stageID = ((int)gameMgr.currentStage).ToString();
@@ -422,7 +423,7 @@ public class BattleMgr : MonoBehaviour
     public void OnClickStage()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Stagebackground");
+        SceneManager.LoadScene("StageSelect");
     }
 
     private void InitBossSkill()

@@ -11,11 +11,14 @@ public class Player : MonoBehaviour
     public int gainedHp = 0;
     public int atk = 0;
     public int gainedAtk = 0;
+    public int critical = 0;
+    public int gainedCritical = 0;
     public string imageId = string.Empty;
     public int gold = 0;
     public List<bool> stageClear = new List<bool>();
     public int atkItemIndex = 0;
     public int hpItemIndex = 0;
+    public int criticalItemIndex = 0;
     public string currentStage;
 
     public int Gold 
@@ -46,6 +49,12 @@ public class Player : MonoBehaviour
     {
         get { return gainedHp; }
         set { gainedHp = value; }
+    }
+
+    public int GainedCritical
+    {
+        get { return gainedCritical; }
+        set { gainedCritical = value; }
     }
 
     public string CurrentStage

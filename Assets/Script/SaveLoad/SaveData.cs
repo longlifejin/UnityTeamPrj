@@ -13,6 +13,7 @@ public class SaveDataV1 : SaveData
 {
     public int gainedHp;
     public int gainedAtk;
+    public int gainedCritical;
     public int gold;
     public int lastCleardStage;
     public int atkItemIndex;

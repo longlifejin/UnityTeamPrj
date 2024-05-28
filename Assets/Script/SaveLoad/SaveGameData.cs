@@ -11,6 +11,7 @@ public class SaveGameData : MonoBehaviour
 {
     public int gainedHp;
     public int gainedAtk;
+    public int gainedCritical;
     public int gold;
     public int lastCleardStage;
     public int atkItemIndex;
@@ -34,6 +35,7 @@ public class SaveGameData : MonoBehaviour
         {
             gainedHp = gainedHp,
             gainedAtk = gainedAtk,
+            gainedCritical = gainedCritical,
             gold = gold,
             lastCleardStage = lastCleardStage,
             atkItemIndex = atkItemIndex,
@@ -58,6 +60,7 @@ public class SaveGameData : MonoBehaviour
 
             Player.Instance.gainedHp = data.gainedHp;
             Player.Instance.gainedAtk = data.gainedAtk;
+            Player.Instance.gainedCritical = data.gainedCritical;
             Player.Instance.gold = data.gold;
             Player.Instance.atkItemIndex = data.atkItemIndex;
             Player.Instance.hpItemIndex = data.hpItemIndex;

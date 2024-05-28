@@ -9,16 +9,19 @@ public class Store : MonoBehaviour
 {
     public GameObject atkItemSpace;
     public GameObject hpItemSpace;
+    public GameObject criticalItemSpace;
     public TextMeshProUGUI ownGold;
     private ItemDataTable itemTable;
 
     public ItemSlot itemPrefab;
     private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
     private List<string> hpItemIds = new List<string> { "42001", "42002", "42003", "42004", "42005" };
+    private List<string> criticalItemIds = new List<string> { "43001", "43002", "43003", "43004", "43005" };
     private int currentAtkIndex = 0;
     private int currentHpIndex = 0;
     private ItemSlot currentAtkItem;
     private ItemSlot currentHpItem;
+    private ItemSlot currentCriticalItem;
     private int atkIndex;
 
     public GameObject lackOfGoldPopUp;
@@ -46,6 +49,17 @@ public class Store : MonoBehaviour
         {
             {
                 CreateHpItem(hpItemIds[Player.Instance.hpItemIndex - 1], Player.Instance.hpItemIndex - 1);
+            }
+        }
+
+        if (Player.Instance.criticalItemIndex < criticalItemIds.Count)
+        {
+            CreateHpItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
+        }
+        else
+        {
+            {
+                CreateHpItem(criticalItemIds[Player.Instance.criticalItemIndex - 1], Player.Instance.criticalItemIndex - 1);
             }
         }
 
@@ -92,6 +106,32 @@ public class Store : MonoBehaviour
             currentHpItem.purchaseButton.interactable = false;
         }
     }
+
+    private void CreateCriticalItem(string itemId, int index)
+    {
+        ItemData itemData = itemTable.Get(itemId);
+        currentCriticalItem = Instantiate(itemPrefab, criticalItemSpace.transform);
+        currentCriticalItem.itemName.text = itemData.GetName;
+        currentCriticalItem.itemInfo.text = itemData.GetInfo;
+        currentCriticalItem.itemPrice.text = itemData.Gold.ToString();
+        currentCriticalItem.itemImage.texture = itemData.GetImage;
+        currentCriticalItem.purchaseButton.onClick.AddListener(() => PurchaseCriticalItem(itemData));
+        for (int i = 0; i < index; ++i)
+        {
+            currentCriticalItem.toggles[i].isOn = true;
+        }
+        if (Player.Instance.criticalItemIndex == criticalItemIds.Count)
+        {
+            currentCriticalItem.toggles[criticalItemIds.Count - 1].isOn = true;
+            currentCriticalItem.purchaseButton.interactable = false;
+        }
+    }
+
+
+
+
+
+
 
     private void PurchaseAtkItem(ItemData itemData)
     {
@@ -158,6 +198,45 @@ public class Store : MonoBehaviour
             UpdateToggle(currentHpItem, Player.Instance.hpItemIndex);
         }
     }
+
+    private void PurchaseCriticalItem(ItemData itemData)
+    {
+        var price = int.Parse(currentCriticalItem.itemPrice.text);
+
+        if (Player.Instance.Gold < price)
+        {
+            lackOfGoldPopUp.SetActive(true);
+            return;
+        }
+        else
+        {
+            Player.Instance.Gold -= price;
+            ownGold.text = Player.Instance.Gold.ToString();
+            Player.Instance.GainedCritical += itemData.Value;
+
+            if (Player.Instance.criticalItemIndex < criticalItemIds.Count - 1)
+            {
+                ++Player.Instance.criticalItemIndex;
+                Destroy(currentCriticalItem.gameObject);
+                CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
+            }
+            else
+            {
+                ++Player.Instance.criticalItemIndex;
+                currentCriticalItem.toggles[Player.Instance.criticalItemIndex - 1].isOn = true;
+                currentCriticalItem.purchaseButton.interactable = false;
+                Debug.Log("모든 치명타 확률 아이템을 구매했습니다.");
+            }
+
+            UpdateToggle(currentCriticalItem, Player.Instance.criticalItemIndex);
+        }
+    }
+
+
+
+
+
+
 
     private void UpdateToggle(ItemSlot itemSlot, int index)
     {

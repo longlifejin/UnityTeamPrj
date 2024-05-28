@@ -28,7 +28,7 @@ public class EntranceScene : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        SceneManager.LoadScene("StageSelect_test");
+        SceneManager.LoadScene("StageSelect");
         entranceAudioSource.Stop();
     }
 
