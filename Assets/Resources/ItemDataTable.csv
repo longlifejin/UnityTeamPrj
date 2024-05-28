@@ -1,4 +1,4 @@
-Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
+﻿Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
 41001,1,ItemName1,3,400,1,ItemInfo1,Image_Item_41001
 41002,1,ItemName2,3,800,1,ItemInfo2,Image_Item_41001
 41003,1,ItemName3,6,1200,1,ItemInfo3,Image_Item_41001
@@ -9,3 +9,8 @@ Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
 42003,2,ItemName8,400,1200,1,ItemInfo8,Image_Item_42001
 42004,2,ItemName9,500,1500,1,ItemInfo9,Image_Item_42001
 42005,2,ItemName10,600,2000,1,ItemInfo10,Image_Item_42001
+43001,3,ItemName11,2,400,1,ItemInfo11,Image_Item_43001
+43002,3,ItemName12,2,800,1,ItemInfo12,Image_Item_43001
+43003,3,ItemName13,2,1200,1,ItemInfo13,Image_Item_43001
+43004,3,ItemName14,2,1500,1,ItemInfo14,Image_Item_43001
+43005,3,ItemName15,2,2000,1,ItemInfo15,Image_Item_43001
