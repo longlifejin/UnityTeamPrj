@@ -9,9 +9,10 @@ public class StageSelect : MonoBehaviour
 {
     //public static StageSelect Instance { get; private set; }
 
+    public GameObject[] stages;
     public Button[] stageButtons;
     public Button backButton;
-    private StageInfo stageInfo;
+    public StageInfo stageInfo;
     private StageData stage;
     private bool isCancel;
     private bool isStart;
@@ -32,11 +33,13 @@ public class StageSelect : MonoBehaviour
         stageSelectAudioSource = GetComponent<AudioSource>();
         stageSelectAudioSource.loop = true;
 
-        stageState.Add(true);
-        for (int i = 1; i < Player.Instance.stageClear.Count; ++i)
-        {
-            stageState.Add(false);
-        }
+        //stageState.Add(true);
+        //for (int i = 1; i < Player.Instance.stageClear.Count; ++i)
+        //{
+        //    stageState.Add(false);
+        //}
+
+        stageState = Player.Instance.StageClear;
 
         //if (Instance != null)
         //{
@@ -50,26 +53,30 @@ public class StageSelect : MonoBehaviour
     }
     private void OnEnable()
     {
-        stageInfo = Instantiate(stagePrefab, canvas.transform);
-        stageInfo.gameObject.SetActive(false);
-        stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
-        SetButtons();
+       
+        //SetButtons();
 
 
-        isCancel = false;
-        isStart = false;
+        //isCancel = false;
+        //isStart = false;
         //StartCoroutine(SetButtonsAfterSceneLoad());
     }
 
     private void Start()
     {
-
+        stageInfo = Instantiate(stagePrefab, canvas.transform);
+        stageInfo.gameObject.SetActive(false);
+        stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
         stageSelectAudioSource.PlayOneShot(stageSelectBGM);
+        SetButtons();
+        CheckToggleState();
+
+        
     }
 
     private void Update()
     {
-        CheckToggleState();
+        
     }
 
 
@@ -92,6 +99,7 @@ public class StageSelect : MonoBehaviour
             int index = i;
             int stageNum = i + 1;
             GameObject stageButton = GameObject.FindWithTag("stage" + stageNum.ToString());
+            
             stageButtons[i] = stageButton.GetComponentInChildren<Button>();
             currStage = (Stage)(index + 3001);
             stage = stageTable.Get(((int)currStage).ToString());
@@ -102,22 +110,33 @@ public class StageSelect : MonoBehaviour
                 PopStageInfo(stagePopupIndex);                
             });
 
-            var toggle = stageButton.GetComponentInChildren<Toggle>();
+            var stageImage = FindChildWithTag(stages[i], "stageImage");
+            //var toggle = stageButton.GetComponentInChildren<Toggle>();
             if (Player.Instance.stageClear[i])
             {
-                toggle.isOn = true;
-                var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                SetImageAlpha(image, 0);
+                //toggle.isOn = true;
+                //var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
+                //SetImageAlpha(image, 0);
+                //stageButtons[i].interactable = true;
+                //toggle.interactable = false;
+
+                var unlocked = FindChildWithTag(stageButton, "lock");
+                unlocked.SetActive(true);
+                stageImage.SetActive(true);
                 stageButtons[i].interactable = true;
-                toggle.interactable = false;
             }
             else
             {
-                toggle.isOn = false;
-                var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                SetImageAlpha(image, 255);
+                //toggle.isOn = false;
+                //var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
+                //SetImageAlpha(image, 255);
+                //stageButtons[i].interactable = false;
+                //toggle.interactable = false;
+
+                var unlocked = FindChildWithTag(stageButton, "lock");
+                unlocked.SetActive(false);
+                stageImage.SetActive(false);
                 stageButtons[i].interactable = false;
-                toggle.interactable = false;
             }
         }
     }
@@ -175,7 +194,30 @@ public class StageSelect : MonoBehaviour
         return null;
     }
 
-   private void CheckToggleState()
+    private GameObject FindSiblingWithTag(GameObject parent, string tag)
+    {
+        // 부모 오브젝트의 자식들을 모두 탐색합니다.
+        foreach (Transform child in parent.transform)
+        {
+            // 자식 오브젝트가 특정 태그를 가지고 있다면 반환합니다.
+            if (child.CompareTag(tag))
+            {
+                return child.gameObject;
+            }
+
+            // 재귀적으로 자식 오브젝트의 자식들을 탐색합니다.
+            GameObject result = FindSiblingWithTag(child.gameObject, tag);
+            if (result != null)
+            {
+                return result;
+            }
+        }
+
+        // 일치하는 태그를 가진 오브젝트를 찾지 못한 경우 null을 반환합니다.
+        return null;
+    }
+
+    private void CheckToggleState()
     {
         for(int i = 0; i < Player.Instance.stageClear.Count; ++i)
         {

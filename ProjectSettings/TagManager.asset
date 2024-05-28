@@ -24,6 +24,7 @@ TagManager:
   - stageInfo
   - BattleMgr
   - GameMgr
+  - stageImage
   layers:
   - Default
   - TransparentFX

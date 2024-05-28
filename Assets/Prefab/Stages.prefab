@@ -792,7 +792,6 @@ GameObject:
   - component: {fileID: 8437038381672844170}
   - component: {fileID: 2890140302017583706}
   - component: {fileID: 149068172274838885}
-  - component: {fileID: -8608058112675885652}
   m_Layer: 5
   m_Name: Stages
   m_TagString: Untagged
@@ -861,29 +860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &-8608058112675885652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8256970660327367472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78fb4653967e82f45bc878664d939b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  purchaseButton: {fileID: 4667310200725832134}
-  itemImage: {fileID: 0}
-  itemName: {fileID: 0}
-  itemInfo: {fileID: 0}
-  itemPrice: {fileID: 2611957050033875670}
-  toggles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &8465029417475689632
 GameObject:
   m_ObjectHideFlags: 0
