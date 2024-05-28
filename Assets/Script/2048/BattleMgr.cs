@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BattleMgr : MonoBehaviour
 {
@@ -369,13 +370,29 @@ public class BattleMgr : MonoBehaviour
     }
     public void ShowDamage(int damage, Vector3 position)
     {
-        var floatingText = Instantiate(playerfloatingDamage, battleMap.transform);
-       
+        //var floatingText = Instantiate(playerfloatingDamage, battleMap.transform);
+
+        //playerfloatingDamage.transform.localPosition = position;
+        //var text = playerfloatingDamage.GetComponentInChildren<TextMeshProUGUI>();
+        //text.text = damage.ToString();
+        //position.z += 10f;
+        //playerfloatingDamage.transform.DOMove(position, 1f);
+        //StartCoroutine(RemoveDamageText(floatingText));
+        var floatingText = Instantiate(playerfloatingDamage, battleMap.GetComponentInChildren<Canvas>().transform);
+
         floatingText.transform.localPosition = position;
         var text = floatingText.GetComponentInChildren<TextMeshProUGUI>();
         text.text = damage.ToString();
 
-        StartCoroutine(RemoveDamageText(floatingText));
+        // Animate the damage text
+        Vector3 endPosition = position + new Vector3(0, 1f, 0); // Adjust the Y value to move upwards
+        floatingText.transform.DOLocalMove(endPosition, 1.5f).SetEase(Ease.OutQuad).OnComplete(() =>
+        {
+            Destroy(floatingText);
+        });
+
+        // Fade out the text
+        text.DOFade(0, 1.5f);
     }
 
     private IEnumerator RemoveDamageText(GameObject textObject)
