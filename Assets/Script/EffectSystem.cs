@@ -75,7 +75,8 @@ public class EffectSystem : MonoBehaviour
 
     public void PlayerChargingPlay()
     {
-        playerChargingAudioClip = battleMgr.playerChargingAudioes[(int)gameMgr.currentStage - 3001];
+        //playerChargingAudioClip = battleMgr.playerChargingAudioes[(int)gameMgr.currentStage - 3001];
+        playerChargingAudioClip = battleMgr.playerChargingAudioes[0];
         playerAudioSource.clip = playerChargingAudioClip;
         playerAudioSource.loop = true;
         playerAudioSource.Play();
@@ -135,7 +136,8 @@ public class EffectSystem : MonoBehaviour
         playerAudioSource.Stop();
         playerAudioSource.loop = false;
 
-        playerAttackAudioClip = battleMgr.playerAttackAudioes[(int)gameMgr.currentStage - 3001];
+        //playerAttackAudioClip = battleMgr.playerAttackAudioes[(int)gameMgr.currentStage - 3001];
+        playerAttackAudioClip = battleMgr.playerAttackAudioes[0];
 
         foreach (var particle in playerParticle)
         {

@@ -10,11 +10,13 @@ public class Tile : MonoBehaviour
     public bool locked { get; set; }
 
     private Image background;
+    private Image tileImage;
     private TextMeshProUGUI text;
 
     private void Awake()
     {
         background = GetComponent<Image>();
+        //tileImage = transform.GetChild(0).GetComponent<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -24,7 +26,9 @@ public class Tile : MonoBehaviour
 
         background.color = state.backgroundColor;
         text.color = state.textColor;
-        text.text = state.number.ToString();
+        //text.text = state.number.ToString();
+        text.text = string.Empty;
+        background.sprite = state.tileImage;
     }
 
     public void Spawn(TileCell cell)
@@ -54,7 +58,8 @@ public class Tile : MonoBehaviour
 
     public void Merge(TileCell cell)
     {
-        if (this.cell != null) {
+        if (this.cell != null)
+        {
             this.cell.tile = null;
         }
 

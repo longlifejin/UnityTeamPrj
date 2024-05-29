@@ -353,11 +353,21 @@ public class TileBoard : MonoBehaviour
 
     private bool CanMerge(Tile a, Tile b)
     {
+        if (a.state.number >= 16 || b.state.number >= 16)
+        {
+            return false;
+        }
+
         return a.state == b.state && !b.locked;
     }
 
     private void MergeTiles(Tile a, Tile b)
     {
+        if (a.state.number >= 16 || b.state.number >= 16)
+        {
+            return;
+        }
+
         tiles.Remove(a);
         a.Merge(b.cell);
 
