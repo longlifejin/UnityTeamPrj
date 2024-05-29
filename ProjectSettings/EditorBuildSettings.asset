@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EntranceStorePopUp.unity
+    path: Assets/Scenes/EntranceStorePopUp_before2.unity
     guid: 81939d9fc75ff5a4998ade22e7ff0c5a
   - enabled: 1
     path: Assets/Scenes/Puzzle&Battle.unity
@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StageSelect.unity
     guid: ff2f6aaecf4dec546a494537d2a7ca9c
   - enabled: 1
-    path: Assets/Scenes/EntranceStorePopUp_CriUI.unity
+    path: Assets/Scenes/EntranceStorePopUp.unity
     guid: 6a33e0e56e7b1b64db439ffcefd2f235
   m_configObjects: {}
