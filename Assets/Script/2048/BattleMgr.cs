@@ -65,6 +65,8 @@ public class BattleMgr : MonoBehaviour
 
     public DynamicTextData floatTextData;
 
+    public ParticleSystem reverseParticle;
+
     public bool is16Attack = false;
     public bool isBossAttack = false; 
     
@@ -100,6 +102,7 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isStopAttack = false;
         gameMgr.isReverseSAttack = false;
         gameMgr.isSecreteAttack = false;
+        reverseParticle.gameObject.SetActive(false);
     }
 
     private void BossStopSwipe()
@@ -108,6 +111,8 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isStopAttack = true;
         gameMgr.isReverseSAttack = false;
         gameMgr.isSecreteAttack = false;
+        reverseParticle.gameObject.SetActive(false);
+
     }
 
     private void BossReverseSwipe()
@@ -116,6 +121,8 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isReverseSAttack = true;
         gameMgr.isStopAttack = false;
         gameMgr.isSecreteAttack = false;
+        reverseParticle.gameObject.SetActive(true);
+        reverseParticle.Play();
     }
 
     private void BossSecretePuzzle()
@@ -124,13 +131,18 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isSecreteAttack = true;
         gameMgr.isStopAttack = false;
         gameMgr.isReverseSAttack = false;
+        reverseParticle.gameObject.SetActive(false);
+
     }
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        //player.AddComponent<Enemy>();
-        //player.GetComponent<Enemy>().textData = floatTextData;
+        //player = GameObject.FindWithTag("Player");
+
+        stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
+        playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
+        bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
+        stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
     }
 
 
@@ -141,6 +153,8 @@ public class BattleMgr : MonoBehaviour
         battleAudioSource.loop = true;
         battleAudioSource.clip = battleBGMClips[(int)gameMgr.currentStage - 3001];
         battleAudioSource.Play();
+        reverseParticle.gameObject.SetActive(false);
+
 
         if (bossPrefab != null)
         {
@@ -162,10 +176,7 @@ public class BattleMgr : MonoBehaviour
 
         bossAnimator = bossPrefab.GetComponent<Animator>();
 
-        stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
-        playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
-        bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
-        stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
+        
 
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
         playerOriginHp = Player.Instance.hp;
