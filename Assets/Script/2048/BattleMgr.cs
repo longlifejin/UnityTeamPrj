@@ -171,8 +171,6 @@ public class BattleMgr : MonoBehaviour
 
         bossAnimator = bossPrefab.GetComponent<Animator>();
 
-        
-
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
         playerOriginHp = Player.Instance.hp;
         Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
@@ -215,7 +213,6 @@ public class BattleMgr : MonoBehaviour
         quitMenu.SetActive(false);
         //bossSpecialAttack = false;
 
-        //playerAnimator.Play(AnimatorIds.playerIdleAni, -1, 0f);
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 

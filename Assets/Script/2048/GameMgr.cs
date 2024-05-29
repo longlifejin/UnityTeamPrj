@@ -62,7 +62,8 @@ public class GameMgr : MonoBehaviour
     public AudioClip puzzleStartSound;
     public AudioClip puzzleEndSound;
 
-    
+    public GameObject stage1_Tutorial;
+
 
 
     private void Start()
@@ -75,6 +76,20 @@ public class GameMgr : MonoBehaviour
         {
             currentStage = (Stage)int.Parse(Player.Instance.currentStage);
         }
+
+        if(currentStage == Stage.first)
+        {
+            stage1_Tutorial.SetActive(true);
+            stage1_Tutorial.GetComponentInChildren<Button>().onClick.AddListener(() =>
+            {
+                stage1_Tutorial.gameObject.SetActive(false);
+            });
+        }
+        else
+        {
+            stage1_Tutorial.SetActive(false);
+        }
+
         isGameStart = false;
 
         audioSource = GetComponent<AudioSource>();
