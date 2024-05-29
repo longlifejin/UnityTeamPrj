@@ -129,8 +129,8 @@ public class BattleMgr : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        player.AddComponent<Enemy>();
-        player.GetComponent<Enemy>().textData = floatTextData;
+        //player.AddComponent<Enemy>();
+        //player.GetComponent<Enemy>().textData = floatTextData;
     }
 
 
@@ -207,7 +207,9 @@ public class BattleMgr : MonoBehaviour
         quitMenu.SetActive(false);
         bossSpecialAttack = false;
 
+        //playerAnimator.Play(AnimatorIds.playerIdleAni, -1, 0f);
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
+        playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
         Debug.Log("플레이어 hp : " + Player.Instance.hp);
         Debug.Log("보스 ID : " + bossID);

@@ -24,7 +24,7 @@ public class TileBoard : MonoBehaviour
     private float limitTime = 20f;
     private float timer;
 
-    public Image timeBar;
+    //public Image timeBar;
 
     public Button puzzleStartButton;
 
@@ -97,6 +97,8 @@ public class TileBoard : MonoBehaviour
         Tile tile = Instantiate(tilePrefab, grid.transform);
         tile.SetState(tileStates[0]);
         tile.Spawn(grid.GetRandomEmptyCell());
+        RectTransform rectTransform = tile.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2(0, 0.5f);
         tiles.Add(tile);
     }
 
@@ -104,11 +106,11 @@ public class TileBoard : MonoBehaviour
     {
         if (!waiting && gameStart && !gameMgr.isPuzzleOver)
         {
-            timeBar.fillAmount = timer / limitTime;
+            //timeBar.fillAmount = timer / limitTime;
             timer -= Time.deltaTime;
-            puzzleStartButton.enabled = false;
+            puzzleStartButton.gameObject.SetActive(false);
 
-            if(gameMgr.isReverseSAttack)
+            if (gameMgr.isReverseSAttack)
             {
                 ReverseTouchEvents();
                 secretePanel.SetActive(false);
@@ -190,23 +192,21 @@ public class TileBoard : MonoBehaviour
         playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
 
         timer = limitTime;
-        timeBar.fillAmount = 1f;
+        //timeBar.fillAmount = 1f;
 
         gameStart = false;
-        puzzleStartButton.enabled = true;
+        puzzleStartButton.gameObject.SetActive(true);
 
         UpdateSpeicalPos();
         foreach (var pos in specialPos)
         {
-            //gameMgr.particularParticlePos = CoordinatesToPos(pos);
-            //gameMgr.particularParticle.transform.position = gameMgr.particularParticlePos;
-            //gameMgr.particularParticle.Play();
+            GameObject instance = Instantiate(framePrefab, grid.transform);
+            RectTransform rectTransform = instance.GetComponent<RectTransform>();
+            rectTransform.pivot = new Vector2(0, 0.5f);
 
-            GameObject instance = Instantiate(framePrefab, gameObject.transform);
             instance.transform.position = CoordinatesToPos(pos);
+
             activeParticleImages.Add(instance);
-            //instance.Play();
-            //activeParticularParticles.Add(instance);
         }
     }
 
@@ -449,6 +449,7 @@ public class TileBoard : MonoBehaviour
         gameMgr.isGameStart = true;
         playerAnimator.SetTrigger(AnimatorIds.playerChargingAni);
         gameMgr.audioSource.PlayOneShot(gameMgr.puzzleStartSound);
+        puzzleStartButton.gameObject.SetActive(false);
     }
 
     public bool IsTile16AtPosition()

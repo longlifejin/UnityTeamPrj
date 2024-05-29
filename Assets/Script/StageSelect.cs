@@ -160,7 +160,7 @@ public class StageSelect : MonoBehaviour
             currStage = selectedStage;
             Player.Instance.currentStage = ((int)currStage).ToString();
             stageSelectAudioSource.Stop();
-            SceneManager.LoadScene("Puzzle&Battle");
+            SceneManager.LoadScene("Puzzle&Battle_UI");
             Debug.Log("Stage " + (index + 1) + " selected");
         });
     }

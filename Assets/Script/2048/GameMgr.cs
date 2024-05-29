@@ -32,8 +32,9 @@ public class GameMgr : MonoBehaviour
     private BattleMgr battleMgr;
 
     public GameObject popUpVictory;
-    public Text victoryGoldText;
-    public Button victoryNextButton;
+    public TextMeshProUGUI victoryGoldText;
+    public Button victoryRestartButton;
+    public Button victoryStageSelectButton;
 
     public GameObject popUpDefeat;
     public Button defeatNextButton;
@@ -83,10 +84,15 @@ public class GameMgr : MonoBehaviour
         puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
 
-        victoryNextButton.onClick.AddListener(() => 
+        victoryRestartButton.onClick.AddListener(() => 
         { 
             OnClickOK(); 
             popUpVictory.SetActive(false);
+        });
+
+        victoryStageSelectButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("StageSelect");
         });
 
         popUpVictory.gameObject.SetActive(false);
@@ -166,6 +172,11 @@ public class GameMgr : MonoBehaviour
     {
         if (isPlayerDie || isBattleStageClear)
         {
+            if(isBattleStageClear)
+            {
+                currentStage -= 1;
+            }
+
             puzzleMgr.NewGame();
             battleMgr.Start();
             audioSource.Stop();
@@ -174,6 +185,8 @@ public class GameMgr : MonoBehaviour
         isPlayerDie = false;
         isBattleStageClear = false;
     }
+
+    
 
     public IEnumerator PlayParticleSystem(ParticleSystem particle)
     {
