@@ -89,9 +89,7 @@ public class BattleMgr : MonoBehaviour
         bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
         playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
         Player.Instance.hp -= 10;
-        Vector3 pos = new Vector3(-2.45f, 2f, -0.5f);
-        ShowDamage(10, pos, Color.white);
-
+        
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
         CheckHealth();

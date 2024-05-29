@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EffectSystem : MonoBehaviour
 {
@@ -59,6 +60,9 @@ public class EffectSystem : MonoBehaviour
         bossSpecialAttackAudioClip = battleMgr.bossSpecialAttackAudioes[(int)gameMgr.currentStage - 3001];
         bossAudioSource.PlayOneShot(bossSpecialAttackAudioClip);
 
+        Vector3 pos = new Vector3(-2.45f, 2f, -0.5f);
+        battleMgr.ShowDamage(10, pos, Color.white);
+
         StartCoroutine(StopBossPlay(1f));
     }
 
@@ -75,49 +79,12 @@ public class EffectSystem : MonoBehaviour
 
     public void PlayerChargingPlay()
     {
-        //playerChargingAudioClip = battleMgr.playerChargingAudioes[(int)gameMgr.currentStage - 3001];
         playerChargingAudioClip = battleMgr.playerChargingAudioes[0];
         playerAudioSource.clip = playerChargingAudioClip;
         playerAudioSource.loop = true;
         playerAudioSource.Play();
 
         int value = gameMgr.maxValue;
-        //int index = 0;
-        //int count = 1;
-
-        //if(value <= 16)
-        //{
-        //    index = 0;
-        //    count = 1;
-        //}
-        //else if(value == 32)
-        //{
-        //    index = 1;
-        //    count = 1;
-        //}
-        //else if(value == 64)
-        //{
-        //    index = 2;
-        //    count = 1;
-        //}
-        //else if(value == 128)
-        //{
-        //    index = 3;
-        //    count = 2;
-        //}
-        //else if(value == 256)
-        //{
-        //    index = 5;
-        //    count = 2;
-        //}
-
-        //for(int i = 0; i < count; ++i)
-        //{
-        //    playerParticle[i] = Instantiate(battleMgr.playerChargingParticles[index+i], battleMgr.battleMap.transform);
-        //    Vector3 pos = new Vector3(-1.53f, 1.75f, -0.3f);
-        //    playerParticle[i].transform.localPosition = pos;
-        //    playerParticle[i].Play();
-        //}
         playerParticle[0] = Instantiate(battleMgr.playerChargingParticles[0], battleMgr.battleMap.transform);
         Vector3 pos = new Vector3(-1.53f, 1.75f, -0.3f);
         playerParticle[0].transform.localPosition = pos;
@@ -140,7 +107,6 @@ public class EffectSystem : MonoBehaviour
         playerAudioSource.Stop();
         playerAudioSource.loop = false;
 
-        //playerAttackAudioClip = battleMgr.playerAttackAudioes[(int)gameMgr.currentStage - 3001];
         playerAttackAudioClip = battleMgr.playerAttackAudioes[0];
 
         foreach (var particle in playerParticle)
@@ -150,39 +116,15 @@ public class EffectSystem : MonoBehaviour
         }
 
         int value = gameMgr.maxValue;
-        //int index = 0;
-
-        //if (value <= 16)
-        //{
-        //    index = 0;
-        //}
-        //else if (value == 32)
-        //{
-        //    index = 1;
-        //}
-        //else if (value == 64)
-        //{
-        //    index = 2;
-        //}
-        //else if (value == 128)
-        //{
-        //    index = 3;
-        //}
-        //else if (value == 256)
-        //{
-        //    index = 5;
-        //}
-
-        //playerParticle[1] = Instantiate(battleMgr.playerAttackParticles[index], battleMgr.battleMap.transform);
+        
         playerParticle[1] = Instantiate(battleMgr.playerAttackParticles[0], battleMgr.battleMap.transform);
         
-        Vector3 pos = new Vector3(1.1f,0f,-1f);
+        Vector3 pos = new Vector3(1.1f,0.5f,-1f);
         playerParticle[1].transform.localPosition = pos;
 
         playerAudioSource.PlayOneShot(playerAttackAudioClip);
         playerParticle[1].Play();
         StartCoroutine(StopPlayerPlay(1f, 1));
-
     }
 
     private IEnumerator StopPlayerPlay(float delay, int index)
