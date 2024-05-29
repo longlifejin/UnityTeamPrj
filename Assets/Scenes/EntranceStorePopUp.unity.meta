@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 81939d9fc75ff5a4998ade22e7ff0c5a
+<<<<<<<< HEAD:Assets/Scenes/StageSelect_before.unity.meta
+guid: 6a33e0e56e7b1b64db439ffcefd2f235
+========
+guid: c982633a18bedbb41b9cf5524ed39bfe
+>>>>>>>> origin/Ahriyoung:Assets/Scenes/EntranceStorePopUp_CriUI.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

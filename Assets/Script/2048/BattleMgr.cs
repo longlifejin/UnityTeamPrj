@@ -92,7 +92,7 @@ public class BattleMgr : MonoBehaviour
         //Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
         Player.Instance.hp -= 10;
         Vector3 pos = new Vector3(-2.45f, 2f, -0.5f);
-        ShowDamage(10, pos);
+        ShowDamage(10, pos, Color.white);
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         CheckHealth();
@@ -292,16 +292,17 @@ public class BattleMgr : MonoBehaviour
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
 
             int criticalValue = 1;
+            Color damageColor = Color.white;
             int randomValue = Random.Range(0, 100);
             if(randomValue <= Player.Instance.critical)
             {
                 criticalValue = 2;
+                damageColor = Color.red;
             }
-            else
 
             boss.hp -= Player.Instance.atk * criticalValue;
             Vector3 pos = new Vector3(0f, 2f, -0.5f);
-            ShowDamage(Player.Instance.atk * criticalValue, pos);
+            ShowDamage(Player.Instance.atk * criticalValue, pos, damageColor);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
@@ -379,7 +380,7 @@ public class BattleMgr : MonoBehaviour
             gameMgr.StartNextRound();
         }
     }
-    public void ShowDamage(int damage, Vector3 position)
+    public void ShowDamage(int damage, Vector3 position, Color damageCol)
     {
         //var floatingText = Instantiate(playerfloatingDamage, battleMap.transform);
 
@@ -393,6 +394,7 @@ public class BattleMgr : MonoBehaviour
 
         floatingText.transform.localPosition = position;
         var text = floatingText.GetComponentInChildren<TextMeshProUGUI>();
+        text.color = damageCol;
         text.text = damage.ToString();
 
         // Animate the damage text
