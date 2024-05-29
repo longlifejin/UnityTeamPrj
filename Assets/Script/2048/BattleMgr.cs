@@ -20,7 +20,6 @@ public class BattleMgr : MonoBehaviour
     private StageDataTable stageTable;
 
     public Boss boss = new Boss();
-    private GameObject player;
 
     public Image playerHpBar;
     public Image bossHpBar;
@@ -36,8 +35,6 @@ public class BattleMgr : MonoBehaviour
     public GameObject[] bossPrefabs;
     public GameObject battleMap;
     private GameObject bossPrefab;
-
-    private bool bossSpecialAttack = false;
 
     public GameObject battleGround;
     public RawImage battleBack;
@@ -97,6 +94,7 @@ public class BattleMgr : MonoBehaviour
         ShowDamage(10, pos, Color.white);
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
+        playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
         CheckHealth();
 
         gameMgr.isStopAttack = false;
@@ -206,6 +204,8 @@ public class BattleMgr : MonoBehaviour
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         bossHpBar.fillAmount = boss.hp / bossOriginHp;
+        playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
+        bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
 
         timer = bossAttackInterval;
 
@@ -213,7 +213,7 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isBattleStageClear = false;
 
         quitMenu.SetActive(false);
-        bossSpecialAttack = false;
+        //bossSpecialAttack = false;
 
         //playerAnimator.Play(AnimatorIds.playerIdleAni, -1, 0f);
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
@@ -312,6 +312,7 @@ public class BattleMgr : MonoBehaviour
             ShowDamage(Player.Instance.atk * criticalValue, pos, damageColor);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
+            bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
             CheckHealth();
         }
     }
