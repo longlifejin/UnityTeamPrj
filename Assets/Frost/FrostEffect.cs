@@ -15,6 +15,8 @@ public class FrostEffect : MonoBehaviour
     public Texture2D FrostNormals; // normalmap
     public Shader Shader; // ImageBlendEffect.shader
 
+    public GameMgr gameMgr;
+
     private Material material;
     private bool isEffectActive = false;
 
@@ -28,9 +30,21 @@ public class FrostEffect : MonoBehaviour
     private void Start()
     {
         // Start the effect automatically when the scene starts
-        if (!isEffectActive)
+
+    }
+
+    private void Update()
+    {
+        if (gameMgr.isStopAttack)
         {
-            StartCoroutine(ActivateFrostEffect());
+            if (!isEffectActive)
+            {
+                StartCoroutine(ActivateFrostEffect());
+            }
+        }
+        else if(!gameMgr.isStopAttack)
+        {
+            //StopAllCoroutines();
         }
     }
 
@@ -50,7 +64,7 @@ public class FrostEffect : MonoBehaviour
         FrostAmount = 2;
 
         // Hold the effect for 2 seconds
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.8f);
 
         // Frost dissolving from inner to outer over 0.8 seconds
         float dissolveDuration = 0.8f;
