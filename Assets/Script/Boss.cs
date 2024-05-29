@@ -8,5 +8,5 @@ public class Boss
     public int hp = 0;
     public int atk = 0;
     public string imageId = string.Empty;
-    public int[] bossPattern = new int[5];
+    public int[] bossPattern = new int[6];
 }
