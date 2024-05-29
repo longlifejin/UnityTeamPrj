@@ -59,10 +59,10 @@ public class FrostEffect : MonoBehaviour
 
         Debug.Log("Frost Effect Active - Holding");
         // Hold the effect for 2 seconds
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
 
         // Frost dissolving from inner to outer over 0.8 seconds
-        float dissolveDuration = 1f;
+        float dissolveDuration = 0.5f;
         elapsedTime = 0.0f;
         while (elapsedTime < dissolveDuration)
         {
