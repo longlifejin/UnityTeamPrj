@@ -193,6 +193,7 @@ MonoBehaviour:
   puzzleStartSound: {fileID: 8300000, guid: 6909afde8273049ac97a7985f974d97c, type: 3}
   puzzleEndSound: {fileID: 8300000, guid: d19f5f9c25b4c4d249f972617e72087b, type: 3}
   stage1_Tutorial: {fileID: 167370826}
+  bossAttackTime: 0
 --- !u!4 &27402488
 Transform:
   m_ObjectHideFlags: 0
@@ -1002,7 +1003,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 7.2175903, y: -2.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 326.427, y: 81.607}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86366689
 MonoBehaviour:
@@ -7617,6 +7618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 27402486}
   quitMenu: {fileID: 1938939940}
+  player: {fileID: 705483030}
   playerHpBar: {fileID: 1244357467}
   bossHpBar: {fileID: 1435863594}
   playerAnimator: {fileID: 791320295}
@@ -11003,7 +11005,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.342346, y: -1.5}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 320.9026, y: 80.2256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1733616081
 MonoBehaviour:
@@ -12747,7 +12749,7 @@ GameObject:
   - component: {fileID: 2017661042}
   - component: {fileID: 2017661041}
   m_Layer: 5
-  m_Name: playerHP
+  m_Name: bossHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12921,7 +12923,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: -133.49066}
-  m_SizeDelta: {x: -65.8121, y: -304.7811}
+  m_SizeDelta: {x: -201.4197, y: -416.4988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2098747742
 MonoBehaviour:

@@ -20,6 +20,7 @@ public class BattleMgr : MonoBehaviour
     private StageDataTable stageTable;
 
     public Boss boss = new Boss();
+    public GameObject player;
 
     public Image playerHpBar;
     public Image bossHpBar;
@@ -181,6 +182,7 @@ public class BattleMgr : MonoBehaviour
         bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
 
         playerPos = new Vector3(-1.3f, 0f, 0f);
+        player.gameObject.transform.localPosition = playerPos;
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
         playerOriginHp = Player.Instance.hp;
         Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
@@ -199,6 +201,7 @@ public class BattleMgr : MonoBehaviour
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
         timer = bossAttackInterval;
+        gameMgr.bossAttackTime = bossAttackInterval;
 
         gameMgr.isPlayerDie = false;
         gameMgr.isBattleStageClear = false;

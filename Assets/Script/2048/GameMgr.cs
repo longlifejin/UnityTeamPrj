@@ -62,6 +62,7 @@ public class GameMgr : MonoBehaviour
     public AudioClip puzzleEndSound;
 
     public GameObject stage1_Tutorial;
+    public float bossAttackTime;
 
     private void Awake()
     {
@@ -190,7 +191,7 @@ public class GameMgr : MonoBehaviour
             {
                 currentStage -= 1;
             }
-
+            isSecreteAttack = false;
             puzzleMgr.NewGame();
             battleMgr.Start();
             audioSource.Stop();

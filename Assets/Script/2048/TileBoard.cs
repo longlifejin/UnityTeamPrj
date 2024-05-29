@@ -170,10 +170,12 @@ public class TileBoard : MonoBehaviour
             activeParticleImages.Clear();
         }
 
+        
         gameMgr.isTimeOver = false;
         gameMgr.isPuzzleOver = false;
         gameMgr.isGridFull = false;
         gameMgr.filledGridCount = 0;
+        secretePanel.SetActive(false);
 
         playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
         gameStart = false;

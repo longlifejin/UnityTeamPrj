@@ -37,12 +37,11 @@ public class FrostEffect : MonoBehaviour
     {
         if (gameMgr.isStopAttack && !isEffectActive)
         {
-            Debug.Log("프로스트 이펙트 코루틴 시작");
-            StartCoroutine(ActivateFrostEffect());
+            StartCoroutine(ActivateFrostEffect(gameMgr.bossAttackTime));
         }
     }
 
-    private IEnumerator ActivateFrostEffect()
+    private IEnumerator ActivateFrostEffect(float time)
     {
         isEffectActive = true;
 
@@ -57,21 +56,19 @@ public class FrostEffect : MonoBehaviour
         }
         FrostAmount = 1;
 
-        Debug.Log("Frost Effect Active - Holding");
         // Hold the effect for 2 seconds
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(time - 1f);
 
         // Frost dissolving from inner to outer over 0.8 seconds
-        float dissolveDuration = 0.5f;
+        float dissolveDuration = 1f;
         elapsedTime = 0.0f;
         while (elapsedTime < dissolveDuration)
         {
-            FrostAmount = Mathf.Lerp(2, 0, elapsedTime / dissolveDuration); // 완전히 사라질 때까지 퍼지도록 수정
+            FrostAmount = Mathf.Lerp(1f, 0, elapsedTime / dissolveDuration); // 완전히 사라질 때까지 퍼지도록 수정
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         FrostAmount = 0;
-        Debug.Log("Frost Effect Finished");
         isEffectActive = false;
     }
 
