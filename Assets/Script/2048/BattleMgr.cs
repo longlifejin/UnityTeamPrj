@@ -143,6 +143,7 @@ public class BattleMgr : MonoBehaviour
         battleAudioSource.clip = battleBGMClips[(int)gameMgr.currentStage - 3001];
         battleAudioSource.Play();
         reverseParticle.gameObject.SetActive(false);
+        
 
 
         if (bossPrefab != null)
@@ -279,7 +280,7 @@ public class BattleMgr : MonoBehaviour
         }
     }
     
-    private void CheckHealth()
+    public void CheckHealth()
     {
         if (Player.Instance.hp <= 0)
         {

@@ -80,6 +80,7 @@ public class TileBoard : MonoBehaviour
         }
 
         tiles.Clear();
+        secretePanel.SetActive(false);
     }
 
     public void CreateTile()
@@ -151,6 +152,11 @@ public class TileBoard : MonoBehaviour
         //    timer = limitTime;
         //    isGridFull = false;
         //}
+        if(isGridFull)
+        {
+            gameMgr.isGridFull = true;
+            isGridFull = false;
+        }
     }
 
     public void ResetPuzzle()
