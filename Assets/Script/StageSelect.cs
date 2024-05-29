@@ -26,40 +26,17 @@ public class StageSelect : MonoBehaviour
 
     private AudioSource stageSelectAudioSource;
     public AudioClip stageSelectBGM;
-
+    public AudioSource stageSFXAudioSource;
+    public AudioClip selectStageSFX;
+    public AudioClip stageStartSFX;
 
     private void Awake()
     {
         stageSelectAudioSource = GetComponent<AudioSource>();
         stageSelectAudioSource.loop = true;
-
-        //stageState.Add(true);
-        //for (int i = 1; i < Player.Instance.stageClear.Count; ++i)
-        //{
-        //    stageState.Add(false);
-        //}
+        stageSFXAudioSource.loop = false;
 
         stageState = Player.Instance.StageClear;
-
-        //if (Instance != null)
-        //{
-        //    DestroyImmediate(gameObject);
-        //}
-        //else
-        //{
-        //    Instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-    }
-    private void OnEnable()
-    {
-       
-        //SetButtons();
-
-
-        //isCancel = false;
-        //isStart = false;
-        //StartCoroutine(SetButtonsAfterSceneLoad());
     }
 
     private void Start()
@@ -92,8 +69,6 @@ public class StageSelect : MonoBehaviour
         backButton = buttons.GetComponentInChildren<Button>();
         backButton.onClick.AddListener(() => OnClickBack());
 
-        
-
         for (int i = 0; i < stageButtons.Length; ++i)
         {
             int index = i;
@@ -107,19 +82,13 @@ public class StageSelect : MonoBehaviour
             int stagePopupIndex = index;
             stageButtons[i].onClick.AddListener(() =>
             {
+                stageSFXAudioSource.PlayOneShot(selectStageSFX);
                 PopStageInfo(stagePopupIndex);                
             });
 
             var stageImage = FindChildWithTag(stages[i], "stageImage");
-            //var toggle = stageButton.GetComponentInChildren<Toggle>();
             if (Player.Instance.stageClear[i])
             {
-                //toggle.isOn = true;
-                //var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                //SetImageAlpha(image, 0);
-                //stageButtons[i].interactable = true;
-                //toggle.interactable = false;
-
                 var unlocked = FindChildWithTag(stageButton, "lock");
                 unlocked.SetActive(true);
                 stageImage.SetActive(true);
@@ -127,12 +96,6 @@ public class StageSelect : MonoBehaviour
             }
             else
             {
-                //toggle.isOn = false;
-                //var image = FindChildWithTag(stageButton, "lock").GetComponentInChildren<Image>();
-                //SetImageAlpha(image, 255);
-                //stageButtons[i].interactable = false;
-                //toggle.interactable = false;
-
                 var unlocked = FindChildWithTag(stageButton, "lock");
                 unlocked.SetActive(false);
                 stageImage.SetActive(false);
@@ -157,6 +120,7 @@ public class StageSelect : MonoBehaviour
         stageInfo.start.onClick.RemoveAllListeners();
         stageInfo.start.onClick.AddListener(() =>
         {
+            stageSFXAudioSource.PlayOneShot(stageStartSFX);
             currStage = selectedStage;
             Player.Instance.currentStage = ((int)currStage).ToString();
             stageSelectAudioSource.Stop();
