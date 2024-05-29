@@ -2,31 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
     StringTable stringTable;
-    public TextMeshProUGUI[] tutorialTexts;
+    public Image[] pages;
+    public Button[] rightButtons;
+    public Button[] leftButtons;
 
     private void Start()
     {
-        stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
-        int index = 0;
+        SetNormalState();
 
-        for(int i = 1; i <= 3; ++i)
+
+        foreach (var page in pages)
         {
-            for(int j = 1; j <= 6; ++j)
+            var back = FindChildWithTag(page.gameObject, "back");
+            back.GetComponent<Button>().onClick.AddListener(() =>
             {
-                if(i ==3 && j == 6)
-                {
-                    return;
-                }
-                string Id = string.Format("Tutorial{0}_{1}", i, j);
-                var str = stringTable.Get(Id);
+                SetNormalState();
+                gameObject.SetActive(false);
+            });
+        }
 
-                tutorialTexts[index].text = str;
-                ++index;
+
+        for (int i = 0; i < rightButtons.Length; ++i)
+        {
+            int index = i;
+
+            rightButtons[i].onClick.AddListener(() =>
+            {
+                pages[index].gameObject.SetActive(false);
+                int nextIndex = (index + 1) % pages.Length;
+                pages[nextIndex].gameObject.SetActive(true);
+            });
+        }
+
+        for (int i = 0; i < leftButtons.Length; ++i)
+        {
+            int index = i;
+
+            leftButtons[i].onClick.AddListener(() =>
+            {
+                pages[index].gameObject.SetActive(false);
+                int prevIndex = (index - 1 + pages.Length) % pages.Length;
+                pages[prevIndex].gameObject.SetActive(true);
+            });
+        }
+    }
+
+    private GameObject FindChildWithTag(GameObject parent, string tag)
+    {
+        Transform[] children = parent.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform child in children)
+        {
+            if (child.CompareTag(tag))
+            {
+                return child.gameObject;
             }
         }
+        return null;
+    }
+
+    private void SetNormalState()
+    {
+        pages[0].gameObject.SetActive(true);
+        pages[1].gameObject.SetActive(false);
+        pages[2].gameObject.SetActive(false);
     }
 }

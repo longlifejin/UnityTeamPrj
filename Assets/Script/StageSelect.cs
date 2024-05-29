@@ -196,24 +196,19 @@ public class StageSelect : MonoBehaviour
 
     private GameObject FindSiblingWithTag(GameObject parent, string tag)
     {
-        // 부모 오브젝트의 자식들을 모두 탐색합니다.
         foreach (Transform child in parent.transform)
         {
-            // 자식 오브젝트가 특정 태그를 가지고 있다면 반환합니다.
             if (child.CompareTag(tag))
             {
                 return child.gameObject;
             }
 
-            // 재귀적으로 자식 오브젝트의 자식들을 탐색합니다.
             GameObject result = FindSiblingWithTag(child.gameObject, tag);
             if (result != null)
             {
                 return result;
             }
         }
-
-        // 일치하는 태그를 가진 오브젝트를 찾지 못한 경우 null을 반환합니다.
         return null;
     }
 
