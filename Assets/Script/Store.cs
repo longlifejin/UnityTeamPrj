@@ -23,9 +23,13 @@ public class Store : MonoBehaviour
 
     public GameObject lackOfGoldPopUp;
 
+    private AudioSource storeSFXAudioSource;
+    public AudioClip purchaseSFX;
+
     private void Start()
     {
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
+        storeSFXAudioSource = GetComponent<AudioSource>();
 
         if(Player.Instance.atkItemIndex < attackItemIds.Count)
         {
@@ -138,6 +142,8 @@ public class Store : MonoBehaviour
         }
         else
         {
+            storeSFXAudioSource.PlayOneShot(purchaseSFX);
+
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
 
@@ -171,6 +177,8 @@ public class Store : MonoBehaviour
         }
         else
         {
+            storeSFXAudioSource.PlayOneShot(purchaseSFX);
+
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
             Player.Instance.GainedHp += itemData.Value;
@@ -204,6 +212,8 @@ public class Store : MonoBehaviour
         }
         else
         {
+            storeSFXAudioSource.PlayOneShot(purchaseSFX);
+
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
             Player.Instance.GainedCritical += itemData.Value;
