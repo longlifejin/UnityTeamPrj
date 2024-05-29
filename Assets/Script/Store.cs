@@ -68,6 +68,7 @@ public class Store : MonoBehaviour
     {
         ItemData itemData = itemTable.Get(itemId);
         currentAtkItem = Instantiate(itemPrefab, atkItemSpace.transform);
+        currentAtkItem.transform.SetSiblingIndex(0);
         currentAtkItem.itemName.text = itemData.GetName;
         currentAtkItem.itemInfo.text = itemData.GetInfo;
         currentAtkItem.itemPrice.text = itemData.Gold.ToString();
@@ -88,6 +89,7 @@ public class Store : MonoBehaviour
     {
         ItemData itemData = itemTable.Get(itemId);
         currentHpItem = Instantiate(itemPrefab, hpItemSpace.transform);
+        currentHpItem.transform.SetSiblingIndex(0);
         currentHpItem.itemName.text = itemData.GetName;
         currentHpItem.itemInfo.text = itemData.GetInfo;
         currentHpItem.itemPrice.text = itemData.Gold.ToString();
@@ -108,6 +110,7 @@ public class Store : MonoBehaviour
     {
         ItemData itemData = itemTable.Get(itemId);
         currentCriticalItem = Instantiate(itemPrefab, criticalItemSpace.transform);
+        currentCriticalItem.transform.SetSiblingIndex(0);
         currentCriticalItem.itemName.text = itemData.GetName;
         currentCriticalItem.itemInfo.text = itemData.GetInfo;
         currentCriticalItem.itemPrice.text = itemData.Gold.ToString();
