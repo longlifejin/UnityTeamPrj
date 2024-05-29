@@ -237,6 +237,8 @@ public class BattleMgr : MonoBehaviour
 
     private void PlayerTurn()
     {
+        bossAnimator.ResetTrigger(AnimatorIds.bossDamagedAni);
+
         if(!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
