@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     public bool locked { get; set; }
 
     private Image background;
-    private Image tileImage;
+    //private Image tileImage;
     private TextMeshProUGUI text;
 
     private void Awake()

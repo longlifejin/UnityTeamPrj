@@ -107,7 +107,6 @@ public class BattleMgr : MonoBehaviour
 
     private void BossStopSwipe()
     {
-        Debug.Log("StopSwipe");
         gameMgr.isStopAttack = true;
         gameMgr.isReverseSAttack = false;
         gameMgr.isSecreteAttack = false;
@@ -117,7 +116,6 @@ public class BattleMgr : MonoBehaviour
 
     private void BossReverseSwipe()
     {
-        Debug.Log("ReverseSwipe");
         gameMgr.isReverseSAttack = true;
         gameMgr.isStopAttack = false;
         gameMgr.isSecreteAttack = false;
@@ -127,7 +125,6 @@ public class BattleMgr : MonoBehaviour
 
     private void BossSecretePuzzle()
     {
-        Debug.Log("SecretePuzzle");
         gameMgr.isSecreteAttack = true;
         gameMgr.isStopAttack = false;
         gameMgr.isReverseSAttack = false;
@@ -222,8 +219,6 @@ public class BattleMgr : MonoBehaviour
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
-        Debug.Log("플레이어 hp : " + Player.Instance.hp);
-        Debug.Log("보스 ID : " + bossID);
         InitBossSkill();
     }
 
@@ -299,7 +294,6 @@ public class BattleMgr : MonoBehaviour
         if(!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
-            //yield return new WaitForSeconds(1f);
 
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
@@ -319,7 +313,6 @@ public class BattleMgr : MonoBehaviour
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
-            Debug.Log("Boss HP : " + boss.hp);
         }
     }
 
@@ -327,24 +320,6 @@ public class BattleMgr : MonoBehaviour
     {
         if (!gameMgr.isPlayerDie)
         {
-            //StartCoroutine(gameMgr.PlayBossParticleSystem(gameMgr.bossParticle, gameMgr.bossParticlePos));
-            //yield return new WaitForSeconds(1f);
-
-            //if (bossSpecialAttack)
-            //{
-                
-
-            //}
-            //else
-            //{
-            //    bossAnimator.SetTrigger(AnimatorIds.bossAtkAni);
-            //}
-            //bossSpecialAttack = false;
-            
-            //yield return new WaitForSeconds(0.1f);
-
-
-
             if (currentBossAttackPattern >= 5)
             {
                 currentBossAttackPattern = 0;
@@ -352,11 +327,9 @@ public class BattleMgr : MonoBehaviour
             BossSkill skill = (BossSkill)boss.bossPattern[currentBossAttackPattern];
             bossSkillActions[skill].Invoke();
             ++currentBossAttackPattern;
-
         }
     }
     
-
     private void CheckHealth()
     {
         if (Player.Instance.hp <= 0)
@@ -389,7 +362,6 @@ public class BattleMgr : MonoBehaviour
     {
         if (Player.Instance.hp > 0 && boss.hp > 0)
         {
-            Debug.Log("Go Next Round");
             gameMgr.StartNextRound();
         }
     }

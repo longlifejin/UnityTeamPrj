@@ -424,7 +424,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.50181824
-        functionName: BossSpeicalAatackPlay
+        functionName: BossSpecialAttackPlay
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
