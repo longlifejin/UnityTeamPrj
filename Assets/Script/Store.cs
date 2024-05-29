@@ -54,12 +54,12 @@ public class Store : MonoBehaviour
 
         if (Player.Instance.criticalItemIndex < criticalItemIds.Count)
         {
-            CreateHpItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
+            CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
         }
         else
         {
             {
-                CreateHpItem(criticalItemIds[Player.Instance.criticalItemIndex - 1], Player.Instance.criticalItemIndex - 1);
+                CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex - 1], Player.Instance.criticalItemIndex - 1);
             }
         }
 

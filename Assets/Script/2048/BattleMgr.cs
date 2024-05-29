@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -89,9 +89,10 @@ public class BattleMgr : MonoBehaviour
     {
         bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
         playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
-        Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
-        Vector3 pos = new Vector3(-1.2f, 2.0f, -0.5f);
-        ShowDamage(boss.atk * gameMgr.filledGridCount, pos);
+        //Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
+        Player.Instance.hp -= 10;
+        Vector3 pos = new Vector3(-2.45f, 2f, -0.5f);
+        ShowDamage(10, pos);
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         CheckHealth();
@@ -289,9 +290,18 @@ public class BattleMgr : MonoBehaviour
 
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
             bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
-            boss.hp -= Player.Instance.atk * gameMgr.maxValue;
-            Vector3 pos = new Vector3(1.2f, 2f, -0.5f);
-            ShowDamage(Player.Instance.atk * gameMgr.maxValue, pos);
+
+            int criticalValue = 1;
+            int randomValue = Random.Range(0, 100);
+            if(randomValue <= Player.Instance.critical)
+            {
+                criticalValue = 2;
+            }
+            else
+
+            boss.hp -= Player.Instance.atk * criticalValue;
+            Vector3 pos = new Vector3(0f, 2f, -0.5f);
+            ShowDamage(Player.Instance.atk * criticalValue, pos);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
             CheckHealth();
