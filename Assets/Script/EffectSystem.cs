@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EffectSystem : MonoBehaviour
 {
@@ -34,6 +33,8 @@ public class EffectSystem : MonoBehaviour
 
     private void Start()
     {
+        playerParticle[0] = Instantiate(battleMgr.playerChargingParticles[0], battleMgr.battleMap.transform);
+        playerParticle[0].Stop();
     }
 
     public void BossAttackPlay()
@@ -81,7 +82,7 @@ public class EffectSystem : MonoBehaviour
         playerAudioSource.Play();
 
         int value = gameMgr.maxValue;
-        playerParticle[0] = Instantiate(battleMgr.playerChargingParticles[0], battleMgr.battleMap.transform);
+        
         Vector3 pos = new Vector3(-1.53f, 1.75f, -0.3f);
         playerParticle[0].transform.localPosition = pos;
         playerParticle[0].Play();
@@ -100,6 +101,7 @@ public class EffectSystem : MonoBehaviour
 
     public void PlayerAttackPlay()
     {
+        
         playerAudioSource.Stop();
         playerAudioSource.loop = false;
 

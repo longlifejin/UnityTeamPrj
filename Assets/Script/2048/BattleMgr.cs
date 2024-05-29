@@ -283,7 +283,7 @@ public class BattleMgr : MonoBehaviour
         {
             playerAnimator.SetTrigger(AnimatorIds.playerDieAni);
             gameMgr.isPlayerDie = true;
-
+            gameMgr.isPuzzleOver = true;
             bossAnimator.SetTrigger(AnimatorIds.bossVictoryAni);
         }
         else if (boss.hp <= 0)
@@ -291,6 +291,7 @@ public class BattleMgr : MonoBehaviour
             bossAnimator.SetTrigger(AnimatorIds.bossDiedAni);
             playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
             gameMgr.isBattleStageClear = true;
+            gameMgr.isPuzzleOver = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
             Player.Instance.gold += gainedGold;
         }

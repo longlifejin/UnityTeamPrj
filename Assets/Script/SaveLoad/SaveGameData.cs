@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using System;
-using static UnityEditor.Progress;
 
 
 public class SaveGameData : MonoBehaviour
