@@ -17,12 +17,9 @@ public class Store : MonoBehaviour
     private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
     private List<string> hpItemIds = new List<string> { "42001", "42002", "42003", "42004", "42005" };
     private List<string> criticalItemIds = new List<string> { "43001", "43002", "43003", "43004", "43005" };
-    private int currentAtkIndex = 0;
-    private int currentHpIndex = 0;
     private ItemSlot currentAtkItem;
     private ItemSlot currentHpItem;
     private ItemSlot currentCriticalItem;
-    private int atkIndex;
 
     public GameObject lackOfGoldPopUp;
 
@@ -127,12 +124,6 @@ public class Store : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
     private void PurchaseAtkItem(ItemData itemData)
     {
         var price = int.Parse(currentAtkItem.itemPrice.text);
@@ -231,12 +222,6 @@ public class Store : MonoBehaviour
             UpdateToggle(currentCriticalItem, Player.Instance.criticalItemIndex);
         }
     }
-
-
-
-
-
-
 
     private void UpdateToggle(ItemSlot itemSlot, int index)
     {

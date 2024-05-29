@@ -427,7 +427,6 @@ public class TileBoard : MonoBehaviour
         {
             if (specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
             {
-                Debug.Log("16Value in special Position");
                 gameMgr.playerParticlePos = tile.cell.transform.position;
                 tiles.Remove(tile);
                 Destroy(tile.gameObject);

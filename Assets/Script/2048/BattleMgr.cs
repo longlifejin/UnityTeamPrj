@@ -135,7 +135,6 @@ public class BattleMgr : MonoBehaviour
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
     }
 
-
     public void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
@@ -152,26 +151,15 @@ public class BattleMgr : MonoBehaviour
         }
         bossPrefab = Instantiate(bossPrefabs[(int)gameMgr.currentStage - 3001], battleMap.transform);
         bossPrefab.AddComponent<EffectSystem>();
-        bossPrefab.AddComponent<Enemy>();
-        bossPrefab.GetComponent<Enemy>().textData = floatTextData;
         bossPrefab.transform.localPosition = new Vector3(1.3f, 0f, 0f);
         bossPrefab.AddComponent<AudioSource>();
 
-        playerPos = new Vector3(-1.3f, 0f, 0f);
         bossPos = bossPrefab.transform.localPosition;
         bossAudioSource = bossPrefab.GetComponent<AudioSource>();
 
         var bossRot = Quaternion.Euler(0,-130,0);
         bossPrefab.transform.rotation = bossRot;
-
         bossAnimator = bossPrefab.GetComponent<Animator>();
-
-        Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
-        playerOriginHp = Player.Instance.hp;
-        Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
-        Player.Instance.critical = playerTable.Get(DataTableIds.playerID).Player_Critical + Player.Instance.gainedCritical;
-        Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
-
         DataTableIds.stageID = ((int)gameMgr.currentStage).ToString();
         string bossID = stageTable.Get(DataTableIds.stageID).Boss_ID;
         boss.name = stringTable.Get(bossTable.Get(bossID).Boss_Name);
@@ -180,14 +168,23 @@ public class BattleMgr : MonoBehaviour
         boss.atk = bossTable.Get(bossID).Boss_Atk;
 
         bossAttackInterval = bossTable.Get(bossID).Boss_ATKtime;
-
         boss.bossPattern[0] = bossTable.Get(bossID).Boss_patternA;
         boss.bossPattern[1] = bossTable.Get(bossID).Boss_patternB;
         boss.bossPattern[2] = bossTable.Get(bossID).Boss_patternC;
         boss.bossPattern[3] = bossTable.Get(bossID).Boss_patternD;
         boss.bossPattern[4] = bossTable.Get(bossID).Boss_patternE;
         boss.bossPattern[5] = bossTable.Get(bossID).Boss_patternF;
-        currentBossAttackPattern = 0;
+        currentBossAttackPattern = 0; 
+        
+        bossHpBar.fillAmount = boss.hp / bossOriginHp;
+        bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
+
+        playerPos = new Vector3(-1.3f, 0f, 0f);
+        Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
+        playerOriginHp = Player.Instance.hp;
+        Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
+        Player.Instance.critical = playerTable.Get(DataTableIds.playerID).Player_Critical + Player.Instance.gainedCritical;
+        Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
 
         battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
         var ground = stageTable.Get(DataTableIds.stageID).GetGround;
@@ -195,11 +192,10 @@ public class BattleMgr : MonoBehaviour
         groundMaterial.mainTexture = ground;
         battleGround.GetComponent<MeshRenderer>().material = groundMaterial;
 
-
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
-        bossHpBar.fillAmount = boss.hp / bossOriginHp;
         playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
-        bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
+        playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
+        playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
         timer = bossAttackInterval;
 
@@ -207,9 +203,6 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isBattleStageClear = false;
 
         quitMenu.SetActive(false);
-
-        playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
-        playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
         InitBossSkill();
     }

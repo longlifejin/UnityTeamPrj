@@ -19,7 +19,6 @@ public class EffectSystem : MonoBehaviour
     private AudioClip bossAttackAudioClip;
     private AudioClip bossSpecialAttackAudioClip;
 
-
     private void Awake()
     {
         GameObject gameManager = GameObject.FindWithTag("GameMgr");
@@ -31,12 +30,10 @@ public class EffectSystem : MonoBehaviour
         int stage = (int)gameMgr.currentStage - 3001;
 
         playerAudioSource = battleMgr.playerAudioSource;
-
     }
 
     private void Start()
     {
-        //StopAllCoroutines();
     }
 
     public void BossAttackPlay()
@@ -74,7 +71,6 @@ public class EffectSystem : MonoBehaviour
             bossParticle.Stop();
             Destroy(bossParticle.gameObject);
         }
-        
     }
 
     public void PlayerChargingPlay()
