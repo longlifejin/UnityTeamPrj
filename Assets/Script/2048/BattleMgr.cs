@@ -88,7 +88,6 @@ public class BattleMgr : MonoBehaviour
     {
         bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
         playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
-        //Player.Instance.hp -= boss.atk * gameMgr.filledGridCount;
         Player.Instance.hp -= 10;
         Vector3 pos = new Vector3(-2.45f, 2f, -0.5f);
         ShowDamage(10, pos, Color.white);
@@ -132,8 +131,6 @@ public class BattleMgr : MonoBehaviour
 
     private void Awake()
     {
-        //player = GameObject.FindWithTag("Player");
-
         stringTable = DataTableMgr.Get<StringTable>(DataTableIds.String);
         playerTable = DataTableMgr.Get<PlayerDataTable>(DataTableIds.PlayerTable);
         bossTable = DataTableMgr.Get<BossDataTable>(DataTableIds.BossTable);
@@ -191,6 +188,7 @@ public class BattleMgr : MonoBehaviour
         boss.bossPattern[2] = bossTable.Get(bossID).Boss_patternC;
         boss.bossPattern[3] = bossTable.Get(bossID).Boss_patternD;
         boss.bossPattern[4] = bossTable.Get(bossID).Boss_patternE;
+        boss.bossPattern[5] = bossTable.Get(bossID).Boss_patternF;
         currentBossAttackPattern = 0;
 
         battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
@@ -211,7 +209,6 @@ public class BattleMgr : MonoBehaviour
         gameMgr.isBattleStageClear = false;
 
         quitMenu.SetActive(false);
-        //bossSpecialAttack = false;
 
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
@@ -221,19 +218,6 @@ public class BattleMgr : MonoBehaviour
 
     private void Update()
     {
-        //if (gameMgr.isPlayerFirst && !gameMgr.isBossFirst)
-        //{
-        //    StartCoroutine(PlayerFirst());
-        //    gameMgr.isPlayerFirst = false;
-        //}
-
-        //if (gameMgr.isBossFirst && !gameMgr.isPlayerFirst)
-        //{
-        //    StartCoroutine(BossFirst());
-        //    gameMgr.isBossFirst = false;
-        //    bossSpecialAttack = true;
-        //}
-
         if (is16Attack)
         {
             PlayerTurn();
@@ -259,32 +243,6 @@ public class BattleMgr : MonoBehaviour
             CheckHealth();
         }
     }
-
-    //private IEnumerator PlayerFirst()
-    //{
-    //    Debug.Log("PlayerFirst Start");
-    //    yield return StartCoroutine(PlayerTurn());
-    //    if(!gameMgr.isBattleStageClear)
-    //    {
-    //        yield return StartCoroutine(BossTurn());
-    //    }
-    //    if(!gameMgr.isPlayerDie && !gameMgr.isBattleStageClear)
-    //    {
-    //        GoNextRound();
-    //    }
-    //}
-    //private IEnumerator BossFirst()
-    //{
-    //    Debug.Log("BossFirst Start");
-    //    boss.atk *= 32;
-    //    yield return StartCoroutine(BossTurn());
-
-    //    if (!gameMgr.isBattleStageClear && !gameMgr.isPlayerDie)
-    //    {
-    //        yield return StartCoroutine(PlayerTurn());
-    //        GoNextRound();
-    //    }
-    //}
 
     private void PlayerTurn()
     {
@@ -318,7 +276,7 @@ public class BattleMgr : MonoBehaviour
     {
         if (!gameMgr.isPlayerDie)
         {
-            if (currentBossAttackPattern >= 5)
+            if (currentBossAttackPattern >= 6)
             {
                 currentBossAttackPattern = 0;
             }
@@ -336,8 +294,6 @@ public class BattleMgr : MonoBehaviour
             gameMgr.isPlayerDie = true;
 
             bossAnimator.SetTrigger(AnimatorIds.bossVictoryAni);
-
-            //StopAllCoroutines();
         }
         else if (boss.hp <= 0)
         {
@@ -346,8 +302,6 @@ public class BattleMgr : MonoBehaviour
             gameMgr.isBattleStageClear = true;
             gainedGold = stageTable.Get(DataTableIds.stageID).Stage_Reward;
             Player.Instance.gold += gainedGold;
-
-           // StopAllCoroutines();
         }
         else
         {
@@ -356,23 +310,15 @@ public class BattleMgr : MonoBehaviour
         gameMgr.BattleOver();
     }
 
-    private void GoNextRound()
-    {
-        if (Player.Instance.hp > 0 && boss.hp > 0)
-        {
-            gameMgr.StartNextRound();
-        }
-    }
+    //private void GoNextRound()
+    //{
+    //    if (Player.Instance.hp > 0 && boss.hp > 0)
+    //    {
+    //        gameMgr.StartNextRound();
+    //    }
+    //}
     public void ShowDamage(int damage, Vector3 position, Color damageCol)
     {
-        //var floatingText = Instantiate(playerfloatingDamage, battleMap.transform);
-
-        //playerfloatingDamage.transform.localPosition = position;
-        //var text = playerfloatingDamage.GetComponentInChildren<TextMeshProUGUI>();
-        //text.text = damage.ToString();
-        //position.z += 10f;
-        //playerfloatingDamage.transform.DOMove(position, 1f);
-        //StartCoroutine(RemoveDamageText(floatingText));
         var floatingText = Instantiate(playerfloatingDamage, battleMap.GetComponentInChildren<Canvas>().transform);
 
         floatingText.transform.localPosition = position;
@@ -380,21 +326,12 @@ public class BattleMgr : MonoBehaviour
         text.color = damageCol;
         text.text = damage.ToString();
 
-        // Animate the damage text
-        Vector3 endPosition = position + new Vector3(0, 1f, 0); // Adjust the Y value to move upwards
+        Vector3 endPosition = position + new Vector3(0, 1f, 0);
         floatingText.transform.DOLocalMove(endPosition, 1.5f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             Destroy(floatingText);
         });
-
-        // Fade out the text
         text.DOFade(0, 1.5f);
-    }
-
-    private IEnumerator RemoveDamageText(GameObject textObject)
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(textObject);
     }
 
     public void OnClickQuit()

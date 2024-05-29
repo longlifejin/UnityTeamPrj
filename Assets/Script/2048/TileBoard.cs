@@ -21,11 +21,6 @@ public class TileBoard : MonoBehaviour
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
 
-    private float limitTime = 20f;
-    private float timer;
-
-    //public Image timeBar;
-
     public Button puzzleStartButton;
 
     public GameObject gameManager;
@@ -34,7 +29,6 @@ public class TileBoard : MonoBehaviour
     public Animator playerAnimator;
     public Animator bossAnimator;
 
-    private List<ParticleSystem> activeParticularParticles;
     private List<GameObject> activeParticleImages;
 
     public GameObject framePrefab;
@@ -45,7 +39,6 @@ public class TileBoard : MonoBehaviour
     {
         grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
-        activeParticularParticles = new List<ParticleSystem>();
 
         specialPos = new List<Vector2Int>
         {
@@ -66,13 +59,10 @@ public class TileBoard : MonoBehaviour
         tiles = new List<Tile>(16);
         gameStart = false;
         isGridFull = false;
-
-        timer = limitTime;
     }
 
     private void Start()
     {
-        timer = limitTime;
         activeParticleImages = new List<GameObject>();
         secretePanel.SetActive(false);
     }
@@ -106,8 +96,6 @@ public class TileBoard : MonoBehaviour
     {
         if (!waiting && gameStart && !gameMgr.isPuzzleOver)
         {
-            //timeBar.fillAmount = timer / limitTime;
-            timer -= Time.deltaTime;
             puzzleStartButton.gameObject.SetActive(false);
 
             if (gameMgr.isReverseSAttack)
@@ -150,27 +138,18 @@ public class TileBoard : MonoBehaviour
             //    Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
             //}
         }
-
-        //if (timer <= 0f)
+        
+        //else if (isGridFull)
         //{
         //    gameMgr.playerParticlePos = grid.GetMaxGridPos();
         //    gameMgr.bossParticlePos = grid.GetfilledGridPos();
 
-        //    gameMgr.isTimeOver = true;
+        //    gameMgr.isGridFull = true;
         //    gameMgr.isPuzzleOver = true;
+        //    gameMgr.filledGridCount = grid.cells.Length;
         //    timer = limitTime;
+        //    isGridFull = false;
         //}
-        else if (isGridFull)
-        {
-            gameMgr.playerParticlePos = grid.GetMaxGridPos();
-            gameMgr.bossParticlePos = grid.GetfilledGridPos();
-
-            gameMgr.isGridFull = true;
-            gameMgr.isPuzzleOver = true;
-            gameMgr.filledGridCount = grid.cells.Length;
-            timer = limitTime;
-            isGridFull = false;
-        }
     }
 
     public void ResetPuzzle()
@@ -190,10 +169,6 @@ public class TileBoard : MonoBehaviour
         gameMgr.filledGridCount = 0;
 
         playerAnimator.SetTrigger(AnimatorIds.playerIdleAni);
-
-        timer = limitTime;
-        //timeBar.fillAmount = 1f;
-
         gameStart = false;
         puzzleStartButton.gameObject.SetActive(true);
 
@@ -282,8 +257,6 @@ public class TileBoard : MonoBehaviour
 
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
-
-
         bool changed = false;
 
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
@@ -313,11 +286,7 @@ public class TileBoard : MonoBehaviour
         if (gameMgr.filledGridCount == 16)
         {
             isGridFull = true;
-            //TO-DO : 게임 오버 처리하기
         }
-        gameMgr.maxValue = grid.GetMaxGridValue();
-        
-        
     }
 
     private bool MoveTile(Tile tile, Vector2Int direction)
@@ -334,7 +303,6 @@ public class TileBoard : MonoBehaviour
                     MergeTiles(tile, adjacent.tile);
                     return true;
                 }
-
                 break;
             }
 
@@ -347,7 +315,6 @@ public class TileBoard : MonoBehaviour
             tile.MoveTo(newCell);
             return true;
         }
-
         return false;
     }
 
@@ -357,7 +324,6 @@ public class TileBoard : MonoBehaviour
         {
             return false;
         }
-
         return a.state == b.state && !b.locked;
     }
 
@@ -375,7 +341,6 @@ public class TileBoard : MonoBehaviour
         TileState newState = tileStates[index];
 
         b.SetState(newState);
-        //PuzzleManager.Instance.IncreaseScore(newState.number);
     }
 
     private int IndexOf(TileState state)
@@ -387,7 +352,6 @@ public class TileBoard : MonoBehaviour
                 return i;
             }
         }
-
         return -1;
     }
 
@@ -408,10 +372,6 @@ public class TileBoard : MonoBehaviour
         {
             CreateTile();
         }
-
-        //if (CheckForGameOver()) {
-        //    PuzzleManager.Instance.GameOver();
-        //}
     }
 
     public bool CheckForGameOver()
@@ -448,7 +408,6 @@ public class TileBoard : MonoBehaviour
                 return false;
             }
         }
-
         return true;
     }
 

@@ -19,6 +19,7 @@ public class BossData
     public int Boss_patternC { get; set; }
     public int Boss_patternD { get; set; }
     public int Boss_patternE { get; set; }
+    public int Boss_patternF { get; set; }
 
     public string GetName
     {

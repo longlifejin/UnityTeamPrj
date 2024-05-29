@@ -22,7 +22,6 @@ public class GameMgr : MonoBehaviour
     public bool isStopAttack = false;
     public bool isSecreteAttack = false;
 
-
     public int filledGridCount;
     public int maxValue;
 
@@ -64,7 +63,14 @@ public class GameMgr : MonoBehaviour
 
     public GameObject stage1_Tutorial;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        bossParticlePos = new List<Vector2>();
 
+        puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
+        battleMgr = battleManager.GetComponent<BattleMgr>();
+    }
 
     private void Start()
     {
@@ -91,13 +97,6 @@ public class GameMgr : MonoBehaviour
         }
 
         isGameStart = false;
-
-        audioSource = GetComponent<AudioSource>();
-        //bossAnimator = GameObject.FindWithTag("Boss").GetComponent<Animator>();
-        bossParticlePos = new List<Vector2>();
-
-        puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
-        battleMgr = battleManager.GetComponent<BattleMgr>();
 
         victoryRestartButton.onClick.AddListener(() => 
         { 
@@ -151,9 +150,7 @@ public class GameMgr : MonoBehaviour
         if (isGridFull)
         {
             audioSource.PlayOneShot(puzzleEndSound);
-            //isPlayerDie = true;
             isGridFull = false;
-            //isBossFirst = true;
         }
     }
 
@@ -200,8 +197,6 @@ public class GameMgr : MonoBehaviour
         isPlayerDie = false;
         isBattleStageClear = false;
     }
-
-    
 
     public IEnumerator PlayParticleSystem(ParticleSystem particle)
     {
