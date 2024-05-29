@@ -85,6 +85,7 @@ public class TileBoard : MonoBehaviour
     public void CreateTile()
     {
         Tile tile = Instantiate(tilePrefab, grid.transform);
+        tile.transform.SetSiblingIndex(4);
         tile.SetState(tileStates[0]);
         tile.Spawn(grid.GetRandomEmptyCell());
         RectTransform rectTransform = tile.GetComponent<RectTransform>();
