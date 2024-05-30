@@ -1,4 +1,4 @@
-Stage_ID,Boss_ID,Stage_Name,Stage_Reward,Stage_Info,Stage_Image,Stage_Back,Stage_Ground
+﻿Stage_ID,Boss_ID,Stage_Name,Stage_Reward,Stage_Info,Stage_Image,Stage_Back,Stage_Ground
 3001,2001,StageName1,150,StageInfo1,Stage1_Select,Stage1_Back,Stage1_Ground
 3002,2002,StageName2,250,StageInfo2,Stage2_Select,Stage2_Back,Stage2_Ground
 3003,2003,StageName3,350,StageInfo3,Stage3_Select,Stage3_Back,Stage3_Ground

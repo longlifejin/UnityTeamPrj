@@ -1,4 +1,4 @@
-Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
+﻿Item_ID,Item_type,Item_Name,Value,Gold,Stack,Item_Info,Item_Image
 41001,1,ItemName1,3,400,1,ItemInfo1,StoreIcon_ATK
 41002,1,ItemName2,5,800,1,ItemInfo2,StoreIcon_ATK
 41003,1,ItemName3,6,1200,1,ItemInfo3,StoreIcon_ATK
