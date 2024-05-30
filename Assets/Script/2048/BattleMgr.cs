@@ -33,6 +33,7 @@ public class BattleMgr : MonoBehaviour
 
     public Animator playerAnimator;
     public Animator bossAnimator;
+    private AnimatorStateInfo bossAnimatorInfo;
 
     public int gainedGold;
 
@@ -244,14 +245,26 @@ public class BattleMgr : MonoBehaviour
 
     private void PlayerTurn()
     {
-        bossAnimator.ResetTrigger(AnimatorIds.bossDamagedAni);
+        //bossAnimator.ResetTrigger(AnimatorIds.bossDamagedAni);
 
-        if(!gameMgr.isPlayerDie)
+
+        if (!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
 
+
+            bossAnimatorInfo = bossAnimator.GetCurrentAnimatorStateInfo(0);
+
+            if (bossAnimatorInfo.IsName(AnimatorIds.bossDamagedAni))
+            {
+                bossAnimator.Play(AnimatorIds.bossDamagedAni, -1, 0f);
+            }
+            else
+            {
+                bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
+            }
             playerAnimator.SetTrigger(AnimatorIds.playerAtkAni);
-            bossAnimator.SetTrigger(AnimatorIds.bossDamagedAni);
+            
 
             int criticalValue = 1;
             Color damageColor = Color.white;
