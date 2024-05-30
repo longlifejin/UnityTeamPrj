@@ -435,7 +435,7 @@ public class TileBoard : MonoBehaviour
         foreach (var tile in tiles)
         {
             if (specialPos.Contains(tile.cell.coordinates) && tile.state.number == 16)
-            {
+            {                
                 gameMgr.playerParticlePos = tile.cell.transform.position;
                 tiles.Remove(tile);
                 Destroy(tile.gameObject);

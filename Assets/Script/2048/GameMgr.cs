@@ -133,6 +133,9 @@ public class GameMgr : MonoBehaviour
         if(is16Value)
         {
             playerParticle.transform.position = playerParticlePos;
+            var pos = playerParticle.transform.localPosition;
+            pos.x += 80f;
+            playerParticle.transform.localPosition = pos;
             battleMgr.is16Attack = true;
             is16Value = false;
         }
@@ -171,8 +174,15 @@ public class GameMgr : MonoBehaviour
             audioSource.PlayOneShot(clearSound);
             victoryGoldText.text = $"{battleMgr.gainedGold}";
 
-            currentStage += 1;
-            Player.Instance.stageClear[(int)currentStage-3001] = true;
+            if(currentStage == Stage.eightth)
+            {
+                Player.Instance.stageClear[(int)currentStage - 3001] = true;
+            }
+            else
+            {
+                currentStage += 1;
+                Player.Instance.stageClear[(int)currentStage-3001] = true;
+            }
 
         }
         SaveLoadSystem.Save();

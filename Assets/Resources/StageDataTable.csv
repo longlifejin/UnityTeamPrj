@@ -3,7 +3,7 @@ Stage_ID,Boss_ID,Stage_Name,Stage_Reward,Stage_Info,Stage_Image,Stage_Back,Stage
 3002,2002,StageName2,250,StageInfo2,Stage2_Select,Stage2_Back,Stage2_Ground
 3003,2003,StageName3,350,StageInfo3,Stage3_Select,Stage3_Back,Stage3_Ground
 3004,2004,StageName4,450,StageInfo4,Stage4_Select,Stage4_Back,Stage4_Ground
-3005,2005,StageName5,650,StageInfo5,Stage5_Select,Stage5_Back,Stage5_Ground
-3006,2006,StageName6,800,StageInfo6,Stage6_Select,Stage6_Back,Stage6_Ground
-3007,2007,StageName7,800,StageInfo7,Stage7_Select,Stage7_Back,Stage7_Ground
-3008,2008,StageName8,777,StageInfo8,Stage8_Select,Stage8_Back,Stage8_Ground
+3005,2005,StageName5,750,StageInfo5,Stage5_Select,Stage5_Back,Stage5_Ground
+3006,2006,StageName6,1000,StageInfo6,Stage6_Select,Stage6_Back,Stage6_Ground
+3007,2007,StageName7,1100,StageInfo7,Stage7_Select,Stage7_Back,Stage7_Ground
+3008,2008,StageName8,1500,StageInfo8,Stage8_Select,Stage8_Back,Stage8_Ground
