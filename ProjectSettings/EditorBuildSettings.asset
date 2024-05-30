@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/EntranceStorePopUp.unity
     guid: 6a33e0e56e7b1b64db439ffcefd2f235
   - enabled: 1
-    path: Assets/Scenes/Puzzle&Battle.unity
+    path: Assets/Scenes/Puzzle&Battle_before.unity
     guid: 7b7ef1b900beaa7428098f4b9145d96d
   - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 04e33ef3cbd4e1b469c29462dd7e2a3f
+  - enabled: 1
+    path: Assets/Scenes/Puzzle&Battle.unity
+    guid: 0f6e0990c32d628458209f862bdbe7d9
   m_configObjects: {}

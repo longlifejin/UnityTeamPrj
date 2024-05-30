@@ -23,7 +23,10 @@ public class BattleMgr : MonoBehaviour
     public GameObject player;
 
     public Image playerHpBar;
+    public TextMeshProUGUI playerHpText;
     public Image bossHpBar;
+    public TextMeshProUGUI bossHpText;
+
 
     private float playerOriginHp;
     private float bossOriginHp;
@@ -92,7 +95,7 @@ public class BattleMgr : MonoBehaviour
         Player.Instance.hp -= 10;
         
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
-        playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
+        playerHpText.text = $"{Player.Instance.hp} / {playerOriginHp}";
         CheckHealth();
 
         gameMgr.isStopAttack = false;
@@ -179,7 +182,7 @@ public class BattleMgr : MonoBehaviour
         currentBossAttackPattern = 0; 
         
         bossHpBar.fillAmount = boss.hp / bossOriginHp;
-        bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
+        bossHpText.text = $"{boss.hp} / {bossOriginHp}";
 
         playerPos = new Vector3(-1.3f, 0f, 0f);
         player.gameObject.transform.localPosition = playerPos;
@@ -196,7 +199,7 @@ public class BattleMgr : MonoBehaviour
         battleGround.GetComponent<MeshRenderer>().material = groundMaterial;
 
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
-        playerHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{Player.Instance.hp} / {playerOriginHp}";
+        playerHpText.text = $"{Player.Instance.hp} / {playerOriginHp}";
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
 
@@ -264,7 +267,7 @@ public class BattleMgr : MonoBehaviour
             ShowDamage(Player.Instance.atk * criticalValue, pos, damageColor);
 
             bossHpBar.fillAmount = boss.hp / bossOriginHp;
-            bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = $"{boss.hp} / {bossOriginHp}";
+            bossHpText.text = $"{boss.hp} / {bossOriginHp}";
             CheckHealth();
         }
     }
