@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,6 +28,9 @@ public class StageSelect : MonoBehaviour
     public AudioSource stageSFXAudioSource;
     public AudioClip selectStageSFX;
     public AudioClip stageStartSFX;
+
+    public GameObject loadingPopUp;
+    public Slider loadingSlider;
 
     private void Awake()
     {
@@ -124,7 +126,9 @@ public class StageSelect : MonoBehaviour
             currStage = selectedStage;
             Player.Instance.currentStage = ((int)currStage).ToString();
             stageSelectAudioSource.Stop();
-            SceneManager.LoadScene("Puzzle&Battle");
+            stageInfo.gameObject.SetActive(false);
+            LoadScene(2);
+            //SceneManager.LoadScene("Puzzle&Battle");
         });
     }
 
@@ -195,6 +199,27 @@ public class StageSelect : MonoBehaviour
                 toggle.interactable = false;
             }
         }
+    }
+
+    public void LoadScene(int sceneIndex)
+    {
+        StartCoroutine(LoadAsynchronously(sceneIndex));
+    }
+
+    private IEnumerator LoadAsynchronously(int sceneIndex)
+    {
+        loadingPopUp.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingSlider.value = progress;
+            yield return null;
+        }
+
+        loadingPopUp.SetActive(false);
     }
 
 }
