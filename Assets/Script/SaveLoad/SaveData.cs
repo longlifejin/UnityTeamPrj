@@ -18,6 +18,7 @@ public class SaveDataV1 : SaveData
     public int lastCleardStage;
     public int atkItemIndex;
     public int hpItemIndex;
+    public int criticalItemIndex;
 
 
     public SaveDataV1()

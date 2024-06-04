@@ -19,6 +19,7 @@ public class GameDataJsonConverter : JsonConverter<SaveDataV1>
         data.lastCleardStage = (int)jobj["LastClearedStage"];
         data.atkItemIndex = (int)(jobj["AtkItemIndex"]);
         data.hpItemIndex = (int)(jobj["HpItemIndex"]);
+        data.criticalItemIndex = (int)(jobj["CriticalItemIndex"]);
         return data;
     }
 
@@ -39,6 +40,8 @@ public class GameDataJsonConverter : JsonConverter<SaveDataV1>
         writer.WriteValue(value.atkItemIndex);
         writer.WritePropertyName("HpItemIndex");
         writer.WriteValue(value.hpItemIndex);
+        writer.WritePropertyName("CriticalItemIndex");
+        writer.WriteValue(value.criticalItemIndex);
         writer.WriteEndObject();
     }
 }

@@ -15,6 +15,7 @@ public class SaveGameData : MonoBehaviour
     public int lastCleardStage;
     public int atkItemIndex;
     public int hpItemIndex;
+    public int criticalItemIndex;
     public string currentStage;
 
     public void Save()
@@ -26,6 +27,7 @@ public class SaveGameData : MonoBehaviour
         gold = Player.Instance.gold;
         atkItemIndex = Player.Instance.atkItemIndex;
         hpItemIndex = Player.Instance.hpItemIndex;
+        criticalItemIndex = Player.Instance.criticalItemIndex;
         currentStage = Player.Instance.currentStage;
 
         lastCleardStage = Player.Instance.stageClear.FindLastIndex(stage => stage);
@@ -39,6 +41,7 @@ public class SaveGameData : MonoBehaviour
             lastCleardStage = lastCleardStage,
             atkItemIndex = atkItemIndex,
             hpItemIndex = hpItemIndex,
+            criticalItemIndex = criticalItemIndex,
         };
 
         SaveLoadSystem.CurrSaveData = data;
@@ -63,6 +66,7 @@ public class SaveGameData : MonoBehaviour
             Player.Instance.gold = data.gold;
             Player.Instance.atkItemIndex = data.atkItemIndex;
             Player.Instance.hpItemIndex = data.hpItemIndex;
+            Player.Instance.criticalItemIndex = data.criticalItemIndex;
 
             Player.Instance.stageClear.Clear();
             for (int i = 0; i <= data.lastCleardStage; i++)

@@ -6,29 +6,13 @@ using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
-    //public static PuzzleManager Instance { get; private set; }
-
     [SerializeField] private TileBoard board;
     [SerializeField] private CanvasGroup gameOver;
 
     public Camera puzzleCamera;
 
-
-    //[SerializeField] private TextMeshProUGUI scoreText;
-    //[SerializeField] private TextMeshProUGUI hiscoreText;
-
-    //private int score;
-    //public int Score => score;
-
     private void Awake()
     {
-        //if (Instance != null) {
-        //    DestroyImmediate(gameObject);
-        //} else {
-        //    Instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-
     }
 
     private void Start()
@@ -42,15 +26,8 @@ public class PuzzleManager : MonoBehaviour
     public void NewGame()
     {
         board.ResetPuzzle();
-        // reset score
-        //SetScore(0);
-        //hiscoreText.text = LoadHiscore().ToString();
-
-        // hide game over screen
         gameOver.alpha = 0f;
         gameOver.interactable = false;
-
-        // update board state
         board.ClearBoard();
         board.CreateTile();
         board.CreateTile();
@@ -82,33 +59,4 @@ public class PuzzleManager : MonoBehaviour
 
         canvasGroup.alpha = to;
     }
-
-
-    //public void IncreaseScore(int points)
-    //{
-    //    SetScore(score + points);
-    //}
-
-    //private void SetScore(int score)
-    //{
-    //    this.score = score;
-    //    scoreText.text = score.ToString();
-
-    //    SaveHiscore();
-    //}
-
-    //private void SaveHiscore()
-    //{
-    //    int hiscore = LoadHiscore();
-
-    //    if (score > hiscore) {
-    //        PlayerPrefs.SetInt("hiscore", score);
-    //    }
-    //}
-
-    //private int LoadHiscore()
-    //{
-    //    return PlayerPrefs.GetInt("hiscore", 0);
-    //}
-
 }

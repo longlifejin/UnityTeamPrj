@@ -56,6 +56,7 @@ public static class SaveLoadSystem
             lastCleardStage = Player.Instance.stageClear.FindLastIndex(stage => stage),
             atkItemIndex = Player.Instance.atkItemIndex,
             hpItemIndex = Player.Instance.hpItemIndex,
+            criticalItemIndex = Player.Instance.criticalItemIndex,
         };
 
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
@@ -109,6 +110,7 @@ public static class SaveLoadSystem
         Player.Instance.gold = CurrSaveData.gold;
         Player.Instance.atkItemIndex = CurrSaveData.atkItemIndex;
         Player.Instance.hpItemIndex = CurrSaveData.hpItemIndex;
+        Player.Instance.criticalItemIndex = CurrSaveData.criticalItemIndex;
 
         Player.Instance.stageClear.Clear();
         for (int i = 0; i <= CurrSaveData.lastCleardStage; i++)

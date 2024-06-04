@@ -1,4 +1,3 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -245,9 +244,6 @@ public class BattleMgr : MonoBehaviour
 
     private void PlayerTurn()
     {
-        //bossAnimator.ResetTrigger(AnimatorIds.bossDamagedAni);
-
-
         if (!gameMgr.isPlayerDie)
         {
             StartCoroutine(gameMgr.PlayParticleSystem(gameMgr.playerParticle));
@@ -324,13 +320,6 @@ public class BattleMgr : MonoBehaviour
         gameMgr.BattleOver();
     }
 
-    //private void GoNextRound()
-    //{
-    //    if (Player.Instance.hp > 0 && boss.hp > 0)
-    //    {
-    //        gameMgr.StartNextRound();
-    //    }
-    //}
     public void ShowDamage(int damage, Vector3 position, Color damageCol)
     {
         var floatingText = Instantiate(playerfloatingDamage, battleMap.GetComponentInChildren<Canvas>().transform);

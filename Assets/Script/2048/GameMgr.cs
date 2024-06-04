@@ -153,7 +153,6 @@ public class GameMgr : MonoBehaviour
 
         if (isGridFull)
         {
-            //audioSource.PlayOneShot(puzzleEndSound);
             Player.Instance.hp = 0;
             battleMgr.CheckHealth();
             isGridFull = false;

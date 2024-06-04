@@ -49,5 +49,4 @@ public static class StageName
     public static readonly string entrance = "EntranceStorePopUp";
     public static readonly string stageSelect = "StageSelect";
     public static readonly string mainGame = "Puzzle&Battle";
-
 }

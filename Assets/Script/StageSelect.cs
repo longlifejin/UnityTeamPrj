@@ -128,7 +128,6 @@ public class StageSelect : MonoBehaviour
             stageSelectAudioSource.Stop();
             stageInfo.gameObject.SetActive(false);
             LoadScene(2);
-            //SceneManager.LoadScene("Puzzle&Battle");
         });
     }
 
