@@ -202,7 +202,7 @@ public class GameMgr : MonoBehaviour
             }
             isSecreteAttack = false;
             puzzleMgr.NewGame();
-            battleMgr.Start();
+            battleMgr.StartStage();
             audioSource.Stop();
         }
         isGameStart = false;
@@ -239,7 +239,7 @@ public class GameMgr : MonoBehaviour
     public void RestartGame()
     {
         puzzleMgr.NewGame();
-        battleMgr.Start();
+        battleMgr.StartStage();
         isPlayerDie = false;
         isBattleStageClear = false;
         isGameStart = false;

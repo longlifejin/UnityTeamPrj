@@ -139,7 +139,7 @@ public class BattleMgr : MonoBehaviour
         stageTable = DataTableMgr.Get<StageDataTable>(DataTableIds.StageTable);
     }
 
-    public void Start()
+    private void Start()
     {
         gameMgr = gameManager.GetComponent<GameMgr>();
         battleAudioSource = GetComponent<AudioSource>();
@@ -147,9 +147,23 @@ public class BattleMgr : MonoBehaviour
         battleAudioSource.clip = battleBGMClips[(int)gameMgr.currentStage - 3001];
         battleAudioSource.Play();
         reverseParticle.gameObject.SetActive(false);
-        
+        gameMgr.isPlayerDie = false;
+        gameMgr.isBattleStageClear = false;
+        quitMenu.SetActive(false);
+        StartStage();
+    }
 
+    public void StartStage()
+    {
+        SetStage();
+        SetBoss();
+        SetPlayer();
 
+        InitBossSkill();
+    }
+
+    private void SetBoss()
+    {
         if (bossPrefab != null)
         {
             Destroy(bossPrefab);
@@ -162,7 +176,7 @@ public class BattleMgr : MonoBehaviour
         bossPos = bossPrefab.transform.localPosition;
         bossAudioSource = bossPrefab.GetComponent<AudioSource>();
 
-        var bossRot = Quaternion.Euler(0,-130,0);
+        var bossRot = Quaternion.Euler(0, -130, 0);
         bossPrefab.transform.rotation = bossRot;
         bossAnimator = bossPrefab.GetComponent<Animator>();
         DataTableIds.stageID = ((int)gameMgr.currentStage).ToString();
@@ -179,11 +193,27 @@ public class BattleMgr : MonoBehaviour
         boss.bossPattern[3] = bossTable.Get(bossID).Boss_patternD;
         boss.bossPattern[4] = bossTable.Get(bossID).Boss_patternE;
         boss.bossPattern[5] = bossTable.Get(bossID).Boss_patternF;
-        currentBossAttackPattern = 0; 
-        
+        currentBossAttackPattern = 0;
+
         bossHpBar.fillAmount = boss.hp / bossOriginHp;
         bossHpText.text = $"{boss.hp} / {bossOriginHp}";
 
+
+        timer = bossAttackInterval;
+        gameMgr.bossAttackTime = bossAttackInterval;
+    }
+
+    private void SetStage()
+    {
+        battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
+        var ground = stageTable.Get(DataTableIds.stageID).GetGround;
+        Material groundMaterial = new Material(Shader.Find("Standard"));
+        groundMaterial.mainTexture = ground;
+        battleGround.GetComponent<MeshRenderer>().material = groundMaterial;
+    }
+
+    private void SetPlayer()
+    {
         playerPos = new Vector3(-1.3f, 0f, 0f);
         player.gameObject.transform.localPosition = playerPos;
         Player.Instance.hp = playerTable.Get(DataTableIds.playerID).Player_Hp + Player.Instance.gainedHp;
@@ -191,27 +221,10 @@ public class BattleMgr : MonoBehaviour
         Player.Instance.atk = playerTable.Get(DataTableIds.playerID).Player_Atk + Player.Instance.gainedAtk;
         Player.Instance.critical = playerTable.Get(DataTableIds.playerID).Player_Critical + Player.Instance.gainedCritical;
         Player.Instance.imageId = playerTable.Get(DataTableIds.playerID).Player_Image;
-
-        battleBack.texture = stageTable.Get(DataTableIds.stageID).GetBack;
-        var ground = stageTable.Get(DataTableIds.stageID).GetGround;
-        Material groundMaterial = new Material(Shader.Find("Standard"));
-        groundMaterial.mainTexture = ground;
-        battleGround.GetComponent<MeshRenderer>().material = groundMaterial;
-
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         playerHpText.text = $"{Player.Instance.hp} / {playerOriginHp}";
         playerAnimator.ResetTrigger(AnimatorIds.playerAtkAni);
         playerAnimator.ResetTrigger(AnimatorIds.playerDamagedAni);
-
-        timer = bossAttackInterval;
-        gameMgr.bossAttackTime = bossAttackInterval;
-
-        gameMgr.isPlayerDie = false;
-        gameMgr.isBattleStageClear = false;
-
-        quitMenu.SetActive(false);
-
-        InitBossSkill();
     }
 
     private void Update()
@@ -363,6 +376,11 @@ public class BattleMgr : MonoBehaviour
 
     private void InitBossSkill()
     {
+        if(bossSkillActions != null)
+        {
+            bossSkillActions.Clear();
+        }
+
         bossSkillActions = new Dictionary<BossSkill, System.Action>
         {
             { BossSkill.Normal, BossNormalAttack },
