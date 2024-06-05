@@ -26,7 +26,7 @@ public class GameMgr : MonoBehaviour
     public int maxValue;
 
     public GameObject puzzleManager;
-    private PuzzleManager puzzleMgr;
+    private PuzzleMgr puzzleMgr;
     public GameObject battleManager;
     private BattleMgr battleMgr;
 
@@ -69,7 +69,7 @@ public class GameMgr : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bossParticlePos = new List<Vector2>();
 
-        puzzleMgr = puzzleManager.GetComponent<PuzzleManager>();
+        puzzleMgr = puzzleManager.GetComponent<PuzzleMgr>();
         battleMgr = battleManager.GetComponent<BattleMgr>();
     }
 

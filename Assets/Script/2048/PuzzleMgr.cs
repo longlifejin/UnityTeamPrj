@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PuzzleManager : MonoBehaviour
+public class PuzzleMgr : MonoBehaviour
 {
     [SerializeField] private TileBoard board;
     [SerializeField] private CanvasGroup gameOver;
