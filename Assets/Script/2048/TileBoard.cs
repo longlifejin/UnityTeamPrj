@@ -9,6 +9,7 @@ public class TileBoard : MonoBehaviour
 {
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private TileState[] tileStates;
+    [SerializeField] private HitZone[] hitZones;
 
     private TileGrid grid;
     private List<Tile> tiles;
@@ -40,22 +41,6 @@ public class TileBoard : MonoBehaviour
         grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
 
-        specialPos = new List<Vector2Int>
-        {
-            new Vector2Int(0, 0),
-            new Vector2Int(1, 0),
-            new Vector2Int(2, 0),
-            new Vector2Int(3, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(3, 1),
-            new Vector2Int(0, 2),
-            new Vector2Int(3, 2),
-            new Vector2Int(0, 3),
-            new Vector2Int(1, 3),
-            new Vector2Int(2, 3),
-            new Vector2Int(3, 3),
-        };
-
         tiles = new List<Tile>(16);
         gameStart = false;
         isGridFull = false;
@@ -64,7 +49,14 @@ public class TileBoard : MonoBehaviour
     private void Start()
     {
         activeParticleImages = new List<GameObject>();
-        secretePanel.SetActive(false);
+        secretePanel.SetActive(false); 
+
+        specialPos = new List<Vector2Int>();
+
+        for (int i = 0; i < hitZones[0].specificPos.Count; ++i)
+        {
+            specialPos.Add(hitZones[0].specificPos[i]);
+        }
     }
 
     public void ClearBoard()
@@ -138,7 +130,6 @@ public class TileBoard : MonoBehaviour
             }
             activeParticleImages.Clear();
         }
-
         
         gameMgr.isTimeOver = false;
         gameMgr.isPuzzleOver = false;
@@ -150,7 +141,7 @@ public class TileBoard : MonoBehaviour
         gameStart = false;
         puzzleStartButton.gameObject.SetActive(true);
 
-        UpdateSpeicalPos();
+        UpdateSpecificPos();
         foreach (var pos in specialPos)
         {
             GameObject instance = Instantiate(framePrefab, grid.transform);
@@ -352,43 +343,6 @@ public class TileBoard : MonoBehaviour
         }
     }
 
-    public bool CheckForGameOver()
-    {
-        if (tiles.Count != grid.Size)
-        {
-            return false;
-        }
-
-        foreach (var tile in tiles)
-        {
-            TileCell up = grid.GetAdjacentCell(tile.cell, Vector2Int.up);
-            TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
-            TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
-            TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
-
-            if (up != null && CanMerge(tile, up.tile))
-            {
-                return false;
-            }
-
-            if (down != null && CanMerge(tile, down.tile))
-            {
-                return false;
-            }
-
-            if (left != null && CanMerge(tile, left.tile))
-            {
-                return false;
-            }
-
-            if (right != null && CanMerge(tile, right.tile))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void OnClickPuzzleStartButton()
     {
         touchStartPosition = Input.GetTouch(0).position;
@@ -424,108 +378,14 @@ public class TileBoard : MonoBehaviour
         return Vector3.zero;
     }
 
-    private void UpdateSpeicalPos()
+    private void UpdateSpecificPos()
     {
-        switch (gameMgr.currentStage)
+        var hitzone = hitZones[(int)gameMgr.currentStage - 3001];
+        specialPos.Clear();
+        //specialPos = new List<Vector2Int>();
+        foreach(var pos in hitzone.specificPos)
         {
-            case Stage.first:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                new Vector2Int(0, 0),
-                new Vector2Int(1, 0),
-                new Vector2Int(2, 0),
-                new Vector2Int(3, 0),
-                new Vector2Int(0, 1),
-                new Vector2Int(3, 1),
-                new Vector2Int(0, 2),
-                new Vector2Int(3, 2),
-                new Vector2Int(0, 3),
-                new Vector2Int(1, 3),
-                new Vector2Int(2, 3),
-                new Vector2Int(3, 3),
-        };
-                break;
-            case Stage.second:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                new Vector2Int(1, 0),
-                new Vector2Int(2, 0),
-                new Vector2Int(0, 1),
-                new Vector2Int(3, 1),
-                new Vector2Int(0, 2),
-                new Vector2Int(3, 2),
-                new Vector2Int(1, 3),
-                new Vector2Int(2, 3),
-                };
-                break;
-            case Stage.third:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                     new Vector2Int(0, 0),
-            new Vector2Int(1, 0),
-            new Vector2Int(3, 0),
-            new Vector2Int(3, 1),
-            new Vector2Int(0, 2),
-            new Vector2Int(0, 3),
-            new Vector2Int(2, 3),
-            new Vector2Int(3, 3),
-                };
-                break;
-            case Stage.fourth:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                     new Vector2Int(0, 0),
-            new Vector2Int(2, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(2, 1),
-            new Vector2Int(1, 2),
-            new Vector2Int(3, 2),
-            new Vector2Int(1, 3),
-            new Vector2Int(3, 3),
-                };
-                break;
-            case Stage.fifth:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                    new Vector2Int(0, 0),
-            new Vector2Int(3, 0),
-            new Vector2Int(0, 3),
-            new Vector2Int(3, 3),
-                };
-                break;
-            case Stage.sixth:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                    new Vector2Int(0, 2),
-            new Vector2Int(0, 1),
-            new Vector2Int(3, 2),
-            new Vector2Int(1, 3),
-                };
-                break;
-            case Stage.seventh:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                    new Vector2Int(1, 0),
-            new Vector2Int(3, 1),
-            new Vector2Int(1, 2),
-                };
-                break;
-            case Stage.eightth:
-                specialPos.Clear();
-                specialPos = new List<Vector2Int>
-                {
-                    new Vector2Int(1, 1),
-            new Vector2Int(2, 2),
-                };
-                break;
-
+            specialPos.Add(pos);
         }
     }
 }

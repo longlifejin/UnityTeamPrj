@@ -26,7 +26,6 @@ public class BattleMgr : MonoBehaviour
     public Image bossHpBar;
     public TextMeshProUGUI bossHpText;
 
-
     private float playerOriginHp;
     private float bossOriginHp;
 

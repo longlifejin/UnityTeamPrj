@@ -6530,6 +6530,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19b4310b755bd894a999f0202d2f671d, type: 2}
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
+  hitZones:
+  - {fileID: 11400000, guid: 7a3b95dd95f56c14d8afccf3ab64953a, type: 2}
+  - {fileID: 11400000, guid: 42b56401ab2ae864bb9556418a193707, type: 2}
+  - {fileID: 11400000, guid: 7225d982938bc2d448cd5f8fff4f13bd, type: 2}
+  - {fileID: 11400000, guid: 5114688fdf55e6e468a38080554c7160, type: 2}
+  - {fileID: 11400000, guid: 253a1aaa353195048a9a56acbd08a0db, type: 2}
+  - {fileID: 11400000, guid: e865709fa3edc8f43b7e76d392981154, type: 2}
+  - {fileID: 11400000, guid: d8c094a8a2335fa439a90e8b5dedc029, type: 2}
+  - {fileID: 11400000, guid: 7ac5c0ce460793c4ab32edf5d25a40ae, type: 2}
   isGridFull: 0
   puzzleStartButton: {fileID: 1656314483}
   gameManager: {fileID: 27402486}
@@ -9140,6 +9149,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19b4310b755bd894a999f0202d2f671d, type: 2}
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
+  hitZones: []
   isGridFull: 0
   puzzleStartButton: {fileID: 0}
   gameManager: {fileID: 27402486}
