@@ -22,7 +22,7 @@ public class Tile : MonoBehaviour
     {
         this.state = state;
 
-        background.color = state.backgroundColor;
+        //background.color = state.backgroundColor;
         text.color = state.textColor;
         text.text = string.Empty;
         background.sprite = state.tileImage;
