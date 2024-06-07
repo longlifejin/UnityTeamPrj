@@ -17,6 +17,7 @@ public class Store : MonoBehaviour
     private List<string> attackItemIds = new List<string> { "41001", "41002", "41003", "41004", "41005" };
     private List<string> hpItemIds = new List<string> { "42001", "42002", "42003", "42004", "42005" };
     private List<string> criticalItemIds = new List<string> { "43001", "43002", "43003", "43004", "43005" };
+
     private ItemSlot currentAtkItem;
     private ItemSlot currentHpItem;
     private ItemSlot currentCriticalItem;
@@ -31,179 +32,59 @@ public class Store : MonoBehaviour
         itemTable = DataTableMgr.Get<ItemDataTable>(DataTableIds.ItemTable);
         storeSFXAudioSource = GetComponent<AudioSource>();
 
-        if(Player.Instance.atkItemIndex < attackItemIds.Count)
-        {
-            CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex], Player.Instance.atkItemIndex);
-        }
-        else
-        {
-            {
-                CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex-1], Player.Instance.atkItemIndex-1);
-            }
-        }
-
-        if (Player.Instance.hpItemIndex < hpItemIds.Count)
-        {
-            CreateHpItem(hpItemIds[Player.Instance.hpItemIndex], Player.Instance.hpItemIndex);
-        }
-        else
-        {
-            {
-                CreateHpItem(hpItemIds[Player.Instance.hpItemIndex - 1], Player.Instance.hpItemIndex - 1);
-            }
-        }
-
-        if (Player.Instance.criticalItemIndex < criticalItemIds.Count)
-        {
-            CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
-        }
-        else
-        {
-            {
-                CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex - 1], Player.Instance.criticalItemIndex - 1);
-            }
-        }
+        InitializeItem(Player.Instance.atkItemIndex, attackItemIds, atkItemSpace, ref currentAtkItem, PurchaseAtkItem);
+        InitializeItem(Player.Instance.hpItemIndex, hpItemIds, hpItemSpace, ref currentHpItem, PurchaseHpItem);
+        InitializeItem(Player.Instance.criticalItemIndex, criticalItemIds, criticalItemSpace, ref currentCriticalItem, PurchaseCriticalItem);
 
         ownGold.text = Player.Instance.Gold.ToString();
         lackOfGoldPopUp.SetActive(false);
     }
 
-    private void CreateAtkItem(string itemId, int index)
+    private void InitializeItem(int playerIndex, List<string> itemIds, GameObject itemSpace, ref ItemSlot currentItem, UnityEngine.Events.UnityAction<ItemData> purchaseAction)
     {
-        ItemData itemData = itemTable.Get(itemId);
-        currentAtkItem = Instantiate(itemPrefab, atkItemSpace.transform);
-        currentAtkItem.transform.SetSiblingIndex(0);
-        currentAtkItem.itemName.text = itemData.GetName;
-        currentAtkItem.itemInfo.text = itemData.GetInfo;
-        currentAtkItem.itemPrice.text = itemData.Gold.ToString();
-        currentAtkItem.itemImage.texture = itemData.GetImage;
-        currentAtkItem.purchaseButton.onClick.AddListener(() => PurchaseAtkItem(itemData));
-        for(int i = 0; i < index; ++i)
+        if (playerIndex >= itemIds.Count)
         {
-            currentAtkItem.toggles[i].isOn = true;
+            playerIndex = itemIds.Count - 1;
         }
-        if (Player.Instance.atkItemIndex == attackItemIds.Count)
-        {
-            currentAtkItem.toggles[attackItemIds.Count - 1].isOn = true;
-            currentAtkItem.purchaseButton.interactable = false;
-        }
-    }
 
-    private void CreateHpItem(string itemId, int index)
-    {
-        ItemData itemData = itemTable.Get(itemId);
-        currentHpItem = Instantiate(itemPrefab, hpItemSpace.transform);
-        currentHpItem.transform.SetSiblingIndex(0);
-        currentHpItem.itemName.text = itemData.GetName;
-        currentHpItem.itemInfo.text = itemData.GetInfo;
-        currentHpItem.itemPrice.text = itemData.Gold.ToString();
-        currentHpItem.itemImage.texture = itemData.GetImage;
-        currentHpItem.purchaseButton.onClick.AddListener(() => PurchaseHpItem(itemData)); 
-        for (int i = 0; i < index; ++i)
-        {
-            currentHpItem.toggles[i].isOn = true;
-        }
-        if (Player.Instance.hpItemIndex == hpItemIds.Count)
-        {
-            currentHpItem.toggles[hpItemIds.Count - 1].isOn = true;
-            currentHpItem.purchaseButton.interactable = false;
-        }
-    }
+        ItemData itemData = itemTable.Get(itemIds[playerIndex]);
+        currentItem = Instantiate(itemPrefab, itemSpace.transform);
+        currentItem.transform.SetSiblingIndex(0);
+        currentItem.itemName.text = itemData.GetName;
+        currentItem.itemInfo.text = itemData.GetInfo;
+        currentItem.itemPrice.text = itemData.Gold.ToString();
+        currentItem.itemImage.texture = itemData.GetImage;
+        currentItem.purchaseButton.onClick.AddListener(() => purchaseAction(itemData));
 
-    private void CreateCriticalItem(string itemId, int index)
-    {
-        ItemData itemData = itemTable.Get(itemId);
-        currentCriticalItem = Instantiate(itemPrefab, criticalItemSpace.transform);
-        currentCriticalItem.transform.SetSiblingIndex(0);
-        currentCriticalItem.itemName.text = itemData.GetName;
-        currentCriticalItem.itemInfo.text = itemData.GetInfo;
-        currentCriticalItem.itemPrice.text = itemData.Gold.ToString();
-        currentCriticalItem.itemImage.texture = itemData.GetImage;
-        currentCriticalItem.purchaseButton.onClick.AddListener(() => PurchaseCriticalItem(itemData));
-        for (int i = 0; i < index; ++i)
+        for (int i = 0; i < playerIndex; ++i)
         {
-            currentCriticalItem.toggles[i].isOn = true;
+            currentItem.toggles[i].isOn = true;
         }
-        if (Player.Instance.criticalItemIndex == criticalItemIds.Count)
+        if (playerIndex == itemIds.Count)
         {
-            currentCriticalItem.toggles[criticalItemIds.Count - 1].isOn = true;
-            currentCriticalItem.purchaseButton.interactable = false;
+            currentItem.toggles[itemIds.Count - 1].isOn = true;
+            currentItem.purchaseButton.interactable = false;
         }
     }
 
     private void PurchaseAtkItem(ItemData itemData)
     {
-        var price = int.Parse(currentAtkItem.itemPrice.text);
-
-        if (Player.Instance.Gold < price)
-        {
-            lackOfGoldPopUp.SetActive(true);
-            return;
-        }
-        else
-        {
-            storeSFXAudioSource.PlayOneShot(purchaseSFX);
-
-            Player.Instance.Gold -= price;
-            ownGold.text = Player.Instance.Gold.ToString();
-
-            Player.Instance.GainedAtk += itemData.Value;
-
-            if (Player.Instance.atkItemIndex < attackItemIds.Count - 1)
-            {
-                ++Player.Instance.atkItemIndex;
-                Destroy(currentAtkItem.gameObject);
-                CreateAtkItem(attackItemIds[Player.Instance.atkItemIndex], Player.Instance.atkItemIndex);
-            }
-            else
-            {
-                ++Player.Instance.atkItemIndex;
-                currentAtkItem.toggles[Player.Instance.atkItemIndex-1].isOn = true;
-                currentAtkItem.purchaseButton.interactable = false;
-                Debug.Log("모든 공격 아이템을 구매했습니다.");
-            }
-
-            UpdateToggle(currentAtkItem, Player.Instance.atkItemIndex);
-        }
+        PurchaseItem(itemData, attackItemIds, ref Player.Instance.atkItemIndex, ref currentAtkItem, atkItemSpace, Player.Instance.GainedAtk, val => Player.Instance.GainedAtk += val);
     }
+
     private void PurchaseHpItem(ItemData itemData)
     {
-        var price = int.Parse(currentHpItem.itemPrice.text);
-
-        if (Player.Instance.Gold < price)
-        {
-            lackOfGoldPopUp.SetActive(true);
-            return;
-        }
-        else
-        {
-            storeSFXAudioSource.PlayOneShot(purchaseSFX);
-
-            Player.Instance.Gold -= price;
-            ownGold.text = Player.Instance.Gold.ToString();
-            Player.Instance.GainedHp += itemData.Value;
-
-            if (Player.Instance.hpItemIndex < hpItemIds.Count - 1)
-            {
-                ++Player.Instance.hpItemIndex;
-                Destroy(currentHpItem.gameObject);
-                CreateHpItem(hpItemIds[Player.Instance.hpItemIndex], Player.Instance.hpItemIndex);
-            }
-            else
-            {
-                ++Player.Instance.hpItemIndex;
-                currentHpItem.toggles[Player.Instance.hpItemIndex - 1].isOn = true;
-                currentHpItem.purchaseButton.interactable = false;
-                Debug.Log("모든 체력 아이템을 구매했습니다.");
-            }
-
-            UpdateToggle(currentHpItem, Player.Instance.hpItemIndex);
-        }
+        PurchaseItem(itemData, hpItemIds, ref Player.Instance.hpItemIndex, ref currentHpItem, hpItemSpace, Player.Instance.GainedHp, val => Player.Instance.GainedHp += val);
     }
 
     private void PurchaseCriticalItem(ItemData itemData)
     {
-        var price = int.Parse(currentCriticalItem.itemPrice.text);
+        PurchaseItem(itemData, criticalItemIds, ref Player.Instance.criticalItemIndex, ref currentCriticalItem, criticalItemSpace, Player.Instance.GainedCritical, val => Player.Instance.GainedCritical += val);
+    }
+
+    private void PurchaseItem(ItemData itemData, List<string> itemIds, ref int playerIndex, ref ItemSlot currentItem, GameObject itemSpace, int playerStat, System.Action<int> updateStat)
+    {
+        var price = int.Parse(currentItem.itemPrice.text);
 
         if (Player.Instance.Gold < price)
         {
@@ -216,23 +97,28 @@ public class Store : MonoBehaviour
 
             Player.Instance.Gold -= price;
             ownGold.text = Player.Instance.Gold.ToString();
-            Player.Instance.GainedCritical += itemData.Value;
+            updateStat(itemData.Value);
 
-            if (Player.Instance.criticalItemIndex < criticalItemIds.Count - 1)
+            if (playerIndex < itemIds.Count - 1)
             {
-                ++Player.Instance.criticalItemIndex;
-                Destroy(currentCriticalItem.gameObject);
-                CreateCriticalItem(criticalItemIds[Player.Instance.criticalItemIndex], Player.Instance.criticalItemIndex);
+                ++playerIndex;
+                Destroy(currentItem.gameObject);
+                InitializeItem(playerIndex, itemIds, itemSpace, ref currentItem, itemData =>
+                {
+                    if (itemIds == attackItemIds) PurchaseAtkItem(itemData);
+                    else if (itemIds == hpItemIds) PurchaseHpItem(itemData);
+                    else if (itemIds == criticalItemIds) PurchaseCriticalItem(itemData);
+                });
             }
             else
             {
-                ++Player.Instance.criticalItemIndex;
-                currentCriticalItem.toggles[Player.Instance.criticalItemIndex - 1].isOn = true;
-                currentCriticalItem.purchaseButton.interactable = false;
-                Debug.Log("모든 치명타 확률 아이템을 구매했습니다.");
+                ++playerIndex;
+                currentItem.toggles[playerIndex - 1].isOn = true;
+                currentItem.purchaseButton.interactable = false;
+                Debug.Log("모든 아이템을 구매했습니다.");
             }
 
-            UpdateToggle(currentCriticalItem, Player.Instance.criticalItemIndex);
+            UpdateToggle(currentItem, playerIndex);
         }
     }
 

@@ -423,7 +423,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5090909
+      - time: 0.49905744
         functionName: BossAttackPlay
         data: 
         objectReferenceParameter: {instanceID: 0}

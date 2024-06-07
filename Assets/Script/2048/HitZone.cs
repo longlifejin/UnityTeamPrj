@@ -6,4 +6,5 @@ using UnityEngine;
 public class HitZone : ScriptableObject
 {
     public List<Vector2Int> specificPos;
+    
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 
-public static class SaveLoadSystem 
+public static class SaveLoadSystem
 {
     private static string SaveDirectory
     {
@@ -61,7 +61,7 @@ public static class SaveLoadSystem
 
         var path = Path.Combine(SaveDirectory, SaveFileName[slot]);
 
-        using (var writer = new JsonTextWriter(new StreamWriter(path)))
+        using (var writer = new StringWriter())
         {
             var serializer = new JsonSerializer
             {
@@ -70,6 +70,9 @@ public static class SaveLoadSystem
                 Converters = { new GameDataJsonConverter() }
             };
             serializer.Serialize(writer, CurrSaveData);
+            string jsonData = writer.ToString();
+            string encryptedData = EncryptionHelper.EncryptString(jsonData);
+            File.WriteAllText(path, encryptedData);
         }
         return true;
     }
@@ -87,7 +90,10 @@ public static class SaveLoadSystem
         }
 
         SaveData data = null;
-        using (var reader = new JsonTextReader(new StreamReader(path)))
+        string encryptedData = File.ReadAllText(path);
+        string jsonData = EncryptionHelper.DecryptString(encryptedData);
+
+        using (var reader = new JsonTextReader(new StringReader(jsonData)))
         {
             var serializer = new JsonSerializer
             {
@@ -124,5 +130,4 @@ public static class SaveLoadSystem
 
         return true;
     }
-
 }
