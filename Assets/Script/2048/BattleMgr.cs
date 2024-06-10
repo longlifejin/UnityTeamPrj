@@ -90,8 +90,8 @@ public class BattleMgr : MonoBehaviour
     private void BossNormalAttack()
     {
         bossAnimator.SetTrigger(AnimatorIds.bossSpecialAtkAni);
-        playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
         Player.Instance.hp -= 10;
+        playerAnimator.SetTrigger(AnimatorIds.playerDamagedAni);
         
         playerHpBar.fillAmount = Player.Instance.hp / playerOriginHp;
         playerHpText.text = $"{Player.Instance.hp} / {playerOriginHp}";
@@ -364,6 +364,7 @@ public class BattleMgr : MonoBehaviour
     public void OnClickRestart()
     {
         Time.timeScale = 1f;
+        quitMenu.SetActive(false);
         gameMgr.RestartGame();
     }
 

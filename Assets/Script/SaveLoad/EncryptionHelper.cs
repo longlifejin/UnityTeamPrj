@@ -5,8 +5,8 @@ using System.Text;
 
 public class EncryptionHelper
 {
-    private static string PASSWORD = "tHisIstesT4tistory";
-    private static readonly string KEY = PASSWORD.Substring(0, 128 / 8); // 16 characters
+    private static string PASSWORD = "passwordIsSecret123";
+    private static readonly string KEY = PASSWORD.Substring(0, 128 / 8);
 
     public static string EncryptString(string plain)
     {
@@ -18,12 +18,12 @@ public class EncryptionHelper
             rijndael.Padding = PaddingMode.PKCS7;
             rijndael.KeySize = 128;
 
-            rijndael.GenerateIV(); // Generate a new IV for each encryption
+            rijndael.GenerateIV();
             byte[] iv = rijndael.IV;
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                memoryStream.Write(iv, 0, iv.Length); // Prepend IV to the ciphertext
+                memoryStream.Write(iv, 0, iv.Length);
 
                 ICryptoTransform encryptor = rijndael.CreateEncryptor(Encoding.UTF8.GetBytes(KEY), iv);
                 using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
@@ -51,7 +51,7 @@ public class EncryptionHelper
             using (MemoryStream memoryStream = new MemoryStream(encryptBytes))
             {
                 byte[] iv = new byte[rijndael.BlockSize / 8];
-                memoryStream.Read(iv, 0, iv.Length); // Extract the IV from the ciphertext
+                memoryStream.Read(iv, 0, iv.Length);
 
                 ICryptoTransform decryptor = rijndael.CreateDecryptor(Encoding.UTF8.GetBytes(KEY), iv);
                 using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
