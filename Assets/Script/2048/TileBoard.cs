@@ -4,6 +4,15 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+
+public enum Dirs
+{
+    None,
+    Up, Down, Left, Right
+}
 
 public class TileBoard : MonoBehaviour
 {
@@ -18,6 +27,25 @@ public class TileBoard : MonoBehaviour
     public bool isGridFull;
 
     private List<Vector2Int> specialPos;
+
+    private Finger primaryFinger; 
+    private float timeTap = 0.25f;
+    private float timeLongTap = 0.5f;
+    private float timeDoubleTap = 0.25f;
+
+    private float primaryStartTime = 0f;
+    private Vector2 primaryStartPos;
+
+    private bool isFirstTap = false;
+    private float firstTapTime = 0f;
+
+    public float minSwipeDistanceInch = 0.25f; // Inch
+    private float minSwipeDistancePixels;
+
+    private float swipeTime = 0.25f;
+
+    public float zoomMaxInch = 1f; // Inch
+    private float zoomMaxPixel;
 
     private Vector2 touchStartPosition = Vector2.zero;
     private const float MinSwipeDistance = 10.0f;
@@ -36,14 +64,29 @@ public class TileBoard : MonoBehaviour
 
     public GameObject secretePanel;
 
+    public bool Tap { get; private set; }
+    public bool LongTap { get; private set; }
+    public bool DoubleTap { get; private set; }
+
+    public Dirs Swipe { get; private set; }
+    public float Zoom { get; private set; }
+    public float Rotation { get; private set; }
+
+
     private void Awake()
     {
+        EnhancedTouchSupport.Enable();
         grid = GetComponentInChildren<TileGrid>();
         gameMgr = gameManager.GetComponent<GameMgr>();
 
         tiles = new List<Tile>(16);
         gameStart = false;
         isGridFull = false;
+    }
+
+    private void OnDestroy()
+    {
+        EnhancedTouchSupport.Disable();
     }
 
     private void Start()
@@ -156,71 +199,264 @@ public class TileBoard : MonoBehaviour
 
     private void TouchEvents()
     {
-        if (Input.touchCount == 0)
+        //if(Touch.activeTouches.Count > 0)
+        //{
+        //    var first = Touch.activeTouches[0];
+        //    var second = Touch.activeTouches[1];
+
+        //    if (Touch.activeTouches.Count == 0)
+        //    {
+        //        return;
+        //    }
+        //    if (first.phase == TouchPhase.Began)
+        //    {
+        //        touchStartPosition = first.startScreenPosition;
+        //    }
+        //    if (first.phase != TouchPhase.Ended) return;
+        //    var swipeDelta = (first.startScreenPosition - touchStartPosition);
+        //    if (swipeDelta.magnitude < MinSwipeDistance)
+        //    {
+        //        return;
+        //    }
+        //    swipeDelta.Normalize();
+        //    if (swipeDelta.y > 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        //    {
+        //        Move(Vector2Int.up, 0, 1, 1, 1);
+        //    }
+        //    else if (swipeDelta.y < 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        //    {
+        //        Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+        //    }
+        //    else if (swipeDelta.x > 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        //    {
+        //        Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+        //    }
+        //    else if (swipeDelta.x < 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        //    {
+        //        Move(Vector2Int.left, 1, 1, 0, 1);
+        //    }
+        //}
+
+        Tap = false;
+        LongTap = false;
+        DoubleTap = false;
+        Swipe = Dirs.None;
+        Zoom = 0f;
+        Rotation = 0f;
+
+        foreach (var touch in Touch.activeTouches)
         {
-            return;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (primaryFinger == null)
+                    {
+                        primaryFinger = touch.finger;
+                        primaryStartTime = Time.time;
+                        primaryStartPos = touch.screenPosition;
+                    }
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (primaryFinger == touch.finger)
+                    {
+                        primaryFinger = null;
+                        var duration = Time.time - primaryStartTime;
+
+                        if (duration < swipeTime)
+                        {
+                            var diff = (touch.screenPosition - touch.startScreenPosition);
+                            if (diff.magnitude > minSwipeDistancePixels)
+                            {
+                                if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+                                {
+                                    Swipe = diff.x > 0 ? Dirs.Right : Dirs.Left;
+                                }
+                                else
+                                {
+                                    Swipe = diff.y > 0 ? Dirs.Up : Dirs.Down;
+                                }
+                            }
+                        }
+                        if (duration < timeTap)
+                        {
+                            Tap = true;
+
+                            if (isFirstTap && Time.time - firstTapTime > timeDoubleTap)
+                            {
+                                isFirstTap = false;
+                            }
+
+                            if (!isFirstTap)
+                            {
+                                isFirstTap = true;
+                                firstTapTime = Time.time;
+                            }
+                            else
+                            {
+                                DoubleTap = Time.time - firstTapTime < timeDoubleTap;
+                                isFirstTap = false;
+                            }
+                        }
+
+                        if (duration > timeLongTap)
+                        {
+                            LongTap = true;
+                        }
+                    }
+                    break;
+            }
         }
-        if (Input.GetTouch(0).phase == TouchPhase.Began)
+
+        switch (Swipe)
         {
-            touchStartPosition = Input.GetTouch(0).position;
-        }
-        if (Input.GetTouch(0).phase != TouchPhase.Ended) return;
-        var swipeDelta = (Input.GetTouch(0).position - touchStartPosition);
-        if (swipeDelta.magnitude < MinSwipeDistance)
-        {
-            return;
-        }
-        swipeDelta.Normalize();
-        if (swipeDelta.y > 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
-        {
-            Move(Vector2Int.up, 0, 1, 1, 1);
-        }
-        else if (swipeDelta.y < 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
-        {
-            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-        }
-        else if (swipeDelta.x > 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
-        {
-            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-        }
-        else if (swipeDelta.x < 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
-        {
-            Move(Vector2Int.left, 1, 1, 0, 1);
+            case Dirs.Up:
+                Move(Vector2Int.up, 0, 1, 1, 1);
+                break;
+            case Dirs.Down:
+                Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+                break;
+            case Dirs.Left:
+                Move(Vector2Int.left, 1, 1, 0, 1);
+                break;
+            case Dirs.Right:
+                Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+                break;
+
         }
     }
 
     private void ReverseTouchEvents()
     {
-        if (Input.touchCount == 0)
+        //if (Touch.activeTouches.Count > 0)
+        //{
+        //    var first = Touch.activeTouches[0];
+        //    var second = Touch.activeTouches[1];
+
+        //    if (Touch.activeTouches.Count == 0)
+        //    {
+        //        return;
+        //    }
+        //    if (first.phase == TouchPhase.Began)
+        //    {
+        //        touchStartPosition = first.startScreenPosition;
+        //    }
+        //    if (first.phase != TouchPhase.Ended) return;
+        //    var swipeDelta = (first.startScreenPosition - touchStartPosition);
+        //    if (swipeDelta.magnitude < MinSwipeDistance)
+        //    {
+        //        return;
+        //    }
+        //    swipeDelta.Normalize();
+        //    if (swipeDelta.y > 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        //    {
+        //        Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+        //    }
+        //    else if (swipeDelta.y < 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
+        //    {
+        //        Move(Vector2Int.up, 0, 1, 1, 1);
+        //    }
+        //    else if (swipeDelta.x > 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        //    {
+        //        Move(Vector2Int.left, 1, 1, 0, 1);
+        //    }
+        //    else if (swipeDelta.x < 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
+        //    {
+        //        Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+        //    }
+        //}
+        Tap = false;
+        LongTap = false;
+        DoubleTap = false;
+        Swipe = Dirs.None;
+        Zoom = 0f;
+        Rotation = 0f;
+
+        foreach (var touch in Touch.activeTouches)
         {
-            return;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (primaryFinger == null)
+                    {
+                        primaryFinger = touch.finger;
+                        primaryStartTime = Time.time;
+                        primaryStartPos = touch.screenPosition;
+                    }
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (primaryFinger == touch.finger)
+                    {
+                        primaryFinger = null;
+                        var duration = Time.time - primaryStartTime;
+
+                        if (duration < swipeTime)
+                        {
+                            var diff = (touch.screenPosition - touch.startScreenPosition);
+                            if (diff.magnitude > minSwipeDistancePixels)
+                            {
+                                if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+                                {
+                                    Swipe = diff.x > 0 ? Dirs.Right : Dirs.Left;
+                                }
+                                else
+                                {
+                                    Swipe = diff.y > 0 ? Dirs.Up : Dirs.Down;
+                                }
+                            }
+                        }
+                        if (duration < timeTap)
+                        {
+                            Tap = true;
+
+                            if (isFirstTap && Time.time - firstTapTime > timeDoubleTap)
+                            {
+                                isFirstTap = false;
+                            }
+
+                            if (!isFirstTap)
+                            {
+                                isFirstTap = true;
+                                firstTapTime = Time.time;
+                            }
+                            else
+                            {
+                                DoubleTap = Time.time - firstTapTime < timeDoubleTap;
+                                isFirstTap = false;
+                            }
+                        }
+
+                        if (duration > timeLongTap)
+                        {
+                            LongTap = true;
+                        }
+                    }
+                    break;
+            }
         }
-        if (Input.GetTouch(0).phase == TouchPhase.Began)
+
+        switch (Swipe)
         {
-            touchStartPosition = Input.GetTouch(0).position;
-        }
-        if (Input.GetTouch(0).phase != TouchPhase.Ended) return;
-        var swipeDelta = (Input.GetTouch(0).position - touchStartPosition);
-        if (swipeDelta.magnitude < MinSwipeDistance)
-        {
-            return;
-        }
-        swipeDelta.Normalize();
-        if (swipeDelta.y > 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
-        {
-            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-        }
-        else if (swipeDelta.y < 0.0f && swipeDelta.x > -0.5f && swipeDelta.x < 0.5f)
-        {
-            Move(Vector2Int.up, 0, 1, 1, 1);
-        }
-        else if (swipeDelta.x > 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
-        {
-            Move(Vector2Int.left, 1, 1, 0, 1);
-        }
-        else if (swipeDelta.x < 0.0f && swipeDelta.y > -0.5f && swipeDelta.y < 0.5f)
-        {
-            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+            case Dirs.Up:
+                Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+                break;
+            case Dirs.Down:
+                Move(Vector2Int.up, 0, 1, 1, 1);
+                break;
+            case Dirs.Left:
+                Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+                break;
+            case Dirs.Right:
+                Move(Vector2Int.left, 1, 1, 0, 1);
+                break;
+
         }
     }
 
